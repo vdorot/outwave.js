@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Canvas test</title>
+
+        <link rel="stylesheet" media="all" type="text/css" href="lib/outwave/layout.css">
+        <link rel="stylesheet" media="all" type="text/css" href="lib/outwave/style.css">
+        <script type="text/javascript" src="lib/require.js"></script>
+        <script type="text/javascript" src="lib/jquery.js"></script>
+
+        <script src="http://jwpsrv.com/library/FjUFlGnREeO71iIACi0I_Q.js"></script>
+
+
+    </head>
+
+    <body>
+
+<h1>outwave.js: javascript waveform viewer</h1>
+
+
+
+<div style="width: 400px; float: right;">
+<div id='playerXFDzbWwkjnsq'></div>
+<div style="clear: both;"></div>
+</div>
+<script type='text/javascript'>
+    jwplayer('playerXFDzbWwkjnsq').setup({
+        file: 'http://www.youtube.com/watch?v=kYXiegTXsEs',
+        width: '100%',
+        aspectratio: '16:9',
+        fallback: 'false',
+        primary: 'flash'
+    });
+
+    jwplayer().onTime(function(pos){
+        outwave.setCursor(pos.position);
+    });
+
+        jwplayer().onIdle(function(){
+        outwave.removeCursor();
+    });
+</script>
+
+
+
+<form action="" id="zoomform" style="margin-left: 30px; margin-top: 20px;">
+<label>Samples per pixel: </label><input type="text" id="zoom" value="40" /><input type="submit" value="Update">
+</form>
+
+<form action="" id="annotform" style="margin-left: 30px; margin-top: 20px;">
+Create annotation: <!--<label>Start: </label><input type="text" id="annotstart" value="40" />-->
+<label>End: </label><input type="text" id="annotend" value="40" />
+<input type="submit" value="Create">
+</form>
+
+<form action="" id="annotsplit" style="margin-left: 30px; margin-top: 20px;">
+Split annotations at: <input type="text" id="split" value="40" />
+<input type="submit" value="Create">
+</form>
+
+<script>
+
+// avoid errors in ie
+if(!console){
+    window.console = {log: function(){}, dir: function(){}, error: function(e){alert(e)}};
+}
+
+
+// require.js http://requirejs.org
+require.config({
+    baseUrl: 'lib'
+});
+
+
+
+
+require(['jquery'],function($){
+
+
+    //Obsluha formularov
+
+    $(function(){
+
+        $("#zoomform").submit(function(e){
+            e.preventDefault();
+            var z = parseFloat($("#zoom").val());
+            outwave.setZoom(z);
+
+        });
+
+
+        $("#annotform").submit(function(e){
+            e.preventDefault();
+            var end = parseFloat($("#annotend").val());
+            spanCollection.addContinuous(end);
+
+
+
+        });
+
+        $("#annotsplit").submit(function(e){
+            e.preventDefault();
+            var time = parseFloat($("#split").val());
+            spanCollection.split(time);
+
+
+
+        });
+
+    });
+
+});
+
+
+</script>
+
+<br>
+<script type="text/javascript">
+require([
+    'jquery',
+    'outwave/data-file',
+    'outwave/outwave',
+    'outwave/utils',
+    'outwave/time-span/time-span-collection'],function($,DataFile,Outwave,Utils,TimeSpanCollection){
+
+    var waveform;
+
+    //nacita a zobrazi waveform z *.wf suboru file
+    var load_waveform = function(file){
+
+
+        //TODO: loading indicator
+
+        DataFile.loadUrl(file,function(success,errorMessage,dataFile){
+
+                //pre defaultne nastavenia vid outwave.js a style.js
+                var options = {height: 400}; //height - vyska waveformu v horizontalnej orientacii (amplituda)
+
+
+                options.style = {
+                    waveformFill: function(ctx,p1,p2,channel,played){
+
+                        //return "#444"; // jednoliata farba
+
+                        //channel: channel id (0..n-1)
+                        //played: this part has been played, cursor is further
+                        var grad = ctx.createLinearGradient(p1.x,p1.y,p2.x,p2.y);
+                        if(played){
+                            if(channel == 0){
+                                grad.addColorStop(0, '#92dffc');
+                                grad.addColorStop(1, '#08bbff');
+                            }else{
+                                grad.addColorStop(0, '#b3ff66');
+                                grad.addColorStop(1, '#77ed00');
+                            }
+                        }else{
+                            if(channel == 0){
+                                grad.addColorStop(0, '#78daff');
+                                grad.addColorStop(1, '#0094cc');
+                            }else{
+                                grad.addColorStop(0, '#94ff29');
+                                grad.addColorStop(1, '#58b000');
+                            }               
+                        }
+                        return grad;
+                    }
+                };
+
+                //vytvorenie "editoru"
+                outwave = new Outwave($('#waveform'),dataFile,options);
+
+                outwave.onZoomChanged(function(zoom){
+                    $("#zoom").val(zoom);
+                });
+
+                outwave.setZoom(5);
+
+                outwave.onClick(function(time){
+                    jwplayer().seek(time);
+                });
+
+
+
+
+
+
+
+                //tu zacina kod pre anotacie(segmenty), timeSpan = 1 segment
+
+
+
+
+                var container = $("#divcontainer");
+
+
+                var scroller = $("#divscroller");
+
+
+                //celkova dlzka waveformu v pixeloch
+
+                //internalWidth: width a height su odvodene od horizontalneho zobrazenia
+                container.height(outwave.internalWidth());
+
+                outwave.onInternalDimensionsChanged(function(length){
+                    container.height(length);
+                });
+
+
+
+                // synchonizacia posuvnikov
+
+                var viewport = outwave.getViewportElement(); //jQuery element
+                
+                var scrollFlag = false; // prevent infinite recursion
+
+                viewport.scroll(function(){
+                    if(scrollFlag){ scrollFlag = false; return;}
+                    scrollFlag = true;
+                    scroller.scrollTop(viewport.scrollTop());          
+               });
+
+
+                scroller.scroll(function(){
+                    if(scrollFlag){scrollFlag=false; return;}
+                    scrollFlag = true;
+                    viewport.scrollTop(scroller.scrollTop());
+                });
+
+                //zablokovanie autoscroll-u, ked je mys nad anotaciami napravo
+
+                scroller.on('mouseenter',outwave.handleMouseEnter).on('mouseleave',outwave.handleMouseLeave);
+
+
+
+                // obalka nad anotaciami
+                spanCollection = new TimeSpanCollection(outwave);
+
+
+                // spanCollection.getAll() vrati pole span-ov
+                // span - vnutorna reprezentacia casoveho useku(anotacie)
+                // span.setData(whatever); ulozi referenciu na whatever
+                // span.getData(whatever); vrati whatever 
+
+
+                spanCollection.onTimeSpanCreated(function(span){
+                    //bola vytvorena nova anotacia
+
+                    // span.getCollection() == spanCollection 
+
+                    var html = ['<div class="annotation" style="',
+                                '"position: absolute;',
+                                'background-color: #FF2E2E;',
+                                'width: 100%;',
+                                'overflow: hidden;',
+                                '">',
+                                '    <div style="background-color: red; color: white; position: absolute; right: 0;">',
+                                '        <span class="s"></span> - <span class="e"></span>',
+                                '    </div>',
+                                '</div>'
+                                ].join("");
+
+                    var annotEl = $(html);
+                    
+                    var textarea = $('<textarea style="width: 99%; height: 99%; resize: none;"></textarea>');
+
+                    textarea.val("text text text text");
+
+                    annotEl.append(textarea);
+
+
+                    annotEl.data(span);
+
+
+                    //reaguje na zmeny polohy
+                    var updatePosition = function(){
+
+                        //this == span
+
+                        annotEl.find(".s").text(Utils.formatTime(this.getStart()));
+
+                        annotEl.find(".e").text(Utils.formatTime(this.getEnd()));                    
+
+                        annotEl.css("top",this.getStartX()).height(this.getEndX()-this.getStartX());
+                    }
+
+                    updatePosition.call(span); // inicializia, call => this = span
+
+                    span.onPositionChanged(updatePosition);
+
+                    span.onMerged(function(prev,created){
+                        //console.log("merged with ",prev," into ",created);
+                    });
+
+                    span.onSplit(function(left,right){
+                        //console.log("split into",left,right);
+                    });
+
+                    span.onRemoved(function(){
+                        annotEl.remove();
+                    });
+
+                    container.append(annotEl);
+
+
+                });
+
+                // inicializacia
+
+                spanCollection.setContinuous();
+
+                //vytvorenie nahodnych anotacii
+
+                var end = 15;
+
+                spanCollection.addContinuous(end); // pridanie anotacie
+
+
+        });
+
+    }
+
+        $(function(){
+        load_waveform('tedx-value-of-travel.wf');
+    });
+
+    
+});
+
+</script>
+
+
+
+<div id="waveform" style="height: 600px; width: 400px; float:left;"></div>
+
+<div id="divscroller" style="height: 600px; width: 400px; overflow: auto; float: left;">
+<div id="divcontainer" style="background-color: #ddd; position: relative;"></div>
+</div>
+
+</body>
+</html>

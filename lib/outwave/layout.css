@@ -1,0 +1,12 @@
+body.drag-vertical *{
+    cursor: n-resize;
+}
+
+body.drag-horizontal *{
+
+}
+
+.outwave{
+    position: relative;
+    overflow: auto;
+}
