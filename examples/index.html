@@ -4,10 +4,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Canvas test</title>
 
-        <link rel="stylesheet" media="all" type="text/css" href="lib/outwave/layout.css">
-        <link rel="stylesheet" media="all" type="text/css" href="lib/outwave/style.css">
-        <script type="text/javascript" src="lib/require.js"></script>
-        <script type="text/javascript" src="lib/jquery.js"></script>
+        <link rel="stylesheet" media="all" type="text/css" href="../lib/outwave/layout.css">
+        <link rel="stylesheet" media="all" type="text/css" href="../lib/outwave/style.css">
+        <script type="text/javascript" src="../lib/require.js"></script>
+        <script type="text/javascript" src="../lib/jquery.js"></script>
 
         <script src="http://jwpsrv.com/library/FjUFlGnREeO71iIACi0I_Q.js"></script>
 
@@ -69,7 +69,7 @@ if(!console){
 
 // require.js http://requirejs.org
 require.config({
-    baseUrl: 'lib'
+    baseUrl: '../lib'
 });
 
 
@@ -249,7 +249,7 @@ require([
                     // span.getCollection() == spanCollection 
 
                     var html = ['<div class="annotation" style="',
-                                '"position: absolute;',
+                                'position: absolute;',
                                 'background-color: #FF2E2E;',
                                 'width: 100%;',
                                 'overflow: hidden;',
