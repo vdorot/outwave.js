@@ -271,6 +271,8 @@ require([
 
                     annotEl.data(span);
 
+                    span.setData(annotEl);
+
 
                     //reaguje na zmeny polohy
                     var updatePosition = function(){
@@ -282,7 +284,7 @@ require([
                         annotEl.find(".e").text(Utils.formatTime(this.getEnd()));                    
 
                         annotEl.css("top",this.getStartX()).height(this.getEndX()-this.getStartX());
-                    }
+                    };
 
                     updatePosition.call(span); // inicializia, call => this = span
 
