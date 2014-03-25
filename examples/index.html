@@ -45,7 +45,7 @@
 
 
 <form action="" id="zoomform" style="margin-left: 30px; margin-top: 20px;">
-<label>Samples per pixel: </label><input type="text" id="zoom" value="40" /><input type="submit" value="Update">
+<label>Pixels per second: </label><input type="text" id="zoom" value="40" /><input type="submit" value="Update">
 </form>
 
 <form action="" id="annotform" style="margin-left: 30px; margin-top: 20px;">
@@ -147,7 +147,7 @@ require([
                         //played: this part has been played, cursor is further
                         var grad = ctx.createLinearGradient(p1.x,p1.y,p2.x,p2.y);
                         if(played){
-                            if(channel == 0){
+                            if(channel === 0){
                                 grad.addColorStop(0, '#92dffc');
                                 grad.addColorStop(1, '#08bbff');
                             }else{
@@ -155,7 +155,7 @@ require([
                                 grad.addColorStop(1, '#77ed00');
                             }
                         }else{
-                            if(channel == 0){
+                            if(channel === 0){
                                 grad.addColorStop(0, '#78daff');
                                 grad.addColorStop(1, '#0094cc');
                             }else{
@@ -174,7 +174,7 @@ require([
                     $("#zoom").val(zoom);
                 });
 
-                outwave.setZoom(5);
+                outwave.setZoom(50,true);
 
                 outwave.onClick(function(time){
                     jwplayer().seek(time);

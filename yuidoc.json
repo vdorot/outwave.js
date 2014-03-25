@@ -1,0 +1,10 @@
+{
+    "name": "Outwave.js",
+    "description": "Web based waveform viewer, supporting long recordings",
+    "version": "0.8",
+    "url": "https://github.com/vdot/outwave.js",
+    "options": {
+        "outdir": "yuidoc",
+        "paths": "lib/outwave/"
+    }
+}
