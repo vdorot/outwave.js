@@ -3,15 +3,17 @@
     LDFLAGS = -lm
     BIN=outwave
     CC=gcc
-
+    FILES=
     MAIN=main.o
 
-    OBJS=$(FILES) $(MAIN) libsndfile/src/.libs/libsndfile.a
+    LIBSNDFILE=libsndfile/src/.libs/libsndfile.a
+
+    OBJS=$(FILES) $(MAIN)
  
 
     .PHONY: all
-    all: clean $(OBJS)
-	    $(CC) $(CFLAGS) -o $(BIN) $(OBJS) $(LDFLAGS)
+    all: $(LIBSNDFILE) $(OBJS)
+	    $(CC) $(CFLAGS) -o $(BIN) $(OBJS) $(LIBSNDFILE) $(LDFLAGS)
 
     libsndfile/src/.libs/libsndfile.a:
 	    cd libsndfile && ./configure --enable-static --disable-external-libs && make
