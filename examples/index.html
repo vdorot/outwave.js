@@ -122,7 +122,9 @@ require([
     'outwave/data-file',
     'outwave/outwave',
     'outwave/utils',
-    'outwave/time-span/continuous-time-span-collection'],function($,DataFile,Outwave,Utils,ContinuousTimeSpanCollection){
+    'outwave/time-span/continuous-time-span-collection',
+    'outwave/time-span/sparse-time-span-collection'
+    ],function($,DataFile,Outwave,Utils,ContinuousTimeSpanCollection,SparseTimeSpanCollection){
 
     var waveform;
 
@@ -248,7 +250,7 @@ require([
 
 
                 // obalka nad anotaciami
-                spanCollection = new ContinuousTimeSpanCollection(outwave);
+                spanCollection = new ContinuousTimeSpanCollection(outwave,{minSpanLength: 2});
 
 
                 // spanCollection.getAll() vrati pole span-ov

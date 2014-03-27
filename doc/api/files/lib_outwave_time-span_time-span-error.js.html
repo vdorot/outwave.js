@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/outwave/time-span/continuous-time-span.js - Outwave.js</title>
+    <title>lib/outwave/time-span/time-span-error.js - Outwave.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -110,166 +110,42 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/outwave/time-span/continuous-time-span.js</h1>
+                        <h1 class="file-heading">File: lib/outwave/time-span/time-span-error.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 
-/*
-Copyright (c) 2014, Viktor Dorotovic
-All rights reserved.
-See LICENSE.txt for licensing information.
-*/
-
 define([
-&#x27;./time-span&#x27;
-],function(TimeSpan){
-
+],function(){
     /**
      * @module TimeSpan
      */
 
     /**
-     * Continuous time span
-     *
-     * @class ContinousTimeSpan
-     * @extends {TimeSpan}
+     * Time span error
+     * @class TimeSpanError
+     * @extends {Error}
      * @constructor
-     * @param {TimeSpanCollection} collection collection object
-     * @param {DataFile} dataFile Waveform data
-     * @param {jQuery element} backgroundContainer Container element behind waveform
-     * @param {jQuery element} foregroundContainer Container element above waveform
-     * @param {Style} style Style object
+     * @param {String} type Error type identifier
+     * @param {String} message Error description
      */
-    var ContinuousTimeSpan = function(collection, dataFile, backgroundContainer, foregroundContainer, style){
-        var span = new TimeSpan(collection, dataFile, backgroundContainer, foregroundContainer, style);
+    function TimeSpanError(type,message) {
+      this.name = &quot;TimeSpanError&quot;;
+      this.message = message;
 
-        var getStartLimits = span.getStartLimits;
+      this.type = type;
 
-        /**
-         * Get range of times this span can start at
-         *
-         * Extends method from parent class
-         *
-         * @method  getStartLimits
-         * @return {interval} Start limits
-         */        
-        span.getStartLimits = function(){
-            var limits = getStartLimits.call(this);
-            
-            if(this.getPrev()){
-                limits = this.intersectIntervals(limits,{s:this.getPrev().getStart()+this.getPrev().getMinLength(),e:this.getEnd()});
-            }
+      this.getType = function(){
+        return this.type;
+      };
 
-            return limits;
-        };
+    }
 
+    TimeSpanError.prototype = new Error();
+    TimeSpanError.prototype.constructor = TimeSpanError;
 
-        var getEndLimits = span.getEndLimits;
+    return TimeSpanError;
 
-        /**
-         * Get range of times this span can end at
-         *
-         * Extends method from parent class
-         *
-         * @method  getEndLimits
-         * @return {interval} End limits
-         */          
-        span.getEndLimits = function(){
-            var limits = getEndLimits.call(this);
-            
-            if(this.getNext()){
-                limits = this.intersectIntervals(limits,{s:this.getStart(),e:this.getNext().getEnd()-this.getNext().getMinLength()});
-            }
-
-
-            return limits;
-        };   
-
-        var setStart = span.setStart;
-
-        /**
-         * Sets start time of span
-         * 
-         * Extends method from parent class
-         *
-         * @method setStart
-         * @param {Number} start Time in seconds
-         */
-        span.setStart = function(time){
-            var prevTime = this.getStart();
-
-            setStart.call(this,time);
-
-            if(time !=prevTime &amp;&amp; this.getPrev()) this.getPrev().setEnd(time);
-            
-        };
-
-        var setEnd = span.setEnd;
-
-        /**
-         * Sets end time of span
-         * 
-         * Extends method from parent class
-         *
-         * @method  setEnd
-         * @param {Number} end Time in seconds
-         */        
-        span.setEnd = function(time){
-            prevTime = this.getEnd();
-            setEnd.call(this,time);
-
-            if(time != prevTime &amp;&amp; this.getNext()) this.getNext().setStart(time);       
-
-        };
-
-
-        var setPrev = span.setPrev;
-
-        /**
-         * Sets previous span in linked list
-         *
-         * This function should not be used directly, use collection methods instead
-         * 
-         * Extends method from parent class
-         *
-         * @method  setPrev
-         * @param {TimeSpan} prev Previous span
-         */
-        span.setPrev = function(prev){
-            setPrev.call(this,prev);
-            if(prev){
-                this.getStartElement().addClass(&#x27;continuous&#x27;);
-            }else{
-                this.getStartElement().removeClass(&#x27;continuous&#x27;);
-            }
-        };
-
-        var setNext = span.setNext;
-
-        /**
-         * Sets next span in linked list
-         *
-         * This function should not be used directly, use collection methods instead
-         * 
-         * Extends method from parent class
-         *
-         * @method  setNext
-         * @param {TimeSpan} next Next span
-         */ 
-        span.setNext = function(next){
-            setNext.call(this,next);
-            if(next){
-                this.getEndElement().addClass(&#x27;continuous&#x27;);
-            }else{
-                this.getEndElement().removeClass(&#x27;continuous&#x27;);
-            }
-        };
-
-
-        return span; //return extended object
-    };
-    return ContinuousTimeSpan;
 });
     </pre>
 </div>

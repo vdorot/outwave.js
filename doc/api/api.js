@@ -12,6 +12,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Style",
         "TimeSpan",
         "TimeSpanCollection",
+        "TimeSpanError",
         "Utils"
     ],
     "modules": [

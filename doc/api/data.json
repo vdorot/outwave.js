@@ -58,6 +58,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "lib/outwave/time-span/time-span-error.js": {
+            "name": "lib/outwave/time-span/time-span-error.js",
+            "modules": {},
+            "classes": {
+                "TimeSpanError": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "lib/outwave/time-span/time-span.js": {
             "name": "lib/outwave/time-span/time-span.js",
             "modules": {
@@ -136,6 +145,7 @@
                 "Draggable": 1,
                 "SparseTimeSpan": 1,
                 "TimeSpanCollection": 1,
+                "TimeSpanError": 1,
                 "TimeSpan": 1
             },
             "fors": {},
@@ -187,6 +197,11 @@
                     "name": "outwave",
                     "description": "Outwave object",
                     "type": "Outwave"
+                },
+                {
+                    "name": "options",
+                    "description": "Options: {minSpanLength: Number}",
+                    "type": "Array"
                 }
             ]
         },
@@ -321,7 +336,7 @@
             "module": "TimeSpan",
             "namespace": "",
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 18,
+            "line": 22,
             "description": "Manages time spans\n\nAbstract class - use subclasses",
             "is_constructor": 1,
             "params": [
@@ -329,6 +344,39 @@
                     "name": "outwave",
                     "description": "Outwave object",
                     "type": "Outwave"
+                },
+                {
+                    "name": "options",
+                    "description": "Options: {minSpanLength: Number}",
+                    "type": "Array"
+                }
+            ]
+        },
+        "TimeSpanError": {
+            "name": "TimeSpanError",
+            "shortname": "TimeSpanError",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "TimeSpan",
+            "namespace": "",
+            "file": "lib/outwave/time-span/time-span-error.js",
+            "line": 8,
+            "description": "Time span error",
+            "extends": "{Error}",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "Error type identifier",
+                    "type": "String"
+                },
+                {
+                    "name": "message",
+                    "description": "Error description",
+                    "type": "String"
                 }
             ]
         },
@@ -546,7 +594,7 @@
     "classitems": [
         {
             "file": "lib/outwave/time-span/continuous-time-span-collection.js",
-            "line": 30,
+            "line": 31,
             "description": "Creates a continuous time span and returns the instance\n\nOverrides method in parent class",
             "itemtype": "method",
             "name": "spanFactory",
@@ -559,7 +607,7 @@
         },
         {
             "file": "lib/outwave/time-span/continuous-time-span-collection.js",
-            "line": 43,
+            "line": 44,
             "description": "Add new Continuous time span\n\nStarting time is end of last time span or 0, if no spans exist",
             "itemtype": "method",
             "name": "addTimeSpan",
@@ -575,7 +623,7 @@
         },
         {
             "file": "lib/outwave/time-span/continuous-time-span-collection.js",
-            "line": 99,
+            "line": 100,
             "description": "Remove time span",
             "itemtype": "method",
             "name": "removeTimeSpan",
@@ -681,7 +729,7 @@
         },
         {
             "file": "lib/outwave/time-span/sparse-time-span-collection.js",
-            "line": 31,
+            "line": 32,
             "description": "Creates a sparse time span and return the instance\n\nOverrides method in parent class",
             "itemtype": "method",
             "name": "spanFactory",
@@ -694,7 +742,7 @@
         },
         {
             "file": "lib/outwave/time-span/sparse-time-span-collection.js",
-            "line": 45,
+            "line": 46,
             "description": "Add sparse time span",
             "itemtype": "method",
             "name": "addTimeSpan",
@@ -715,7 +763,7 @@
         },
         {
             "file": "lib/outwave/time-span/sparse-time-span-collection.js",
-            "line": 139,
+            "line": 140,
             "description": "Remove time span",
             "itemtype": "method",
             "name": "removeTimeSpan",
@@ -757,7 +805,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 66,
+            "line": 74,
             "description": "Return all time spans\n\nThe array should not be manipulated with, only use for reading",
             "itemtype": "method",
             "name": "getAll",
@@ -770,7 +818,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 77,
+            "line": 85,
             "description": "Factory for new time spans\n\nAbstract method",
             "itemtype": "method",
             "name": "spanFactory",
@@ -783,7 +831,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 90,
+            "line": 98,
             "description": "Creates new span",
             "itemtype": "method",
             "name": "createSpan",
@@ -796,7 +844,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 101,
+            "line": 110,
             "description": "Apply mixins to created time spans",
             "itemtype": "method",
             "name": "applySpanMixins",
@@ -812,7 +860,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 113,
+            "line": 122,
             "description": "Merge mergingSpan with span before",
             "itemtype": "method",
             "name": "mergePrev",
@@ -828,7 +876,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 164,
+            "line": 173,
             "description": "Split spans at a given time position",
             "itemtype": "method",
             "name": "split",
@@ -844,7 +892,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 228,
+            "line": 244,
             "description": "Remove time span\n\nAbstract method",
             "itemtype": "method",
             "name": "removeTimeSpan",
@@ -860,7 +908,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 241,
+            "line": 257,
             "description": "Update zoom",
             "itemtype": "method",
             "name": "setZoom",
@@ -876,7 +924,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 254,
+            "line": 270,
             "description": "Set event handler for new spans created",
             "itemtype": "method",
             "name": "onTimeSpanCreated",
@@ -1252,7 +1300,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 322,
+            "line": 321,
             "description": "Sets end time of span",
             "itemtype": "method",
             "name": "setEnd",
@@ -1268,7 +1316,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 337,
+            "line": 336,
             "description": "Get start time",
             "itemtype": "method",
             "name": "getStart",
@@ -1281,7 +1329,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 346,
+            "line": 345,
             "description": "Get starting position in pixels",
             "itemtype": "method",
             "name": "getStartX",
@@ -1294,7 +1342,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 355,
+            "line": 354,
             "description": "Get ending position in pixels",
             "itemtype": "method",
             "name": "getEndX",
@@ -1307,7 +1355,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 364,
+            "line": 363,
             "description": "Get end time",
             "itemtype": "method",
             "name": "getEnd",
@@ -1320,7 +1368,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 373,
+            "line": 372,
             "description": "Update element position on screen",
             "itemtype": "method",
             "name": "updatePositon",
@@ -1329,7 +1377,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 462,
+            "line": 461,
             "description": "Render elements",
             "itemtype": "method",
             "name": "render",
@@ -1338,7 +1386,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 515,
+            "line": 514,
             "description": "Set zoom",
             "itemtype": "method",
             "name": "setZoom",
@@ -1354,7 +1402,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 526,
+            "line": 525,
             "description": "Remove elements",
             "itemtype": "method",
             "name": "unRender",
@@ -1363,7 +1411,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 554,
+            "line": 553,
             "description": "Set event handler for position changes",
             "itemtype": "method",
             "name": "onPositionChanged",
@@ -1379,7 +1427,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 563,
+            "line": 562,
             "description": "Set event handler that is called after the span gets removed",
             "itemtype": "method",
             "name": "onRemoved",
@@ -1395,7 +1443,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 572,
+            "line": 571,
             "description": "Fire onRemoved handler",
             "itemtype": "method",
             "name": "handleRemoved",
@@ -1404,7 +1452,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 581,
+            "line": 580,
             "description": "Remove timespan from collection",
             "itemtype": "method",
             "name": "remove",

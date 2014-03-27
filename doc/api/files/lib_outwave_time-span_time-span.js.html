@@ -63,6 +63,8 @@
             
                 <li><a href="../classes/TimeSpanCollection.html">TimeSpanCollection</a></li>
             
+                <li><a href="../classes/TimeSpanError.html">TimeSpanError</a></li>
+            
                 <li><a href="../classes/Utils.html">Utils</a></li>
             
             </ul>
@@ -119,9 +121,9 @@ See LICENSE.txt for licensing information.
 */
 
 define([
-&#x27;../utils&#x27;
-],function(Utils){
-
+&#x27;../utils&#x27;,
+&#x27;./time-span-error&#x27;
+],function(Utils,TimeSpanError){
 
     /**
      * Adds support for marking time spans(segments) of waveform
@@ -424,10 +426,9 @@ define([
          */
         setStart: function(start){
             if(!this.canStart(start)){
-                //console.log(this.getStartLimits(),end);
-                var error = new Error(&quot;TimeSpans would overlap&quot;);
-                error.name = &quot;TimeSpanError&quot;;
-                throw error;
+                //console.log(this.getStartLimits(),end);               
+
+                throw new TimeSpanError(&#x27;set-start&#x27;,&quot;Cannot set starting position of time span, time span would overlap another or be shorter than the minimum length&quot;);
             }
             this.start = start;
             this.updatePosition();
@@ -441,9 +442,9 @@ define([
          */
         setEnd: function(end){
             if(!this.canEnd(end)){
-                var error = new Error(&quot;TimeSpans would overlap&quot;);
-                error.name = &quot;TimeSpanError&quot;;
-                throw error;
+
+                throw new TimeSpanError(&#x27;set-end&#x27;,&quot;Cannot set ending position of time span, time span would overlap another or be shorter than the minimum length&quot;);
+
             }
             this.end = end;
             this.updatePosition();

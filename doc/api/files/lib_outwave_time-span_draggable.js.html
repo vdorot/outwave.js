@@ -63,6 +63,8 @@
             
                 <li><a href="../classes/TimeSpanCollection.html">TimeSpanCollection</a></li>
             
+                <li><a href="../classes/TimeSpanError.html">TimeSpanError</a></li>
+            
                 <li><a href="../classes/Utils.html">Utils</a></li>
             
             </ul>
@@ -302,19 +304,53 @@ define([
                     }
                     
 
+                    var sDim = self.getStartDimensions();
 
+                    var eDim = self.getEndDimensions();
+
+                    var elemSize; // pixel size of starting and ending element
+
+                    if(style.horizontal()){
+                        elemSize = sDim.w + eDim.w;
+                    }else{
+                        elemSize = sDim.h + sDim.h;
+                    }
+
+                    elemSize = self.dataFile.px2time(elemSize,self.zoom);
 
                     var time = self.dataFile.px2time(endPos,self.zoom);
 
                     var limits;
                     if(isStart){
                         limits = self.getStartLimits();
+
+
+
+                        if(self.getEnd() - limits.e &lt; elemSize){
+                            limits.e = self.getEnd() - elemSize;
+                        }
+
+
+                        if(limits.e &lt; limits.s){
+                            limits.e = limits.s;
+                        }
+
                         time = self.applyInterval(limits,time);
                         if(time !==null){
                             self.setStart(time);
                         }
                     }else{
                         limits = self.getEndLimits();
+
+                        if(limits.s - self.getStart() &lt; elemSize){
+                            limits.s = self.getStart() + elemSize;
+                        }
+
+                        if(limits.s &gt; limits.e){
+                            limits.s = limits.e;
+                        }
+
+
                         time = self.applyInterval(limits,time);
                         if(time !==null){
                             self.setEnd(time);

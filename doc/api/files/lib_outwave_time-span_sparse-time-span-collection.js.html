@@ -63,6 +63,8 @@
             
                 <li><a href="../classes/TimeSpanCollection.html">TimeSpanCollection</a></li>
             
+                <li><a href="../classes/TimeSpanError.html">TimeSpanError</a></li>
+            
                 <li><a href="../classes/Utils.html">Utils</a></li>
             
             </ul>
@@ -137,9 +139,10 @@ define([
      * @extends {TimeSpanCollection}
      * @constructor
      * @param {Outwave} outwave Outwave object
+     * @param {Array} options Options: {minSpanLength: Number}
      */
-    var ContinuousTimeSpanCollection = function(outwave){
-        var collection = new TimeSpanCollection(outwave);
+    var ContinuousTimeSpanCollection = function(outwave,options){
+        var collection = new TimeSpanCollection(outwave,options);
 
 
         /**
