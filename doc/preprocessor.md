@@ -41,7 +41,7 @@ Exit codes:
 
 ##Using FFmpeg
 
-It is poosible to process any media file without having to save uncompressed audio on the disk. FFmpeg can route its output to a pipe, which outwave can read from.
+It is possible to process any media file without having to save uncompressed audio on the disk. FFmpeg can route its output to a pipe, which outwave can read from.
 
 If converting on the fly, FFmpeg writes a zero to the frame count field in the header, which libsndfile interprets as an empty file.
 A solution is to choose the AU format, which doesn't contain the number of frames in the file header.
