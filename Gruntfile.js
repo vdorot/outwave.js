@@ -13,7 +13,7 @@ module.exports = function(grunt) {
           outdir: 'doc/api'
         }
       }
-    }
+    },
     clean: ['doc/api']
   });
 

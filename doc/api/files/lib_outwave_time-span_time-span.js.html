@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/outwave/time-span/time-span.js - Outwave.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="Outwave.js"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/ContinousTimeSpan.html">ContinousTimeSpan</a></li>
+            
+                <li><a href="../classes/ContinuousTimeSpanCollection.html">ContinuousTimeSpanCollection</a></li>
+            
+                <li><a href="../classes/DataFile.html">DataFile</a></li>
+            
+                <li><a href="../classes/Draggable.html">Draggable</a></li>
+            
+                <li><a href="../classes/Outwave.html">Outwave</a></li>
+            
+                <li><a href="../classes/Segment.html">Segment</a></li>
+            
+                <li><a href="../classes/SegmentCollection.html">SegmentCollection</a></li>
+            
+                <li><a href="../classes/SparseTimeSpan.html">SparseTimeSpan</a></li>
+            
+                <li><a href="../classes/Style.html">Style</a></li>
+            
+                <li><a href="../classes/TimeSpan.html">TimeSpan</a></li>
+            
+                <li><a href="../classes/TimeSpanCollection.html">TimeSpanCollection</a></li>
+            
+                <li><a href="../classes/Utils.html">Utils</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Outwave.html">Outwave</a></li>
+            
+                <li><a href="../modules/TimeSpan.html">TimeSpan</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib/outwave/time-span/time-span.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*
+Copyright (c) 2014, Viktor Dorotovic
+All rights reserved.
+See LICENSE.txt for licensing information.
+*/
+
+define([
+&#x27;../utils&#x27;
+],function(Utils){
+
+
+    /**
+     * Adds support for marking time spans(segments) of waveform
+     * 
+     * @module TimeSpan
+     * @main TimeSpan
+     */
+
+
+    /**
+     * Represents time span
+     *
+     * Abstract class - use subclasses
+     *
+     * @class TimeSpan
+     * @constructor
+     * @param {TimeSpanCollection} collection collection object
+     * @param {DataFile} dataFile Waveform data
+     * @param {jQuery element} backgroundContainer Container element behind waveform
+     * @param {jQuery element} foregroundContainer Container element above waveform
+     * @param {Style} style Style object
+     */
+    var TimeSpan = function(collection, dataFile, backgroundContainer, foregroundContainer, style){
+
+        this.zoom = null;
+
+        this.dataFile = dataFile;
+
+        this.collection = collection;
+
+        this.backgroundContainer = backgroundContainer;
+
+        this.foregroundContainer = foregroundContainer;
+
+        this.style = style;
+
+        this.start = null;
+
+        this.end = null;
+
+        this.prev = null;
+        this.next = null;
+
+        this.rendered = false;
+
+        this.startEl;
+        this.endEl;
+        this.backEl;
+
+        this.utils = Utils; //TODO: refactor
+
+
+        this.splitFn;
+
+        this.mergedFn;
+
+        this.minLength = 0;
+
+        this.data = null;
+
+    }
+
+
+    TimeSpan.prototype = {
+        /**
+         * Get back reference to collection
+         *
+         * @method  getCollection
+         * @return {TimeSpanCollection} Time span collection
+         */
+        getCollection: function(){
+            return this.collection;
+        },
+        /**
+         * adds arbitrary data to span
+         *
+         * @method  setData
+         * @param {Object} data Any data
+         */
+        setData: function(data){
+            this.data = data;
+        },
+        /**
+         * Get data associated with this time span
+         *
+         * @method  getData
+         * @return {Object} Saved data
+         */
+        getData: function(){
+            return this.data;
+        },
+        /**
+         * Set event handler for splitting time spans
+         * 
+         * prevSpan - Time span created to the left of splitting position
+         * nextSpan - Time span created to the right of splitting position
+         *
+         * @method  onSplit
+         * @param  {Function} fn Function(prevSpan, nextSpan)
+         */
+        onSplit: function(fn){
+            this.splitFn = fn;
+        },
+        /**
+         * Fire event handler
+         *
+         * @method  handleSplit
+         * @param  {TimeSpan} prevSpan Time span created to the left of splitting position
+         * @param  {TimeSpan} nextSpan Time span created to the right of splitting position
+         */
+        handleSplit: function(prevSpan,nextSpan){
+            if(this.splitFn){
+                this.splitFn(prevSpan,nextSpan);
+            }
+        },
+        /**
+         * Set event handler for merging
+         *
+         * prevSpan - Time span that was merged with this object
+         * createdSpan - New time span created as a result of merging
+         *
+         * @method  onMerged
+         * @param  {Function} fn Function(prevSpan,createdSpan)
+         */
+        onMerged: function(fn){
+            this.mergedFn = fn;
+        },
+        /**
+         * Fire event handler
+         *
+         * @method  handleMerged
+         * @param  {[type]} prevSpan    Time span that was merged with this object
+         * @param  {[type]} createdSpan New time span created as a result of merging
+         */
+        handleMerged: function(prevSpan,createdSpan){
+            if(this.mergedFn){
+                this.mergedFn(prevSpan,createdSpan);
+            }
+        },
+        /**
+         * Get minimum length of span
+         *
+         * @method  getMinLength
+         * @return {[type]} [description]
+         */
+        getMinLength: function(){
+            return this.minLength;
+        },
+        /**
+         * Set minimum length of span
+         * @method  setMinLength
+         * @param {Number} length Length in seconds
+         */
+        setMinLength: function(length){
+            this.minLength = length;
+        },
+        /**
+         * Sets previous span in linked list
+         *
+         * This function should not be used directly, use collection methods instead
+         *
+         * @method  setPrev
+         * @param {TimeSpan} prev Previous span
+         */
+        setPrev: function(prev){
+            this.prev = prev;
+        },
+        /**
+         * Sets next span in linked list
+         *
+         * This function should not be used directly, use collection methods instead
+         * @method  setNext
+         * @param {TimeSpan} next Next span
+         */        
+        setNext: function(next){
+            this.next = next;
+        },
+        /**
+         * Returns previous span in linked list
+         *
+         * @method  getPrev
+         * @return {TimeSpan} Peevious span
+         */
+        getPrev: function(){
+            return this.prev;
+        },
+        /**
+         * Returns next span in linked list
+         *
+         * @method  getNext
+         * @return {TimeSpan} Next span
+         */
+        getNext: function(){
+            return this.next;
+        },
+
+        //interval: {s:0,e:1}
+        /**
+         * Compute the interseciton of 2 intervals
+         *
+         * Interval are represented as an object:
+         *
+         *  {s: Number, e: Number}
+         *
+         *  s - start
+         *
+         *  e - end
+         *
+         * @method  intersectIntervals
+         * @param  {interval} a [description]
+         * @param  {interval} b [description]
+         * @return {[type]}   [description]
+         */
+        intersectIntervals: function(a,b){
+            if(!a || !b){
+                return null;
+            }
+            var s = Math.max(a.s,b.s);
+            var e = Math.min(a.e,b.e);
+            return (s&lt;=e)? {s:s,e:e} : null;
+        },
+        /**
+         * Limits value to range defined by interval
+         *
+         * @method  applyInterval
+         * @param  {interval} interval Limiting interval
+         * @param  {Number} value    Number
+         * @return {Number}          Value inside interval
+         */
+        applyInterval: function(interval,value){ // limits vlaue range to interval
+            if(!interval) return null;
+            var val = Math.max(interval.s,value);
+            val = Math.min(interval.e,val);
+            return val;
+        },
+        /**
+         * Check if value is inside interval
+         *
+         * If interval is not set, the value is not considered to be inside
+         *
+         * @method  inInterval
+         * @param  {interval} interval Interval
+         * @param  {Number} time     Number
+         * @return {Boolean}         Result
+         */
+        inInterval: function(interval,time){
+            return interval &amp;&amp; (time &gt;= interval.s &amp;&amp; time&lt;=interval.e);
+        },
+        /**
+         * Get range of times this span can start at
+         * @method getStartLimits
+         * @return {interval} Start limits
+         */
+        getStartLimits: function(){
+            if(this.getEnd() !== null){
+                return {s:0,e:this.getEnd()-this.getMinLength()};
+            }else{
+                return {s:0,e:(this.dataFile.getLength())};
+            }
+        },
+        /**
+         * Get range of times this span can end at
+         * @method  getEndLimits
+         * @return {interval} End limits
+         */
+        getEndLimits: function(){
+            if(this.getStart() !== null){
+                return {s:this.getStart()+this.getMinLength(),e:(this.dataFile.getLength())}
+            }else{     
+                return {s:0,e:(this.dataFile.getLength())};
+            }
+        },
+        /**
+         * Can this span start at a given time?
+         *
+         * @method  canStart
+         * @param  {Number} start Time in seconds to check
+         * @return {Boolean}      Result
+         */
+        canStart: function(start){
+            var limits = this.getStartLimits();
+            return this.inInterval(limits,start);
+        },
+        /**
+         * Can this span end at a given time?
+         *
+         * @method  canEnd
+         * @param  {Number} end Time in seconds to check
+         * @return {Boolean}     Result
+         */
+        canEnd: function(end){
+            var limits = this.getEndLimits();
+            return this.inInterval(limits,end);
+        },
+        /**
+         * Sets start time of span
+         *
+         * @method  setStart
+         * @param {Number} start Time in seconds
+         */
+        setStart: function(start){
+            if(!this.canStart(start)){
+                //console.log(this.getStartLimits(),end);
+                var error = new Error(&quot;TimeSpans would overlap&quot;);
+                error.name = &quot;TimeSpanError&quot;;
+                throw error;
+            }
+            this.start = start;
+            this.updatePosition();
+        },
+
+        /**
+         * Sets end time of span
+         *
+         * @method  setEnd
+         * @param {Number} end Time in seconds
+         */
+        setEnd: function(end){
+            if(!this.canEnd(end)){
+                var error = new Error(&quot;TimeSpans would overlap&quot;);
+                error.name = &quot;TimeSpanError&quot;;
+                throw error;
+            }
+            this.end = end;
+            this.updatePosition();
+        },
+        /**
+         * Get start time
+         *
+         * @method  getStart
+         * @return {Number} Time in seconds
+         */
+        getStart: function(){
+            return this.start;
+        },
+        /**
+         * Get starting position in pixels
+         *
+         * @method  getStartX
+         * @return {Number} X-cordinate
+         */
+        getStartX: function(){
+            return this.dataFile.time2px(this.start,this.zoom);
+        },
+        /**
+         * Get ending position in pixels
+         *
+         * @method  getEndX
+         * @return {Number} X-coordinate
+         */
+        getEndX: function(){
+            return this.dataFile.time2px(this.end,this.zoom);
+        },
+        /**
+         * Get end time
+         *
+         * @method  getEnd
+         * @return {Number} Time in seconds
+         */
+        getEnd: function(){
+            return this.end;
+        },
+        /**
+         * Update element position on screen
+         *
+         * @method  updatePositon
+         */
+        updatePosition: function(){
+            if(!this.rendered){
+                return;
+            }
+
+
+            var startX = this.dataFile.time2px(this.start,this.zoom);
+
+            var endX = this.dataFile.time2px(this.end,this.zoom);
+
+            if(this.positionChangedFn) this.positionChangedFn(this.getStart(),this.getEnd());
+
+
+            var startPos = startX;
+
+            var startEl = this.getStartElement();
+            var endEl = this.getEndElement();
+            var backEl = this.getBackElement();
+
+            startEl.css(&#x27;position&#x27;,&#x27;absolute&#x27;);
+
+            endEl.css(&#x27;position&#x27;,&#x27;absolute&#x27;);
+
+            backEl.css(&#x27;position&#x27;,&#x27;absolute&#x27;);
+
+            if(this.style.horizontal()){
+
+                backEl.css({&#x27;left&#x27;: startPos, &#x27;width&#x27;: endX - startX});
+
+                startEl.css(&#x27;left&#x27;,startPos);
+                var endPos = endX - this.getEndDimensions().w;
+                endEl.css(&#x27;left&#x27;,endPos);
+            }else{
+                backEl.css({&#x27;top&#x27;: startPos, &#x27;height&#x27;: endX - startX});
+
+                startEl.css(&#x27;top&#x27;,startPos);
+                var endPos = endX - this.getEndDimensions().h;
+                endEl.css(&#x27;top&#x27;,endPos);
+            }
+
+
+        },
+        createStartElement: function(){
+            return this.style.timeSpanStart();
+        },
+        createEndElement: function(){
+            return this.style.timeSpanEnd();
+        },
+        createBackElement: function(){
+            return this.style.timeSpanBackground();
+        },
+        getStartElement: function(){
+            if(!this.startEl){
+                this.startEl = this.createStartElement();
+            }
+
+            return this.startEl;
+        },
+        getEndElement: function(){
+            if(!this.endEl){
+                this.endEl = this.createEndElement();
+            }
+
+            return this.endEl;
+        },
+        getBackElement: function(){
+            if(!this.backEl){
+                this.backEl = this.createBackElement();
+            }
+
+            return this.backEl;       
+        },
+        getStartDimensions: function(){ // return dimensions of HTML element representing start of time span
+            if(!this.startDim){
+                this.startDim = this.utils.getElementDimensions(this.getStartElement());
+            }
+            return this.startDim;
+        },
+        getEndDimensions: function(){
+            if(!this.endDim){
+                this.endDim = this.utils.getElementDimensions(this.getEndElement());
+            }
+            return this.endDim;
+        },
+        /**
+         * Render elements
+         *
+         * @method  render
+         */
+        render: function(){
+
+            //generate element
+            if(this.rendered){
+                this.unRender();
+            }
+
+
+            if(this.start===null || this.end===null || this.zoom===null){
+                return;
+            }
+
+            //check if start, end and zoom are available
+
+            var startEl = this.getStartElement();
+
+            //startEl.mousemove(function(e){$(e.target).parent().trigger(&#x27;mouseleave&#x27;); e.stopPropagation();});
+
+            var startDim = this.getStartDimensions();
+
+
+            var endEl = this.getEndElement();
+
+            /*endEl.mousemove(function(e){
+
+                $(e.target).parent().trigger(&#x27;mouseleave&#x27;); e.stopPropagation();
+
+            });*/
+
+            var endDim = this.getEndDimensions();
+
+            this.foregroundContainer.append(startEl, endEl);
+
+            var backEl = this.getBackElement();
+
+            this.backgroundContainer.append(backEl);
+
+            this.rendered = true;
+
+            this.updatePosition();
+
+            var self = this;
+
+
+            
+
+
+        },
+        /**
+         * Set zoom
+         *
+         * @method  setZoom
+         * @param {Number} zoom Zoom factor
+         */
+        setZoom: function(zoom){
+
+            this.zoom = zoom;
+            this.updatePosition();
+        },
+        /**
+         * Remove elements
+         *
+         * @method  unRender
+         */
+        unRender: function(){
+            // possible optimization - keeping only visible annotations rendered
+            if(!this.rendered){
+                return;
+            }
+            if(this.startEl){
+                this.startEl.remove();
+                this.startEl = null;
+            }
+
+            if(this.endEl){
+                this.endEl.remove();
+                this.endEl = null;
+            }
+            if(this.backEl){
+                this.backEl.remove();
+                this.backEl = null;
+            }
+            this.startDim = null;
+            this.endDim = null;
+
+            this.rendered = false;
+        },
+        /**
+         * Set event handler for position changes
+         *
+         * @method  onPositionChanged
+         * @param  {Function} fn Function(start,end) start, end - seconds
+         */
+        onPositionChanged: function(fn){
+            this.positionChangedFn = fn;
+        },
+        /**
+         * Set event handler that is called after the span gets removed
+         *
+         * @method  onRemoved
+         * @param  {Function} fn Function()
+         */
+        onRemoved: function(fn){
+            this.removedFn = fn;
+        },
+        /**
+         * Fire onRemoved handler
+         *
+         * @method  handleRemoved
+         */
+        handleRemoved: function(){
+            this.unRender();
+            if(this.removedFn) this.removedFn();
+        },
+        /**
+         * Remove timespan from collection
+         *
+         * @method  remove
+         */
+        remove: function(){
+            this.collection.removeTimeSpan(this);
+        }
+
+    }
+
+    return TimeSpan;
+
+});
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

@@ -1,0 +1,2676 @@
+{
+    "project": {
+        "name": "Outwave.js",
+        "description": "Web based waveform viewer, supporting long recordings",
+        "version": "0.1.0",
+        "url": ""
+    },
+    "files": {
+        "lib/outwave/time-span/continuous-time-span-collection.js": {
+            "name": "lib/outwave/time-span/continuous-time-span-collection.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/outwave/time-span/continuous-time-span.js": {
+            "name": "lib/outwave/time-span/continuous-time-span.js",
+            "modules": {},
+            "classes": {
+                "ContinousTimeSpan": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/outwave/time-span/draggable.js": {
+            "name": "lib/outwave/time-span/draggable.js",
+            "modules": {},
+            "classes": {
+                "Draggable": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/outwave/time-span/sparse-time-span-collection.js": {
+            "name": "lib/outwave/time-span/sparse-time-span-collection.js",
+            "modules": {},
+            "classes": {
+                "ContinuousTimeSpanCollection": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/outwave/time-span/sparse-time-span.js": {
+            "name": "lib/outwave/time-span/sparse-time-span.js",
+            "modules": {},
+            "classes": {
+                "SparseTimeSpan": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/outwave/time-span/time-span-collection.js": {
+            "name": "lib/outwave/time-span/time-span-collection.js",
+            "modules": {},
+            "classes": {
+                "TimeSpanCollection": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/outwave/time-span/time-span.js": {
+            "name": "lib/outwave/time-span/time-span.js",
+            "modules": {
+                "TimeSpan": 1
+            },
+            "classes": {
+                "TimeSpan": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/outwave/data-file.js": {
+            "name": "lib/outwave/data-file.js",
+            "modules": {},
+            "classes": {
+                "DataFile": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/outwave/outwave.js": {
+            "name": "lib/outwave/outwave.js",
+            "modules": {
+                "Outwave": 1
+            },
+            "classes": {
+                "Outwave": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/outwave/segment-collection.js": {
+            "name": "lib/outwave/segment-collection.js",
+            "modules": {},
+            "classes": {
+                "SegmentCollection": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/outwave/segment.js": {
+            "name": "lib/outwave/segment.js",
+            "modules": {},
+            "classes": {
+                "Segment": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/outwave/style.js": {
+            "name": "lib/outwave/style.js",
+            "modules": {},
+            "classes": {
+                "Style": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/outwave/utils.js": {
+            "name": "lib/outwave/utils.js",
+            "modules": {},
+            "classes": {
+                "Utils": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "TimeSpan": {
+            "name": "TimeSpan",
+            "submodules": {},
+            "classes": {
+                "ContinuousTimeSpanCollection": 1,
+                "ContinousTimeSpan": 1,
+                "Draggable": 1,
+                "SparseTimeSpan": 1,
+                "TimeSpanCollection": 1,
+                "TimeSpan": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "main",
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 20,
+            "description": "Adds support for marking time spans(segments) of waveform",
+            "itemtype": "main"
+        },
+        "Outwave": {
+            "name": "Outwave",
+            "submodules": {},
+            "classes": {
+                "DataFile": 1,
+                "Outwave": 1,
+                "SegmentCollection": 1,
+                "Segment": 1,
+                "Style": 1,
+                "Utils": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "main",
+            "file": "lib/outwave/utils.js",
+            "line": 15,
+            "description": "Web based waveform viewer",
+            "itemtype": "main"
+        }
+    },
+    "classes": {
+        "ContinuousTimeSpanCollection": {
+            "name": "ContinuousTimeSpanCollection",
+            "shortname": "ContinuousTimeSpanCollection",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "TimeSpan",
+            "namespace": "",
+            "file": "lib/outwave/time-span/sparse-time-span-collection.js",
+            "line": 17,
+            "description": "Continuous time span collection\n\nManages all time spans",
+            "extends": "{TimeSpanCollection}",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "outwave",
+                    "description": "Outwave object",
+                    "type": "Outwave"
+                }
+            ]
+        },
+        "ContinousTimeSpan": {
+            "name": "ContinousTimeSpan",
+            "shortname": "ContinousTimeSpan",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "TimeSpan",
+            "namespace": "",
+            "file": "lib/outwave/time-span/continuous-time-span.js",
+            "line": 16,
+            "description": "Continuous time span",
+            "extends": "{TimeSpan}",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "collection",
+                    "description": "collection object",
+                    "type": "TimeSpanCollection"
+                },
+                {
+                    "name": "dataFile",
+                    "description": "Waveform data",
+                    "type": "DataFile"
+                },
+                {
+                    "name": "backgroundContainer",
+                    "description": "Container element behind waveform",
+                    "type": "JQuery element"
+                },
+                {
+                    "name": "foregroundContainer",
+                    "description": "Container element above waveform",
+                    "type": "JQuery element"
+                },
+                {
+                    "name": "style",
+                    "description": "Style object",
+                    "type": "Style"
+                }
+            ]
+        },
+        "Draggable": {
+            "name": "Draggable",
+            "shortname": "Draggable",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "TimeSpan"
+            ],
+            "module": "TimeSpan",
+            "namespace": "",
+            "file": "lib/outwave/time-span/draggable.js",
+            "line": 21,
+            "description": "Mixin that adds dragging capability to time spans",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "span",
+                    "description": "Time span",
+                    "type": "TimeSpan"
+                },
+                {
+                    "name": "viewportElement",
+                    "description": "Viewport element",
+                    "type": "JQuery element"
+                },
+                {
+                    "name": "style",
+                    "description": "Style object",
+                    "type": "Style"
+                }
+            ]
+        },
+        "SparseTimeSpan": {
+            "name": "SparseTimeSpan",
+            "shortname": "SparseTimeSpan",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "TimeSpan",
+            "namespace": "",
+            "file": "lib/outwave/time-span/sparse-time-span.js",
+            "line": 16,
+            "description": "Sparse time span",
+            "extends": "{TimeSpan}",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "collection",
+                    "description": "collection object",
+                    "type": "TimeSpanCollection"
+                },
+                {
+                    "name": "dataFile",
+                    "description": "Waveform data",
+                    "type": "DataFile"
+                },
+                {
+                    "name": "backgroundContainer",
+                    "description": "Container element behind waveform",
+                    "type": "JQuery element"
+                },
+                {
+                    "name": "foregroundContainer",
+                    "description": "Container element above waveform",
+                    "type": "JQuery element"
+                },
+                {
+                    "name": "style",
+                    "description": "Style object",
+                    "type": "Style"
+                }
+            ]
+        },
+        "TimeSpanCollection": {
+            "name": "TimeSpanCollection",
+            "shortname": "TimeSpanCollection",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "TimeSpan",
+            "namespace": "",
+            "file": "lib/outwave/time-span/time-span-collection.js",
+            "line": 18,
+            "description": "Manages time spans\n\nAbstract class - use subclasses",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "outwave",
+                    "description": "Outwave object",
+                    "type": "Outwave"
+                }
+            ]
+        },
+        "TimeSpan": {
+            "name": "TimeSpan",
+            "shortname": "TimeSpan",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "TimeSpan",
+            "namespace": "",
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 20,
+            "description": "Represents time span\n\nAbstract class - use subclasses",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "collection",
+                    "description": "collection object",
+                    "type": "TimeSpanCollection"
+                },
+                {
+                    "name": "dataFile",
+                    "description": "Waveform data",
+                    "type": "DataFile"
+                },
+                {
+                    "name": "backgroundContainer",
+                    "description": "Container element behind waveform",
+                    "type": "JQuery element"
+                },
+                {
+                    "name": "foregroundContainer",
+                    "description": "Container element above waveform",
+                    "type": "JQuery element"
+                },
+                {
+                    "name": "style",
+                    "description": "Style object",
+                    "type": "Style"
+                }
+            ]
+        },
+        "DataFile": {
+            "name": "DataFile",
+            "shortname": "DataFile",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Outwave",
+            "namespace": "",
+            "file": "lib/outwave/data-file.js",
+            "line": 14,
+            "description": "Waveform data and methods for getting samples\n\nUse static method loadUrl for getting a DataFile from a URL directly",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "dataView",
+                    "description": "DataView or compatible(jDataView) of waveform file",
+                    "type": "Dataview"
+                },
+                {
+                    "name": "byteLen",
+                    "description": "Length in bytes",
+                    "type": "Number"
+                }
+            ]
+        },
+        "Outwave": {
+            "name": "Outwave",
+            "shortname": "Outwave",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Outwave",
+            "namespace": "",
+            "file": "lib/outwave/outwave.js",
+            "line": 59,
+            "description": "Main waveform viewer object\n\nWidth and height(x,y) dimensions are used as if for horizontal orientation.\nIf you are using Outwave vertically, exchange the dimensions. Eg. the height option means width on screen.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "container",
+                    "description": "The element which the viewer will reside in",
+                    "type": "HTMLElement|jQuery element"
+                },
+                {
+                    "name": "file",
+                    "description": "Object containing preprocessed waveform data",
+                    "type": "DataFile"
+                },
+                {
+                    "name": "options",
+                    "description": "Options",
+                    "type": "Object"
+                }
+            ]
+        },
+        "SegmentCollection": {
+            "name": "SegmentCollection",
+            "shortname": "SegmentCollection",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Outwave",
+            "namespace": "",
+            "file": "lib/outwave/segment-collection.js",
+            "line": 14,
+            "description": "Create a segment collection",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "dataFile",
+                    "description": "Waveform data",
+                    "type": "DataFile"
+                },
+                {
+                    "name": "container",
+                    "description": "Container element",
+                    "type": "JQuery element"
+                },
+                {
+                    "name": "segmentFactory",
+                    "description": "Factory function for segments",
+                    "type": "Function"
+                },
+                {
+                    "name": "segmentWidth",
+                    "description": "Width of segments",
+                    "type": "Number"
+                },
+                {
+                    "name": "style",
+                    "description": "Style object",
+                    "type": "Style"
+                }
+            ]
+        },
+        "Segment": {
+            "name": "Segment",
+            "shortname": "Segment",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Outwave",
+            "namespace": "",
+            "file": "lib/outwave/segment.js",
+            "line": 18,
+            "description": "Class representing segment of waveform",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "dataFile",
+                    "description": "Waveform data",
+                    "type": "DataFile"
+                },
+                {
+                    "name": "container",
+                    "description": "Contaqiner element",
+                    "type": "JQuery element"
+                },
+                {
+                    "name": "height",
+                    "description": "Height of waveform",
+                    "type": "Number"
+                },
+                {
+                    "name": "style",
+                    "description": "Style object",
+                    "type": "Style"
+                }
+            ]
+        },
+        "Style": {
+            "name": "Style",
+            "shortname": "Style",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Outwave",
+            "namespace": "",
+            "file": "lib/outwave/style.js",
+            "line": 14,
+            "description": "Default styling options",
+            "is_constructor": 1
+        },
+        "Utils": {
+            "name": "Utils",
+            "shortname": "Utils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Outwave",
+            "namespace": "",
+            "file": "lib/outwave/utils.js",
+            "line": 15,
+            "description": "Various utilities",
+            "static": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "lib/outwave/time-span/continuous-time-span-collection.js",
+            "line": 30,
+            "description": "Creates a continuous time span and returns the instance\n\nOverrides method in parent class",
+            "itemtype": "method",
+            "name": "spanFactory",
+            "return": {
+                "description": "New time span",
+                "type": "TimeSpan"
+            },
+            "class": "ContinuousTimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/continuous-time-span-collection.js",
+            "line": 43,
+            "description": "Add new Continuous time span\n\nStarting time is end of last time span or 0, if no spans exist",
+            "itemtype": "method",
+            "name": "addTimeSpan",
+            "params": [
+                {
+                    "name": "end",
+                    "description": "Ending time",
+                    "type": "Number"
+                }
+            ],
+            "class": "ContinuousTimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/continuous-time-span-collection.js",
+            "line": 99,
+            "description": "Remove time span",
+            "itemtype": "method",
+            "name": "removeTimeSpan",
+            "params": [
+                {
+                    "name": "timespan",
+                    "description": "Time span to be removed",
+                    "type": "TimeSpan"
+                }
+            ],
+            "class": "ContinuousTimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/continuous-time-span.js",
+            "line": 33,
+            "description": "Get range of times this span can start at\n\nExtends method from parent class",
+            "itemtype": "method",
+            "name": "getStartLimits",
+            "return": {
+                "description": "Start limits",
+                "type": "Interval"
+            },
+            "class": "ContinousTimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/continuous-time-span.js",
+            "line": 54,
+            "description": "Get range of times this span can end at\n\nExtends method from parent class",
+            "itemtype": "method",
+            "name": "getEndLimits",
+            "return": {
+                "description": "End limits",
+                "type": "Interval"
+            },
+            "class": "ContinousTimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/continuous-time-span.js",
+            "line": 75,
+            "description": "Sets start time of span\n\nExtends method from parent class",
+            "itemtype": "method",
+            "name": "setStart",
+            "params": [
+                {
+                    "name": "start",
+                    "description": "Time in seconds",
+                    "type": "Number"
+                }
+            ],
+            "class": "ContinousTimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/continuous-time-span.js",
+            "line": 94,
+            "description": "Sets end time of span\n\nExtends method from parent class",
+            "itemtype": "method",
+            "name": "setEnd",
+            "params": [
+                {
+                    "name": "end",
+                    "description": "Time in seconds",
+                    "type": "Number"
+                }
+            ],
+            "class": "ContinousTimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/continuous-time-span.js",
+            "line": 113,
+            "description": "Sets previous span in linked list\n\nThis function should not be used directly, use collection methods instead\n\nExtends method from parent class",
+            "itemtype": "method",
+            "name": "setPrev",
+            "params": [
+                {
+                    "name": "prev",
+                    "description": "Previous span",
+                    "type": "TimeSpan"
+                }
+            ],
+            "class": "ContinousTimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/continuous-time-span.js",
+            "line": 134,
+            "description": "Sets next span in linked list\n\nThis function should not be used directly, use collection methods instead\n\nExtends method from parent class",
+            "itemtype": "method",
+            "name": "setNext",
+            "params": [
+                {
+                    "name": "next",
+                    "description": "Next span",
+                    "type": "TimeSpan"
+                }
+            ],
+            "class": "ContinousTimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/sparse-time-span-collection.js",
+            "line": 31,
+            "description": "Creates a sparse time span and return the instance\n\nOverrides method in parent class",
+            "itemtype": "method",
+            "name": "spanFactory",
+            "return": {
+                "description": "New time span",
+                "type": "TimeSpan"
+            },
+            "class": "ContinuousTimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/sparse-time-span-collection.js",
+            "line": 45,
+            "description": "Add sparse time span",
+            "itemtype": "method",
+            "name": "addTimeSpan",
+            "params": [
+                {
+                    "name": "start",
+                    "description": "Start time in seconds",
+                    "type": "Number"
+                },
+                {
+                    "name": "end",
+                    "description": "End time in seconds",
+                    "type": "Number"
+                }
+            ],
+            "class": "ContinuousTimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/sparse-time-span-collection.js",
+            "line": 139,
+            "description": "Remove time span",
+            "itemtype": "method",
+            "name": "removeTimeSpan",
+            "params": [
+                {
+                    "name": "timespan",
+                    "description": "Time span to be removed",
+                    "type": "TimeSpan"
+                }
+            ],
+            "class": "ContinuousTimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/sparse-time-span.js",
+            "line": 35,
+            "description": "Get range of times this span can start at\n\nExtends method from parent class",
+            "itemtype": "method",
+            "name": "getStartLimits",
+            "return": {
+                "description": "Start limits",
+                "type": "Interval"
+            },
+            "class": "SparseTimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/sparse-time-span.js",
+            "line": 53,
+            "description": "Get range of times this span can end at\n\nExtends method from parent class",
+            "itemtype": "method",
+            "name": "getEndLimits",
+            "return": {
+                "description": "End limits",
+                "type": "Interval"
+            },
+            "class": "SparseTimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span-collection.js",
+            "line": 66,
+            "description": "Return all time spans\n\nThe array should not be manipulated with, only use for reading",
+            "itemtype": "method",
+            "name": "getAll",
+            "return": {
+                "description": "[description]",
+                "type": "[type]"
+            },
+            "class": "TimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span-collection.js",
+            "line": 77,
+            "description": "Factory for new time spans\n\nAbstract method",
+            "itemtype": "method",
+            "name": "spanFactory",
+            "return": {
+                "description": "New time span",
+                "type": "TimeSpan"
+            },
+            "class": "TimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span-collection.js",
+            "line": 90,
+            "description": "Creates new span",
+            "itemtype": "method",
+            "name": "createSpan",
+            "return": {
+                "description": "Created time span",
+                "type": "TimeSpan"
+            },
+            "class": "TimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span-collection.js",
+            "line": 101,
+            "description": "Apply mixins to created time spans",
+            "itemtype": "method",
+            "name": "applySpanMixins",
+            "params": [
+                {
+                    "name": "span",
+                    "description": "Time span",
+                    "type": "TimeSpan"
+                }
+            ],
+            "class": "TimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span-collection.js",
+            "line": 113,
+            "description": "Merge mergingSpan with span before",
+            "itemtype": "method",
+            "name": "mergePrev",
+            "params": [
+                {
+                    "name": "mergingSpan",
+                    "description": "Span to merge - at the right side",
+                    "type": "TimeSpan"
+                }
+            ],
+            "class": "TimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span-collection.js",
+            "line": 164,
+            "description": "Split spans at a given time position",
+            "itemtype": "method",
+            "name": "split",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "Time in seconds",
+                    "type": "Number"
+                }
+            ],
+            "class": "TimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span-collection.js",
+            "line": 228,
+            "description": "Remove time span\n\nAbstract method",
+            "itemtype": "method",
+            "name": "removeTimeSpan",
+            "params": [
+                {
+                    "name": "timespan",
+                    "description": "Time span to be removed",
+                    "type": "TimeSpan"
+                }
+            ],
+            "class": "TimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span-collection.js",
+            "line": 241,
+            "description": "Update zoom",
+            "itemtype": "method",
+            "name": "setZoom",
+            "params": [
+                {
+                    "name": "zoom",
+                    "description": "Zoom factor",
+                    "type": "NUmber"
+                }
+            ],
+            "class": "TimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span-collection.js",
+            "line": 254,
+            "description": "Set event handler for new spans created",
+            "itemtype": "method",
+            "name": "onTimeSpanCreated",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Function(TimeSpan timespan)",
+                    "type": "Function"
+                }
+            ],
+            "class": "TimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 75,
+            "description": "Get back reference to collection",
+            "itemtype": "method",
+            "name": "getCollection",
+            "return": {
+                "description": "Time span collection",
+                "type": "TimeSpanCollection"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 84,
+            "description": "adds arbitrary data to span",
+            "itemtype": "method",
+            "name": "setData",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Any data",
+                    "type": "Object"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 93,
+            "description": "Get data associated with this time span",
+            "itemtype": "method",
+            "name": "getData",
+            "return": {
+                "description": "Saved data",
+                "type": "Object"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 102,
+            "description": "Set event handler for splitting time spans\n\nprevSpan - Time span created to the left of splitting position\nnextSpan - Time span created to the right of splitting position",
+            "itemtype": "method",
+            "name": "onSplit",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Function(prevSpan, nextSpan)",
+                    "type": "Function"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 114,
+            "description": "Fire event handler",
+            "itemtype": "method",
+            "name": "handleSplit",
+            "params": [
+                {
+                    "name": "prevSpan",
+                    "description": "Time span created to the left of splitting position",
+                    "type": "TimeSpan"
+                },
+                {
+                    "name": "nextSpan",
+                    "description": "Time span created to the right of splitting position",
+                    "type": "TimeSpan"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 126,
+            "description": "Set event handler for merging\n\nprevSpan - Time span that was merged with this object\ncreatedSpan - New time span created as a result of merging",
+            "itemtype": "method",
+            "name": "onMerged",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Function(prevSpan,createdSpan)",
+                    "type": "Function"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 138,
+            "description": "Fire event handler",
+            "itemtype": "method",
+            "name": "handleMerged",
+            "params": [
+                {
+                    "name": "prevSpan",
+                    "description": "Time span that was merged with this object",
+                    "type": "[type]"
+                },
+                {
+                    "name": "createdSpan",
+                    "description": "New time span created as a result of merging",
+                    "type": "[type]"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 150,
+            "description": "Get minimum length of span",
+            "itemtype": "method",
+            "name": "getMinLength",
+            "return": {
+                "description": "[description]",
+                "type": "[type]"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 159,
+            "description": "Set minimum length of span",
+            "itemtype": "method",
+            "name": "setMinLength",
+            "params": [
+                {
+                    "name": "length",
+                    "description": "Length in seconds",
+                    "type": "Number"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 167,
+            "description": "Sets previous span in linked list\n\nThis function should not be used directly, use collection methods instead",
+            "itemtype": "method",
+            "name": "setPrev",
+            "params": [
+                {
+                    "name": "prev",
+                    "description": "Previous span",
+                    "type": "TimeSpan"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 178,
+            "description": "Sets next span in linked list\n\nThis function should not be used directly, use collection methods instead",
+            "itemtype": "method",
+            "name": "setNext",
+            "params": [
+                {
+                    "name": "next",
+                    "description": "Next span",
+                    "type": "TimeSpan"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 188,
+            "description": "Returns previous span in linked list",
+            "itemtype": "method",
+            "name": "getPrev",
+            "return": {
+                "description": "Peevious span",
+                "type": "TimeSpan"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 197,
+            "description": "Returns next span in linked list",
+            "itemtype": "method",
+            "name": "getNext",
+            "return": {
+                "description": "Next span",
+                "type": "TimeSpan"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 208,
+            "description": "Compute the interseciton of 2 intervals\n\nInterval are represented as an object:\n\n {s: Number, e: Number}\n\n s - start\n\n e - end",
+            "itemtype": "method",
+            "name": "intersectIntervals",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "[description]",
+                    "type": "Interval"
+                },
+                {
+                    "name": "b",
+                    "description": "[description]",
+                    "type": "Interval"
+                }
+            ],
+            "return": {
+                "description": "[description]",
+                "type": "[type]"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 232,
+            "description": "Limits value to range defined by interval",
+            "itemtype": "method",
+            "name": "applyInterval",
+            "params": [
+                {
+                    "name": "interval",
+                    "description": "Limiting interval",
+                    "type": "Interval"
+                },
+                {
+                    "name": "value",
+                    "description": "Number",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Value inside interval",
+                "type": "Number"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 246,
+            "description": "Check if value is inside interval\n\nIf interval is not set, the value is not considered to be inside",
+            "itemtype": "method",
+            "name": "inInterval",
+            "params": [
+                {
+                    "name": "interval",
+                    "description": "Interval",
+                    "type": "Interval"
+                },
+                {
+                    "name": "time",
+                    "description": "Number",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Result",
+                "type": "Boolean"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 259,
+            "description": "Get range of times this span can start at",
+            "itemtype": "method",
+            "name": "getStartLimits",
+            "return": {
+                "description": "Start limits",
+                "type": "Interval"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 271,
+            "description": "Get range of times this span can end at",
+            "itemtype": "method",
+            "name": "getEndLimits",
+            "return": {
+                "description": "End limits",
+                "type": "Interval"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 283,
+            "description": "Can this span start at a given time?",
+            "itemtype": "method",
+            "name": "canStart",
+            "params": [
+                {
+                    "name": "start",
+                    "description": "Time in seconds to check",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Result",
+                "type": "Boolean"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 294,
+            "description": "Can this span end at a given time?",
+            "itemtype": "method",
+            "name": "canEnd",
+            "params": [
+                {
+                    "name": "end",
+                    "description": "Time in seconds to check",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Result",
+                "type": "Boolean"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 305,
+            "description": "Sets start time of span",
+            "itemtype": "method",
+            "name": "setStart",
+            "params": [
+                {
+                    "name": "start",
+                    "description": "Time in seconds",
+                    "type": "Number"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 322,
+            "description": "Sets end time of span",
+            "itemtype": "method",
+            "name": "setEnd",
+            "params": [
+                {
+                    "name": "end",
+                    "description": "Time in seconds",
+                    "type": "Number"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 337,
+            "description": "Get start time",
+            "itemtype": "method",
+            "name": "getStart",
+            "return": {
+                "description": "Time in seconds",
+                "type": "Number"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 346,
+            "description": "Get starting position in pixels",
+            "itemtype": "method",
+            "name": "getStartX",
+            "return": {
+                "description": "X-cordinate",
+                "type": "Number"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 355,
+            "description": "Get ending position in pixels",
+            "itemtype": "method",
+            "name": "getEndX",
+            "return": {
+                "description": "X-coordinate",
+                "type": "Number"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 364,
+            "description": "Get end time",
+            "itemtype": "method",
+            "name": "getEnd",
+            "return": {
+                "description": "Time in seconds",
+                "type": "Number"
+            },
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 373,
+            "description": "Update element position on screen",
+            "itemtype": "method",
+            "name": "updatePositon",
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 462,
+            "description": "Render elements",
+            "itemtype": "method",
+            "name": "render",
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 515,
+            "description": "Set zoom",
+            "itemtype": "method",
+            "name": "setZoom",
+            "params": [
+                {
+                    "name": "zoom",
+                    "description": "Zoom factor",
+                    "type": "Number"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 526,
+            "description": "Remove elements",
+            "itemtype": "method",
+            "name": "unRender",
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 554,
+            "description": "Set event handler for position changes",
+            "itemtype": "method",
+            "name": "onPositionChanged",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Function(start,end) start, end - seconds",
+                    "type": "Function"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 563,
+            "description": "Set event handler that is called after the span gets removed",
+            "itemtype": "method",
+            "name": "onRemoved",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Function()",
+                    "type": "Function"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 572,
+            "description": "Fire onRemoved handler",
+            "itemtype": "method",
+            "name": "handleRemoved",
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 581,
+            "description": "Remove timespan from collection",
+            "itemtype": "method",
+            "name": "remove",
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 66,
+            "description": "Enable or disable mono mode\n\nIn mono mode, the DataFile acts as if there was only one channel, summarising channels together",
+            "itemtype": "method",
+            "name": "setMono",
+            "params": [
+                {
+                    "name": "on",
+                    "description": "on/off",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 83,
+            "description": "Get version of loaded waveform file",
+            "itemtype": "method",
+            "name": "getVersion",
+            "return": {
+                "description": "Version",
+                "type": "Number"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 92,
+            "description": "Get number of channels in file",
+            "itemtype": "method",
+            "name": "getChannelCnt",
+            "return": {
+                "description": "# of channels",
+                "type": "Number"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 109,
+            "description": "Get sample size",
+            "itemtype": "method",
+            "name": "getSampleSize",
+            "return": {
+                "description": "Sample size in bytes (1 or 2)",
+                "type": "Number"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 117,
+            "description": "Get sample rate",
+            "itemtype": "method",
+            "name": "getSampleRate",
+            "return": {
+                "description": "Sample rate",
+                "type": "Number"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 126,
+            "description": "Get number of frames in file\n\nFrame - samples(min,max) for all channels",
+            "itemtype": "method",
+            "name": "getFrameCnt",
+            "return": {
+                "description": "Number of frames",
+                "type": "Number"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 137,
+            "description": "Get length of waveform",
+            "itemtype": "method",
+            "name": "getLength",
+            "return": {
+                "description": "Length in seconds",
+                "type": "Number"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 146,
+            "description": "Translate pixel position to time",
+            "itemtype": "method",
+            "name": "px2time",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "Pixel position from start of waveform",
+                    "type": "Number"
+                },
+                {
+                    "name": "zoom",
+                    "description": "Zoom factor",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Time in seconds",
+                "type": "Number"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 160,
+            "description": "Translate time into pixel position",
+            "itemtype": "method",
+            "name": "time2px",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "Time in seconds",
+                    "type": "Number"
+                },
+                {
+                    "name": "zoom",
+                    "description": "Zoom factor",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Pixel position from start of waveform",
+                "type": "Number"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 175,
+            "description": "Get start of region being summarized\n\nUsed for getting samples with different zoom levels",
+            "itemtype": "method",
+            "name": "sampleStart",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "Index of sample in zoomed waveform",
+                    "type": "Number"
+                },
+                {
+                    "name": "zoom",
+                    "description": "Zoom factor",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Index of starting frame",
+                "type": "Number"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 188,
+            "description": "Get end of region being summarized\n\nUsed for getting samples with different zoom levels",
+            "itemtype": "method",
+            "name": "sampleEnd",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "Index of sample in zoomed waveform",
+                    "type": "Number"
+                },
+                {
+                    "name": "zoom",
+                    "description": "Zoom factor",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Index of starting frame",
+                "type": "Number"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 201,
+            "description": "Get raw sample without taking zoom into account",
+            "itemtype": "method",
+            "name": "getRawSample",
+            "params": [
+                {
+                    "name": "sample",
+                    "description": "Sample index",
+                    "type": "Number"
+                },
+                {
+                    "name": "channel",
+                    "description": "Channel index",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "[min,max]",
+                "type": "Array"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 232,
+            "description": "Get raw sample in mono mode\n\nMultiple channels are summarized by computing minimum and maximum across all of them",
+            "itemtype": "method",
+            "name": "getRawSampleMono",
+            "params": [
+                {
+                    "name": "sample",
+                    "description": "Sample index",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "[min,max]",
+                "type": "Array"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 252,
+            "description": "Get sample in zoomed waveform",
+            "itemtype": "method",
+            "name": "getSample",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "Sample index in zoomed waveform",
+                    "type": "Number"
+                },
+                {
+                    "name": "channel",
+                    "description": "Channel id",
+                    "type": "Number"
+                },
+                {
+                    "name": "zoom",
+                    "description": "Zoom factor",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Summarized sample [min, max]",
+                "type": "Array"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 286,
+            "description": "Loads waveform file from URL and returns a DataFile instance\n\nUses jQuery AJAX\n\nIf DataView is not available in the browser, it tries to look for jDataView, which can be used as a compatibility layer.\njDataView is much slower though.",
+            "itemtype": "method",
+            "name": "loadUrl",
+            "static": 1,
+            "params": [
+                {
+                    "name": "url",
+                    "description": "URL of file containing preprocessed waveform data",
+                    "type": "String"
+                },
+                {
+                    "name": "done",
+                    "description": "Callback done(Boolean success,String errorMessage,DataFile dataFile)",
+                    "type": "Function"
+                }
+            ],
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 305,
+            "description": "Get default options",
+            "itemtype": "method",
+            "name": "getDefaultOoptions",
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 313,
+            "description": "Translate time to pixels",
+            "itemtype": "method",
+            "name": "timeToInternalX",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "[description]",
+                    "type": "[type]"
+                }
+            ],
+            "return": {
+                "description": "[description]",
+                "type": "[type]"
+            },
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 326,
+            "description": "Translate pixels to time",
+            "itemtype": "method",
+            "name": "internalXToTime",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "[description]",
+                    "type": "[type]"
+                }
+            ],
+            "return": {
+                "description": "[description]",
+                "type": "[type]"
+            },
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 352,
+            "description": "Internal, helper function forwarding scroll events to segment collection",
+            "itemtype": "method",
+            "name": "updateSegments",
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 367,
+            "description": "Update elements to reflect cursor position",
+            "itemtype": "method",
+            "name": "updateCursor",
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 389,
+            "description": "Autmatically scroll viewport so that the waveform at time is visible",
+            "itemtype": "method",
+            "name": "autoScroll",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "Time in seconds",
+                    "type": "Number"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 482,
+            "description": "Set cursor position",
+            "itemtype": "method",
+            "name": "setCursor",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "Player position in seconds",
+                    "type": "Number"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 505,
+            "description": "Removes cursor, use when playback is stopped",
+            "itemtype": "method",
+            "name": "removeCursor",
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 516,
+            "description": "Sets (replaces) click handler",
+            "itemtype": "method",
+            "name": "onClick",
+            "params": [
+                {
+                    "name": "click",
+                    "description": "handler accepting time in seconds as an argument",
+                    "type": "Function"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 526,
+            "description": "Fires configurable click handler",
+            "itemtype": "method",
+            "name": "clicked",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "Position in seconds computed from mouse coordinates",
+                    "type": "Number"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 537,
+            "description": "Updates dimensions of HTML elements",
+            "itemtype": "method",
+            "name": "updateDimensions",
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 551,
+            "description": "Set scroll position",
+            "params": [
+                {
+                    "name": "pos",
+                    "description": "New scroll position in pixels",
+                    "type": "Number"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 562,
+            "description": "Add handler for scroll change",
+            "itemtype": "method",
+            "name": "onScroll",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Accepts 1 argument: scrollPos (pixels)",
+                    "type": "Function"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 570,
+            "description": "Call scroll event handlers",
+            "itemtype": "method",
+            "name": "handleScrolled",
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 599,
+            "description": "Zoom in",
+            "itemtype": "method",
+            "name": "zoomIn",
+            "params": [
+                {
+                    "name": "mult",
+                    "description": "Factor by which to multiply zoom",
+                    "type": "Number"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 613,
+            "description": "Zoom out",
+            "itemtype": "method",
+            "name": "zoomOut",
+            "params": [
+                {
+                    "name": "div",
+                    "description": "Factor by which to divide current zoom",
+                    "type": "Number"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 627,
+            "description": "Get zoom",
+            "itemtype": "method",
+            "name": "getZoom",
+            "return": {
+                "description": "Pixels per second",
+                "type": "Number"
+            },
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 642,
+            "description": "Set zoom",
+            "itemtype": "method",
+            "name": "setZoom",
+            "params": [
+                {
+                    "name": "zoom",
+                    "description": "Pixels pre second",
+                    "type": "Number"
+                },
+                {
+                    "name": "disableScroll",
+                    "description": "Don't automatically update scroll position",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 653,
+            "description": "Get current zoom value\n\nThe zoom factor determines how many samples in the preprocessed file\nare collapsed into one sample(pixel column) on the screen.\n\nThe resulting zoom levels are therefore dependent on the sample rate of the data file.",
+            "itemtype": "method",
+            "name": "getZoomFactor",
+            "return": {
+                "description": "Zoom factor",
+                "type": "Number"
+            },
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 667,
+            "description": "Return position at mouse coodinates",
+            "params": [
+                {
+                    "name": "pageX",
+                    "description": "X coordinate relative to page",
+                    "type": "Number"
+                },
+                {
+                    "name": "pageY",
+                    "description": "Y coordinate relative to page",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Time in seconds",
+                "type": "Number"
+            },
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 700,
+            "description": "Return position in the middle of viewport",
+            "return": {
+                "description": "Time in seconds",
+                "type": "Number"
+            },
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 714,
+            "description": "Scroll viewport so that the middle is on time",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "Time to set the middle to",
+                    "type": "SetTimeInMiddle"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 750,
+            "description": "Set zoom factor\n\nThe zoom factor determines how many samples in the preprocessed file\nare collapsed into one sample(pixel column) on the screen.\n\nThe resulting zoom levels are therefore dependent on the sample rate of the data file.",
+            "itemtype": "method",
+            "name": "setZoomFactor",
+            "params": [
+                {
+                    "name": "zoom",
+                    "description": "Zoom factor",
+                    "type": "Number"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 767,
+            "description": "Set event handler for zoom changes",
+            "itemtype": "method",
+            "name": "onZoomed",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Event handler accepting zoom(pixels per second) and waveform length(pixels) as arguments",
+                    "type": "Function"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 776,
+            "description": "Fire zoom change events",
+            "itemtype": "method",
+            "name": "handleZoomed",
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 796,
+            "description": "Set event handler for zoom factor changes",
+            "itemtype": "method",
+            "name": "onZoomChanged",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Event handler accepting zoom factor as argument",
+                    "type": "Function"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 805,
+            "description": "Enable or disable mono mode\n\nIn mono mode, all channels are summarised into one",
+            "itemtype": "method",
+            "name": "setMono",
+            "params": [
+                {
+                    "name": "on",
+                    "description": "on/off",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 819,
+            "description": "Returns jQuery element which is used for native scrollbars",
+            "itemtype": "method",
+            "name": "getViewportElement",
+            "return": {
+                "description": "Viewport element with overflow: auto",
+                "type": "JQuery element"
+            },
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 828,
+            "description": "Returns container elements for time span markers",
+            "itemtype": "method",
+            "name": "getTimeSpanContainers",
+            "return": {
+                "description": "Object {back: [element], front: [element]}",
+                "type": "[type]"
+            },
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 837,
+            "description": "Returns waveform data",
+            "itemtype": "method",
+            "name": "getDataFile",
+            "return": {
+                "description": "DataFile instance of waveform being viewed",
+                "type": "DataFile"
+            },
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/outwave.js",
+            "line": 846,
+            "description": "Returns style options",
+            "itemtype": "method",
+            "name": "getStyle",
+            "return": {
+                "description": "style options",
+                "type": "OBject"
+            },
+            "class": "Outwave",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment-collection.js",
+            "line": 57,
+            "description": "Update dimensions of container element",
+            "itemtype": "method",
+            "name": "updateDimensions",
+            "class": "SegmentCollection",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment-collection.js",
+            "line": 75,
+            "description": "Set cursor position",
+            "itemtype": "method",
+            "name": "setCursorX",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "Pixel position of cursor froms tart of waveform",
+                    "type": "Number"
+                }
+            ],
+            "class": "SegmentCollection",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment-collection.js",
+            "line": 88,
+            "description": "Reacts to changes in viewport length",
+            "itemtype": "method",
+            "name": "setViewportLength",
+            "class": "SegmentCollection",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment-collection.js",
+            "line": 97,
+            "description": "Set cursor position",
+            "itemtype": "method",
+            "name": "setCursor",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "Time in seconds",
+                    "type": "Number"
+                }
+            ],
+            "class": "SegmentCollection",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment-collection.js",
+            "line": 117,
+            "description": "Remove cursor",
+            "itemtype": "method",
+            "name": "removeCursor",
+            "class": "SegmentCollection",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment-collection.js",
+            "line": 130,
+            "description": "Set zoom",
+            "itemtype": "method",
+            "name": "setZoom",
+            "params": [
+                {
+                    "name": "zoom",
+                    "description": "Zoom-value",
+                    "type": "Number"
+                }
+            ],
+            "class": "SegmentCollection",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment-collection.js",
+            "line": 141,
+            "description": "React to scroliling\n\nShould be called when the viewport is scrolled",
+            "itemtype": "method",
+            "name": "scrollTo",
+            "params": [
+                {
+                    "name": "xPos",
+                    "description": "Scroll position - left side of viewport",
+                    "type": "Number"
+                }
+            ],
+            "class": "SegmentCollection",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment-collection.js",
+            "line": 153,
+            "description": "Get a recycled segment, if available",
+            "itemtype": "method",
+            "name": "getAvailableSegment",
+            "class": "SegmentCollection",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment-collection.js",
+            "line": 165,
+            "description": "Create a new segment, using segment factory function",
+            "itemtype": "method",
+            "name": "createSegment",
+            "return": {
+                "description": "The new segment",
+                "type": "Segment"
+            },
+            "class": "SegmentCollection",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment-collection.js",
+            "line": 176,
+            "description": "Removes and recreates all segments\n\nUsed when zoom factor change",
+            "itemtype": "method",
+            "name": "rebuild",
+            "class": "SegmentCollection",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment-collection.js",
+            "line": 188,
+            "description": "Ensure that there is a segment on index s\n\nTries to recycle existing segments, or creates a new one if necessary",
+            "itemtype": "method",
+            "name": "ensureSegment",
+            "params": [
+                {
+                    "name": "s",
+                    "description": "Index of segment",
+                    "type": "Number"
+                }
+            ],
+            "class": "SegmentCollection",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment-collection.js",
+            "line": 218,
+            "description": "Update segments after viewport change(scrolling)\n\nEnsures that the segments under the viewport exist and are being rendered if necessary",
+            "itemtype": "method",
+            "name": "updateSegments",
+            "class": "SegmentCollection",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment-collection.js",
+            "line": 264,
+            "description": "Draw segments that haven't been rendered",
+            "itemtype": "method",
+            "name": "render",
+            "return": {
+                "description": "[description]",
+                "type": "[type]"
+            },
+            "class": "SegmentCollection",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 100,
+            "description": "Cumputes timeline height by measuring a marker element",
+            "itemtype": "method",
+            "name": "getTimelineHeight",
+            "static": 1,
+            "params": [
+                {
+                    "name": "style",
+                    "description": "Style",
+                    "type": "Style"
+                }
+            ],
+            "return": {
+                "description": "Hieght of timeline",
+                "type": "NUmber"
+            },
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 124,
+            "description": "Set cursor position",
+            "itemtype": "method",
+            "name": "setCursor",
+            "params": [
+                {
+                    "name": "xPos",
+                    "description": "Cursor position in pixels",
+                    "type": "Number"
+                }
+            ],
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 140,
+            "description": "Check if x coordinate is inside viewport",
+            "itemtype": "method",
+            "name": "hasXPos",
+            "params": [
+                {
+                    "name": "xPos",
+                    "description": "X coordinate in pixels from start of waveform",
+                    "type": "NUmber"
+                }
+            ],
+            "return": {
+                "description": "true when xPos is in viewPort",
+                "type": "Boolean"
+            },
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 151,
+            "description": "Computes interval between timeline markers\n\nInterval is chosen from a fixed listin a way so that they are\nthe smallest possible where markers don't overlap",
+            "itemtype": "method",
+            "name": "getTimelineInterval",
+            "return": {
+                "description": "Seconds between markers",
+                "type": "Number"
+            },
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 184,
+            "description": "Return marker element contructor from style",
+            "itemtype": "method",
+            "name": "getTimelineMarkerElement",
+            "return": {
+                "description": "Function(time) returning jQuery element",
+                "type": "Function"
+            },
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 194,
+            "description": "Updates timeline markers for this segment",
+            "itemtype": "method",
+            "name": "updateTimeline",
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 231,
+            "description": "Set zoom factor",
+            "itemtype": "method",
+            "name": "setZoom",
+            "params": [
+                {
+                    "name": "zoom",
+                    "description": "Zoom factor",
+                    "type": "Number"
+                }
+            ],
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 240,
+            "description": "Set width of segment in pixels",
+            "itemtype": "method",
+            "name": "setWidth",
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 262,
+            "description": "Set position and width of segment",
+            "itemtype": "method",
+            "name": "setPosWidth",
+            "params": [
+                {
+                    "name": "xPos",
+                    "description": "Position from start of waveform in pixels",
+                    "type": "NUmber"
+                },
+                {
+                    "name": "width",
+                    "description": "Width of segment",
+                    "type": "Number"
+                }
+            ],
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 286,
+            "description": "Get position",
+            "itemtype": "method",
+            "name": "getPos",
+            "return": {
+                "description": "Position of segment in pixels",
+                "type": "NUmber"
+            },
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 295,
+            "description": "Recycle(hide) segment\n\nUsed when segment moves out of viewport",
+            "itemtype": "method",
+            "name": "recycle",
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 311,
+            "description": "Is this segment recycled?",
+            "itemtype": "method",
+            "name": "recycled",
+            "return": {
+                "description": "",
+                "type": "Boolen"
+            },
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 320,
+            "description": "Is the segment being rendered?",
+            "itemtype": "method",
+            "name": "rendering",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 329,
+            "description": "Has the segment finished rendering?",
+            "itemtype": "method",
+            "name": "rendered",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 338,
+            "description": "Get range of vertical pixels for channel",
+            "itemtype": "method",
+            "name": "channelYRange",
+            "params": [
+                {
+                    "name": "channel",
+                    "description": "Channel id",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "[start,end,height]",
+                "type": "Array"
+            },
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 354,
+            "description": "Applies transformation to canvas so that rendering can proceed as if it was horizontal\n\nOnly applicable when using Outwave in vertical mode",
+            "itemtype": "method",
+            "name": "rotateCanvas",
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 365,
+            "description": "Render styling of waveform\n\nDue to using a trick with source-atop composite operation,\nstyling can be applied multiple times without overwriting the waveform",
+            "itemtype": "method",
+            "name": "renderStyle",
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 431,
+            "description": "Rendering has finished, show segment",
+            "itemtype": "method",
+            "name": "renderingFinished",
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 447,
+            "description": "Cancels rendering of segment",
+            "itemtype": "method",
+            "name": "stopRendering",
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 461,
+            "description": "Compute screen coordinates from aplitude and channel",
+            "itemtype": "method",
+            "name": "tyCoord",
+            "params": [
+                {
+                    "name": "amplitude",
+                    "description": "-1 to 1",
+                    "type": "Number"
+                },
+                {
+                    "name": "channel",
+                    "description": "Channel id",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Y-coordinate for sample",
+                "type": "Number"
+            },
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 476,
+            "description": "Get X-coordinate relative to start of segment",
+            "itemtype": "method",
+            "name": "txCoord",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "Position in pixels from start of waveform",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "X-coordinate inside segment",
+                "type": "NUmber"
+            },
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 486,
+            "description": "Render piece of segment\n\nIf the rendering takes too long and the UI would becme unresponsive, the function returns before rendering is finished\nIf the rendering requires multiple calls, renderPirece schedules itself to run again.\n\nrenderingFinished is called when the entire segment is rendered.",
+            "itemtype": "method",
+            "name": "renderPiece",
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 550,
+            "description": "Start rendering the segment",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "done",
+                    "description": "Function to call when rendering is done",
+                    "type": "Function"
+                }
+            ],
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 573,
+            "description": "Schedule rendering with setTimeout",
+            "itemtype": "method",
+            "name": "scheduleRendering",
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 582,
+            "description": "Interrupt rendering timer",
+            "itemtype": "method",
+            "name": "unschedule",
+            "class": "Segment",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/segment.js",
+            "line": 592,
+            "description": "Destroy segment - remove elements from DOM",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "Segment",
+            "module": "Outwave"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nSet scroll position",
+            "line": " lib/outwave/outwave.js:551"
+        },
+        {
+            "message": "Missing item type\nReturn position at mouse coodinates",
+            "line": " lib/outwave/outwave.js:667"
+        },
+        {
+            "message": "Missing item type\nReturn position in the middle of viewport",
+            "line": " lib/outwave/outwave.js:700"
+        },
+        {
+            "message": "Missing item type\nScroll viewport so that the middle is on time",
+            "line": " lib/outwave/outwave.js:714"
+        }
+    ]
+}
