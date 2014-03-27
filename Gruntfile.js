@@ -13,13 +13,15 @@ module.exports = function(grunt) {
           outdir: 'doc/api'
         }
       }
-    },
+    }
     clean: ['doc/api']
   });
 
   grunt.loadNpmTasks('grunt-contrib-yuidoc');
 
   grunt.loadNpmTasks('grunt-contrib-clean');
+
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 
 /*

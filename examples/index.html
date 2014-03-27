@@ -170,7 +170,10 @@ require([
                 //vytvorenie "editoru"
                 outwave = new Outwave($('#waveform'),dataFile,options);
 
-                outwave.onZoomChanged(function(zoom){
+
+
+
+                outwave.onZoomed(function(zoom){
                     $("#zoom").val(zoom);
                 });
 
@@ -196,36 +199,47 @@ require([
 
                 var scroller = $("#divscroller");
 
-
                 //celkova dlzka waveformu v pixeloch
 
                 //internalWidth: width a height su odvodene od horizontalneho zobrazenia
                 container.height(outwave.internalWidth());
 
-                outwave.onInternalDimensionsChanged(function(length){
+
+                // synchonizacia posuvnikov
+                
+                var annotScrolled = function(){
+                    outwave.scroll(scroller.scrollTop());
+                };
+
+                scroller.bind('scroll',annotScrolled);
+
+
+                outwave.onZoomed(function(zoom,length){
+
+                    //unbind scroll event - avoid causing problem when scroll position changes due to
+                    //changing content length
+                    scroller.unbind('scroll',annotScrolled);
                     container.height(length);
+                    //rebind
+                    setTimeout(function(){scroller.bind('scroll',annotScrolled);},0);
+                    
                 });
 
 
 
-                // synchonizacia posuvnikov
 
-                var viewport = outwave.getViewportElement(); //jQuery element
-                
-                var scrollFlag = false; // prevent infinite recursion
+                outwave.onScroll(function(pos){
 
-                viewport.scroll(function(){
-                    if(scrollFlag){ scrollFlag = false; return;}
-                    scrollFlag = true;
-                    scroller.scrollTop(viewport.scrollTop());          
+                    //avoid recursive calls
+                    scroller.unbind('scroll',annotScrolled);
+
+                    scroller.scrollTop(pos);  
+
+                    //rebind    
+                    setTimeout(function(){scroller.bind('scroll',annotScrolled);},0);                      
                });
 
 
-                scroller.scroll(function(){
-                    if(scrollFlag){scrollFlag=false; return;}
-                    scrollFlag = true;
-                    viewport.scrollTop(scroller.scrollTop());
-                });
 
                 //zablokovanie autoscroll-u, ked je mys nad anotaciami napravo
 
@@ -316,7 +330,7 @@ require([
 
         });
 
-    }
+    };
 
         $(function(){
         load_waveform('tedx-value-of-travel.wf');
