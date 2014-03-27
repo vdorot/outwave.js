@@ -1,7 +1,7 @@
 Preprocessor usage
 ==================
 
-Output of `./outwave --help`
+Output of `./outwave --help`:
 
 ```
 Convert audio file to waveform data for Outwave.js viewer
