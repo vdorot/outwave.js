@@ -11,7 +11,7 @@ Media files have to be processed before they can be viewed effectively, so using
 
 ###Preprocessor
 
-The preprocessor is bundled with `libsndfile`, which is used for reading audio file. Outwave only supports formats supported by libsndfile(TODO: link), with FLAC and Vorbis support disabled.
+The preprocessor is bundled with [libsndfile](http://www.mega-nerd.com/libsndfile/), which is used for reading audio file. Outwave only supports formats supported by the library, with FLAC and Vorbis support disabled.
   
 ####Installation
   
@@ -48,7 +48,7 @@ An API reference generated from source is available in the doc/api directory.
 
 This extension allows marking segments of the waveform, the main purpose being annotation of audio(adding captions).
 
-For more infrormation, see [Time Spans](doc/timespans.md).
+For more infrormation, see [Time Spans](doc/time-spans.md).
 
 
 
