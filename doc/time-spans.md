@@ -1,3 +1,6 @@
+Time Spans
+==========
+
 Time spans can be created by adding a time span collection to Outwave:
 
 ```
