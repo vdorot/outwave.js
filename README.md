@@ -1,7 +1,9 @@
 Outwave.js
 ==========
 
-Outwave.js is a web based waveform viewer build to allow viewing of very long recordings. It uses native browser scrollbars, which allows for a smooth user experience.
+Outwave.js is a web based waveform viewer build to handle very long recordings. 
+
+The UI widget is written purely in JavaScript, using HTML 5 Canvas for rendering of the waveform. Navigation across the recording is done using a native scrollbar, with the help of `overflow: auto;`. The audio is divided into segments, and only segments that are visible are kept rendered. This way, the rendering can be done fast, without interrupting responsiveness of the page and with memory usage independent of the length of the recording or zoom level.
 
 ##Getting started
 
@@ -33,11 +35,20 @@ The result is an executable called `outwave` in the same directory.
 ./outwave input.wav output.wf
 ```
 
-Sample rate, size, mono.
-
-For a full list of options and other information about the preprocessor, see [Preprocessor usage](http://todo.todo).
+The resulting files containg waveform data can be created with configurable sample rate and size. For a full list of options and other information about the preprocessor, see [Preprocessor Usage](doc/preprocessor.md).
 
 ###Browser part
+
+
+The UI component is expected to change, for up-to-date information on usage, see files in the examples folder.
+
+An API reference generated from source is available in the doc/api directory. 
+
+##Time Spans
+
+This extension allows marking segments of the waveform, the main purpose being annotation of audio(adding captions).
+
+For more infrormation, see [Time Spans](doc/timespans.md).
 
 
 
