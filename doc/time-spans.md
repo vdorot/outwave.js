@@ -7,8 +7,8 @@ var timeSpan = collection.addTimeSpan(0,5);
 
 ```
 
-There are 2 basic operation modes - sparse and continuous. In continuous mode, there are no gaps allowed inbetween and new time spans are always created irectly after the last. Sparse mode is less restrictive and allows time psans anywhere, as loing as they don't overlap.
+There are 2 basic operation modes - sparse and continuous. In continuous mode, there are no gaps allowed inbetween time spans and new ones are always created directly following the last. Sparse mode is less restrictive and allows time spans anywhere, as long as they don't overlap.
 
-Continuous mode is enables by creating a `ContinuousTimeSpanCollection` instead.
+Continuous mode is enabled by creating a `ContinuousTimeSpanCollection` instead.
 
 TODO: extend this page
