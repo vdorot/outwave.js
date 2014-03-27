@@ -2063,7 +2063,7 @@
             "line": 796,
             "description": "Set event handler for zoom factor changes",
             "itemtype": "method",
-            "name": "onZoomChanged",
+            "name": "onZoomFactorChanged",
             "params": [
                 {
                     "name": "fn",
