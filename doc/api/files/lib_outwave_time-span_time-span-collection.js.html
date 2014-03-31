@@ -57,6 +57,8 @@
             
                 <li><a href="../classes/SparseTimeSpan.html">SparseTimeSpan</a></li>
             
+                <li><a href="../classes/SparseTimeSpanCollection.html">SparseTimeSpanCollection</a></li>
+            
                 <li><a href="../classes/Style.html">Style</a></li>
             
                 <li><a href="../classes/TimeSpan.html">TimeSpan</a></li>
@@ -241,7 +243,7 @@ define([
          * @method mergePrev
          * @param  {TimeSpan} mergingSpan Span to merge - at the right side
          */
-        mergePrev: function(mergingSpan){ // merge mergingSpan and previous
+        mergeWithPrev: function(mergingSpan){ // merge mergingSpan and previous
 
             var spanI = null;
             for(var i=this.timespans.length-1; i&gt;=0; i--){
@@ -398,6 +400,7 @@ define([
 
     return TimeSpanCollection;
 });
+
     </pre>
 </div>
 

@@ -9,6 +9,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Segment",
         "SegmentCollection",
         "SparseTimeSpan",
+        "SparseTimeSpanCollection",
         "Style",
         "TimeSpan",
         "TimeSpanCollection",

@@ -57,6 +57,8 @@
             
                 <li><a href="../classes/SparseTimeSpan.html">SparseTimeSpan</a></li>
             
+                <li><a href="../classes/SparseTimeSpanCollection.html">SparseTimeSpanCollection</a></li>
+            
                 <li><a href="../classes/Style.html">Style</a></li>
             
                 <li><a href="../classes/TimeSpan.html">TimeSpan</a></li>
@@ -135,13 +137,13 @@ define([
      *
      * Manages all time spans
      *
-     * @class ContinuousTimeSpanCollection
+     * @class SparseTimeSpanCollection
      * @extends {TimeSpanCollection}
      * @constructor
      * @param {Outwave} outwave Outwave object
      * @param {Array} options Options: {minSpanLength: Number}
      */
-    var ContinuousTimeSpanCollection = function(outwave,options){
+    var SparseTimeSpanCollection = function(outwave,options){
         var collection = new TimeSpanCollection(outwave,options);
 
 
@@ -284,9 +286,10 @@ define([
         return collection; //return extended object
     };
 
-    return ContinuousTimeSpanCollection;
+    return SparseTimeSpanCollection;
 
 });
+
     </pre>
 </div>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SparseTimeSpan - Outwave.js</title>
+    <title>SparseTimeSpanCollection - Outwave.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -112,19 +112,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>SparseTimeSpan Class</h1>
+                        <h1>SparseTimeSpanCollection Class</h1>
 <div class="box meta">
     
 
     
         <div class="extends">
-            Extends <a href="../classes/TimeSpan.html" class="crosslink">TimeSpan</a>
+            Extends <a href="../classes/TimeSpanCollection.html" class="crosslink">TimeSpanCollection</a>
         </div>
     
 
     
         <div class="foundat">
-            Defined in: <a href="../files/lib_outwave_time-span_sparse-time-span.js.html#l16"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;sparse-time-span.js:16</code></a>
+            Defined in: <a href="../files/lib_outwave_time-span_sparse-time-span-collection.js.html#l17"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;sparse-time-span-collection.js:17</code></a>
         </div>
     
 
@@ -140,15 +140,16 @@
 
 
 <div class="box intro">
-    <p>Sparse time span</p>
+    <p>Continuous time span collection</p>
+<p>Manages all time spans</p>
 
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_SparseTimeSpan" class="method item">
-    <h3 class="name"><code>SparseTimeSpan</code></h3>
+        <div id="method_SparseTimeSpanCollection" class="method item">
+    <h3 class="name"><code>SparseTimeSpanCollection</code></h3>
 
     
         <div class="args">
@@ -156,31 +157,13 @@
             
                 <li class="arg">
                     
-                        <code>collection</code>
+                        <code>outwave</code>
                     
                 </li>
             
                 <li class="arg">
                     
-                        <code>dataFile</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>backgroundContainer</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>foregroundContainer</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>style</code>
+                        <code>options</code>
                     
                 </li>
             
@@ -213,7 +196,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_sparse-time-span.js.html#l16"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;sparse-time-span.js:16</code></a>
+        <a href="../files/lib_outwave_time-span_sparse-time-span-collection.js.html#l17"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;sparse-time-span-collection.js:17</code></a>
         
         </p>
 
@@ -235,14 +218,14 @@
             
                 <li class="param">
                     
-                        <code class="param-name">collection</code>
-                        <span class="type"><a href="../classes/TimeSpanCollection.html" class="crosslink">TimeSpanCollection</a></span>
+                        <code class="param-name">outwave</code>
+                        <span class="type"><a href="../classes/Outwave.html" class="crosslink">Outwave</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>collection object</p>
+                        <p>Outwave object</p>
 
                     </div>
 
@@ -251,62 +234,14 @@
             
                 <li class="param">
                     
-                        <code class="param-name">dataFile</code>
-                        <span class="type"><a href="../classes/DataFile.html" class="crosslink">DataFile</a></span>
+                        <code class="param-name">options</code>
+                        <span class="type">Array</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Waveform data</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">backgroundContainer</code>
-                        <span class="type">JQuery element</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Container element behind waveform</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">foregroundContainer</code>
-                        <span class="type">JQuery element</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Container element above waveform</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">style</code>
-                        <span class="type"><a href="../classes/Style.html" class="crosslink">Style</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Style object</p>
+                        <p>Options: {minSpanLength: Number}</p>
 
                     </div>
 
@@ -348,14 +283,21 @@
                     <ul class="index-list methods extends">
                         
                             <li class="index-item method">
-                                <a href="#method_getEndLimits">getEndLimits</a>
+                                <a href="#method_addTimeSpan">addTimeSpan</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_getStartLimits">getStartLimits</a>
+                                <a href="#method_removeTimeSpan">removeTimeSpan</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_spanFactory">spanFactory</a>
 
                                 
                                 
@@ -377,17 +319,29 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_getEndLimits" class="method item">
-    <h3 class="name"><code>getEndLimits</code></h3>
+                    <div id="method_addTimeSpan" class="method item">
+    <h3 class="name"><code>addTimeSpan</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>start</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>end</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
-    
-        <span class="returns-inline">
-            <span class="type">Interval</span>
-        </span>
     
 
     
@@ -413,7 +367,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_sparse-time-span.js.html#l53"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;sparse-time-span.js:53</code></a>
+        <a href="../files/lib_outwave_time-span_sparse-time-span-collection.js.html#l46"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;sparse-time-span-collection.js:46</code></a>
         
         </p>
 
@@ -424,35 +378,149 @@
     </div>
 
     <div class="description">
-        <p>Get range of times this span can end at</p>
-<p>Extends method from parent class</p>
+        <p>Add sparse time span</p>
 
     </div>
 
     
+        <div class="params">
+            <h4>Parameters:</h4>
 
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
+            <ul class="params-list">
+            
+                <li class="param">
                     
-                        <span class="type">Interval</span>:
+                        <code class="param-name">start</code>
+                        <span class="type">Number</span>
                     
-                    <p>End limits</p>
 
-                
-            </div>
+                    
+
+                    <div class="param-description">
+                        <p>Start time in seconds</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">end</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>End time in seconds</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
         </div>
+    
+
     
 
     
 </div>
 
                 
-                    <div id="method_getStartLimits" class="method item">
-    <h3 class="name"><code>getStartLimits</code></h3>
+                    <div id="method_removeTimeSpan" class="method item">
+    <h3 class="name"><code>removeTimeSpan</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>timespan</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_outwave_time-span_sparse-time-span-collection.js.html#l140"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;sparse-time-span-collection.js:140</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Remove time span</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">timespan</code>
+                        <span class="type"><a href="../classes/TimeSpan.html" class="crosslink">TimeSpan</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Time span to be removed</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_spanFactory" class="method item">
+    <h3 class="name"><code>spanFactory</code></h3>
 
     
         <span class="paren">()</span>
@@ -460,7 +528,7 @@
 
     
         <span class="returns-inline">
-            <span class="type">Interval</span>
+            <span class="type"><a href="../classes/TimeSpan.html" class="crosslink">TimeSpan</a></span>
         </span>
     
 
@@ -487,7 +555,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_sparse-time-span.js.html#l35"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;sparse-time-span.js:35</code></a>
+        <a href="../files/lib_outwave_time-span_sparse-time-span-collection.js.html#l32"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;sparse-time-span-collection.js:32</code></a>
         
         </p>
 
@@ -498,8 +566,8 @@
     </div>
 
     <div class="description">
-        <p>Get range of times this span can start at</p>
-<p>Extends method from parent class</p>
+        <p>Creates a sparse time span and return the instance</p>
+<p>Overrides method in parent class</p>
 
     </div>
 
@@ -512,9 +580,9 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">Interval</span>:
+                        <span class="type"><a href="../classes/TimeSpan.html" class="crosslink">TimeSpan</a></span>:
                     
-                    <p>Start limits</p>
+                    <p>New time span</p>
 
                 
             </div>

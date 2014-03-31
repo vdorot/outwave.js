@@ -9,7 +9,9 @@
         "lib/outwave/time-span/continuous-time-span-collection.js": {
             "name": "lib/outwave/time-span/continuous-time-span-collection.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "ContinuousTimeSpanCollection": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -35,7 +37,7 @@
             "name": "lib/outwave/time-span/sparse-time-span-collection.js",
             "modules": {},
             "classes": {
-                "ContinuousTimeSpanCollection": 1
+                "SparseTimeSpanCollection": 1
             },
             "fors": {},
             "namespaces": {}
@@ -143,6 +145,7 @@
                 "ContinuousTimeSpanCollection": 1,
                 "ContinousTimeSpan": 1,
                 "Draggable": 1,
+                "SparseTimeSpanCollection": 1,
                 "SparseTimeSpan": 1,
                 "TimeSpanCollection": 1,
                 "TimeSpanError": 1,
@@ -187,8 +190,8 @@
             "extension_for": [],
             "module": "TimeSpan",
             "namespace": "",
-            "file": "lib/outwave/time-span/sparse-time-span-collection.js",
-            "line": 17,
+            "file": "lib/outwave/time-span/continuous-time-span-collection.js",
+            "line": 16,
             "description": "Continuous time span collection\n\nManages all time spans",
             "extends": "{TimeSpanCollection}",
             "is_constructor": 1,
@@ -279,6 +282,34 @@
                     "name": "style",
                     "description": "Style object",
                     "type": "Style"
+                }
+            ]
+        },
+        "SparseTimeSpanCollection": {
+            "name": "SparseTimeSpanCollection",
+            "shortname": "SparseTimeSpanCollection",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "TimeSpan",
+            "namespace": "",
+            "file": "lib/outwave/time-span/sparse-time-span-collection.js",
+            "line": 17,
+            "description": "Continuous time span collection\n\nManages all time spans",
+            "extends": "{TimeSpanCollection}",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "outwave",
+                    "description": "Outwave object",
+                    "type": "Outwave"
+                },
+                {
+                    "name": "options",
+                    "description": "Options: {minSpanLength: Number}",
+                    "type": "Array"
                 }
             ]
         },
@@ -623,7 +654,7 @@
         },
         {
             "file": "lib/outwave/time-span/continuous-time-span-collection.js",
-            "line": 100,
+            "line": 101,
             "description": "Remove time span",
             "itemtype": "method",
             "name": "removeTimeSpan",
@@ -737,7 +768,7 @@
                 "description": "New time span",
                 "type": "TimeSpan"
             },
-            "class": "ContinuousTimeSpanCollection",
+            "class": "SparseTimeSpanCollection",
             "module": "TimeSpan"
         },
         {
@@ -758,7 +789,7 @@
                     "type": "Number"
                 }
             ],
-            "class": "ContinuousTimeSpanCollection",
+            "class": "SparseTimeSpanCollection",
             "module": "TimeSpan"
         },
         {
@@ -774,7 +805,7 @@
                     "type": "TimeSpan"
                 }
             ],
-            "class": "ContinuousTimeSpanCollection",
+            "class": "SparseTimeSpanCollection",
             "module": "TimeSpan"
         },
         {
