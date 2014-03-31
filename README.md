@@ -48,7 +48,7 @@ An API reference generated from source is available in the doc/api directory.
 
 This extension allows marking segments of the waveform, the main purpose being annotation of audio(adding captions).
 
-For more infrormation, see [Time Spans](doc/time-spans.md).
+For more information, see [Time Spans](doc/time-spans.md).
 
 
 
