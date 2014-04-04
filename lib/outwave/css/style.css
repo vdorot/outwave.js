@@ -1,3 +1,32 @@
+.outwave .center{
+    display: table;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+}
+
+.outwave .centerm{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.outwave .error{
+
+    color: #ff0000;
+    text-align: center;
+}
+
+
+.outwave .loading{
+    margin-left: auto;
+    margin-right: auto;
+    width: 48px;
+    background: url("../img/loading.gif") no-repeat;
+    padding-top: 48px;
+    text-align: center;
+}
+
 
 .outwave .cursor{
     background-color: black;
