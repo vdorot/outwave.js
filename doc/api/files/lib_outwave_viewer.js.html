@@ -299,9 +299,11 @@ define([
 
 
             }).on(&quot;mouseleave&quot;,function(){
-                self.setHoverDisplayed(false);
+                this.hoverEl.hide();
             }).on(&quot;mouseenter&quot;,function(){
-                self.setHoverDisplayed(true);
+                if(this.hoverDisplayed){
+                    this.hoverEl.show();
+                }
             });
             if(this.options.style.horizontal()){
                 this.foregroundEl.css(&quot;cursor&quot;,&#x27;text&#x27;);
@@ -990,6 +992,7 @@ define([
          * @param {Boolean} isDisplayed Whether to display hover or not
          */
         setHoverDisplayed: function(isDisplayed){
+            this.hoverDisplayed = isDisplayed;
             if(!this.options.hover){
                 //hover is disabled completely
                 isDisplayed = false;

@@ -252,6 +252,9 @@ define([
 
                 $(&#x27;body&#x27;).data(&#x27;waveform-dragging&#x27;,true);
 
+                viewer.setHoverDisplayed(false);
+
+
                 var prevPagePos = null;
 
 
@@ -386,6 +389,8 @@ define([
                     $(document)[0].removeEventListener(&#x27;mousemove&#x27;,moveHandler,true);
                     $(&#x27;body&#x27;).removeClass(&#x27;drag-horizontal&#x27;).removeClass(&#x27;drag-vertical&#x27;);
                     scrollElement.off(&#x27;scroll.timeSpan&#x27;);
+                    $(&#x27;body&#x27;).data(&#x27;waveform-dragging&#x27;,false);
+                    viewer.setHoverDisplayed(true);
                 };
 
                 $(document)[0].addEventListener(&#x27;mouseup&#x27;,upHandler,true); // event capturing &gt;=IE9
@@ -396,10 +401,16 @@ define([
             this.getEndElement().mousedown(function(e){dragHandler.call(this,e,false);});
 
             var hideHover = function(){
+                if($(&#x27;body&#x27;).data(&#x27;waveform-dragging&#x27;)){
+                    return;
+                }
                 viewer.setHoverDisplayed(false);
             };
 
             var showHover = function(){
+                if($(&#x27;body&#x27;).data(&#x27;waveform-dragging&#x27;)){
+                    return;
+                }
                 viewer.setHoverDisplayed(true);
             };
 
