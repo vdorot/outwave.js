@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/Draggable.html">Draggable</a></li>
             
-                <li><a href="../classes/Outwave.html">Outwave</a></li>
-            
                 <li><a href="../classes/Segment.html">Segment</a></li>
             
                 <li><a href="../classes/SegmentCollection.html">SegmentCollection</a></li>
@@ -68,6 +66,8 @@
                 <li><a href="../classes/TimeSpanError.html">TimeSpanError</a></li>
             
                 <li><a href="../classes/Utils.html">Utils</a></li>
+            
+                <li><a href="../classes/Viewer.html">Viewer</a></li>
             
             </ul>
 
@@ -144,14 +144,14 @@ define([
      *
      * @class TimeSpanCollection
      * @constructor
-     * @param {Outwave} outwave Outwave object
+     * @param {Viewer} viewer Viewer object
      * @param {Array} options Options: {minSpanLength: Number}
      */
-    var TimeSpanCollection = function(outwave,options){
+    var TimeSpanCollection = function(viewer,options){
 
         var self = this;
 
-        this.outwave = outwave;
+        this.viewer = viewer;
 
         this.options = $.extend({},defaultOptions,options);
 
@@ -173,7 +173,7 @@ define([
         this.timespans = [];
 
         this.draggableMixin = function(span){
-            Draggable(span,self.outwave.getViewportElement(),self.style);
+            Draggable(span,self.viewer,self.style);
             span.setScrollingSpeed(4);
             return span;
         };
@@ -314,7 +314,7 @@ define([
             var splitSpan = this.timespans[spanI];
 
 
-            if((time - splitSpan.getStart()() &lt; this.options.minSpanLength || (splitSpan.getEnd() - time) &lt; this.options.minSpanLength)){
+            if((time - splitSpan.getStart() &lt; this.options.minSpanLength || (splitSpan.getEnd() - time) &lt; this.options.minSpanLength)){
                 
                 throw new TimeSpanError(&quot;split&quot;,&quot;Cannot split annotations here, a time span would be shorter than minimum length&quot;);       
 

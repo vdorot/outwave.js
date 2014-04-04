@@ -4,9 +4,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Canvas test</title>
 
-        <link rel="stylesheet" media="all" type="text/css" href="../lib/outwave/layout.css">
-        <link rel="stylesheet" media="all" type="text/css" href="../lib/outwave/style.css">
+        <link rel="stylesheet" media="all" type="text/css" href="../lib/outwave/css/layout.css">
+        <link rel="stylesheet" media="all" type="text/css" href="../lib/outwave/css/style.css">
         <script type="text/javascript" src="../lib/require.js"></script>
+
         <script type="text/javascript" src="../lib/jquery.js"></script>
 
         <script src="http://jwpsrv.com/library/FjUFlGnREeO71iIACi0I_Q.js"></script>
@@ -67,18 +68,11 @@ if(!console){
 }
 
 
-// require.js http://requirejs.org
-require.config({
-    baseUrl: '../lib'
-});
-
-
-
 
 require(['jquery'],function($){
 
 
-    //Obsluha formularov
+    //forms
 
     $(function(){
 
@@ -119,216 +113,204 @@ require(['jquery'],function($){
 <script type="text/javascript">
 require([
     'jquery',
-    'outwave/data-file',
-    'outwave/outwave',
-    'outwave/utils',
-    'outwave/time-span/continuous-time-span-collection',
-    'outwave/time-span/sparse-time-span-collection'
-    ],function($,DataFile,Outwave,Utils,ContinuousTimeSpanCollection,SparseTimeSpanCollection){
+    '../lib/outwave/outwave',
+    ],function($,Outwave){
 
     var waveform;
 
-    //nacita a zobrazi waveform z *.wf suboru file
+    //display waveform from file
     var load_waveform = function(file){
 
 
-        //TODO: loading indicator
-
-        DataFile.loadUrl(file,function(success,errorMessage,dataFile){
-
-                //pre defaultne nastavenia vid outwave.js a style.js
-                var options = {height: 400}; //height - vyska waveformu v horizontalnej orientacii (amplituda)
+        var options = {height: 400}; //height (ampltiude) - as in horizontal orientation
 
 
-                options.style = {
-                    waveformFill: function(ctx,p1,p2,channel,played){
+        options.style = {
+            waveformFill: function(ctx,p1,p2,channel,played){
 
-                        //return "#444"; // jednoliata farba
+                //return "#444"; // solid color
 
-                        //channel: channel id (0..n-1)
-                        //played: this part has been played, cursor is further
-                        var grad = ctx.createLinearGradient(p1.x,p1.y,p2.x,p2.y);
-                        if(played){
-                            if(channel === 0){
-                                grad.addColorStop(0, '#92dffc');
-                                grad.addColorStop(1, '#08bbff');
-                            }else{
-                                grad.addColorStop(0, '#b3ff66');
-                                grad.addColorStop(1, '#77ed00');
-                            }
-                        }else{
-                            if(channel === 0){
-                                grad.addColorStop(0, '#78daff');
-                                grad.addColorStop(1, '#0094cc');
-                            }else{
-                                grad.addColorStop(0, '#94ff29');
-                                grad.addColorStop(1, '#58b000');
-                            }               
-                        }
-                        return grad;
+                //channel: channel id (0..n-1)
+                //played: this part has been played, cursor is further
+                var grad = ctx.createLinearGradient(p1.x,p1.y,p2.x,p2.y);
+                if(played){
+                    if(channel === 0){
+                        grad.addColorStop(0, '#92dffc');
+                        grad.addColorStop(1, '#08bbff');
+                    }else{
+                        grad.addColorStop(0, '#b3ff66');
+                        grad.addColorStop(1, '#77ed00');
                     }
-                };
-
-                //vytvorenie "editoru"
-                outwave = new Outwave($('#waveform'),dataFile,options);
-
-
-
-
-                outwave.onZoomed(function(zoom){
-                    $("#zoom").val(zoom);
-                });
-
-                outwave.setZoom(50,true);
-
-                outwave.onClick(function(time){
-                    jwplayer().seek(time);
-                });
+                }else{
+                    if(channel === 0){
+                        grad.addColorStop(0, '#78daff');
+                        grad.addColorStop(1, '#0094cc');
+                    }else{
+                        grad.addColorStop(0, '#94ff29');
+                        grad.addColorStop(1, '#58b000');
+                    }               
+                }
+                return grad;
+            }
+        };
 
 
 
+        Outwave(file,$("#waveform"),options,function(viewer){
+
+            //save globally for event handlers
+            window.outwave = viewer;
+
+            viewer.onZoomed(function(zoom){
+                $("#zoom").val(zoom);
+            });
+
+            viewer.setZoom(50,true);
+
+            viewer.onClick(function(time){
+                jwplayer().seek(time);
+            });
 
 
 
 
-                //tu zacina kod pre anotacie(segmenty), timeSpan = 1 segment
+            //tu zacina kod pre anotacie(segmenty), timeSpan = 1 segment
 
 
+            var container = $("#divcontainer");
 
 
-                var container = $("#divcontainer");
+            var scroller = $("#divscroller");
 
 
-                var scroller = $("#divscroller");
+            //celkova dlzka waveformu v pixeloch
 
-                //celkova dlzka waveformu v pixeloch
-
-                //internalWidth: width a height su odvodene od horizontalneho zobrazenia
-                container.height(outwave.internalWidth());
+            //internalWidth: width a height su odvodene od horizontalneho zobrazenia
+            container.height(viewer.internalWidth());
 
 
-                // synchonizacia posuvnikov
+            // synchonizacia posuvnikov
+            
+            var annotScrolled = function(){
+                viewer.scroll(scroller.scrollTop());
+            };
+
+            scroller.bind('scroll',annotScrolled);
+
+
+            viewer.onZoomed(function(zoom,length){
+
+                //unbind scroll event - avoid causing problem when scroll position changes due to
+                //changing content length
+                scroller.unbind('scroll',annotScrolled);
+                container.height(length);
+                //rebind
+                setTimeout(function(){scroller.bind('scroll',annotScrolled);},0);
                 
-                var annotScrolled = function(){
-                    outwave.scroll(scroller.scrollTop());
+            });
+
+
+
+
+            viewer.onScroll(function(pos){
+
+                //avoid recursive calls
+                scroller.unbind('scroll',annotScrolled);
+
+                scroller.scrollTop(pos);  
+
+                //rebind    
+                setTimeout(function(){scroller.bind('scroll',annotScrolled);},0);                      
+           });
+
+
+
+            //zablokovanie autoscroll-u, ked je mys nad anotaciami napravo
+
+            scroller.on('mouseenter',viewer.handleMouseEnter).on('mouseleave',viewer.handleMouseLeave);
+
+
+
+            // obalka nad anotaciami
+            spanCollection = new Outwave.api.timeSpans.ContinuousTimeSpanCollection(viewer,{minSpanLength: 2});
+
+
+            // spanCollection.getAll() vrati pole span-ov
+            // span - vnutorna reprezentacia casoveho useku(anotacie)
+            // span.setData(whatever); ulozi referenciu na whatever
+            // span.getData(whatever); vrati whatever 
+
+
+            spanCollection.onTimeSpanCreated(function(span){
+                //bola vytvorena nova anotacia
+
+                // span.getCollection() == spanCollection 
+
+                var html = ['<div class="annotation" style="',
+                            'position: absolute;',
+                            'background-color: #FF2E2E;',
+                            'width: 100%;',
+                            'overflow: hidden;',
+                            '">',
+                            '    <div style="background-color: red; color: white; position: absolute; right: 0;">',
+                            '        <span class="s"></span> - <span class="e"></span>',
+                            '    </div>',
+                            '</div>'
+                            ].join("");
+
+                var annotEl = $(html);
+                
+                var textarea = $('<textarea style="width: 99%; height: 99%; resize: none;"></textarea>');
+
+                textarea.val("text text text text");
+
+                annotEl.append(textarea);
+
+
+                annotEl.data(span);
+
+                span.setData(annotEl);
+
+
+                //reaguje na zmeny polohy
+                var updatePosition = function(){
+
+                    //this == span
+
+                    annotEl.find(".s").text(Outwave.api.utils.formatTime(this.getStart()));
+
+                    annotEl.find(".e").text(Outwave.api.utils.formatTime(this.getEnd()));                    
+
+                    annotEl.css("top",this.getStartX()).height(this.getEndX()-this.getStartX());
                 };
 
-                scroller.bind('scroll',annotScrolled);
+                updatePosition.call(span); // inicializia, call => this = span
 
+                span.onPositionChanged(updatePosition);
 
-                outwave.onZoomed(function(zoom,length){
-
-                    //unbind scroll event - avoid causing problem when scroll position changes due to
-                    //changing content length
-                    scroller.unbind('scroll',annotScrolled);
-                    container.height(length);
-                    //rebind
-                    setTimeout(function(){scroller.bind('scroll',annotScrolled);},0);
-                    
+                span.onMerged(function(prev,created){
+                    //console.log("merged with ",prev," into ",created);
                 });
 
-
-
-
-                outwave.onScroll(function(pos){
-
-                    //avoid recursive calls
-                    scroller.unbind('scroll',annotScrolled);
-
-                    scroller.scrollTop(pos);  
-
-                    //rebind    
-                    setTimeout(function(){scroller.bind('scroll',annotScrolled);},0);                      
-               });
-
-
-
-                //zablokovanie autoscroll-u, ked je mys nad anotaciami napravo
-
-                scroller.on('mouseenter',outwave.handleMouseEnter).on('mouseleave',outwave.handleMouseLeave);
-
-
-
-                // obalka nad anotaciami
-                spanCollection = new ContinuousTimeSpanCollection(outwave,{minSpanLength: 2});
-
-
-                // spanCollection.getAll() vrati pole span-ov
-                // span - vnutorna reprezentacia casoveho useku(anotacie)
-                // span.setData(whatever); ulozi referenciu na whatever
-                // span.getData(whatever); vrati whatever 
-
-
-                spanCollection.onTimeSpanCreated(function(span){
-                    //bola vytvorena nova anotacia
-
-                    // span.getCollection() == spanCollection 
-
-                    var html = ['<div class="annotation" style="',
-                                'position: absolute;',
-                                'background-color: #FF2E2E;',
-                                'width: 100%;',
-                                'overflow: hidden;',
-                                '">',
-                                '    <div style="background-color: red; color: white; position: absolute; right: 0;">',
-                                '        <span class="s"></span> - <span class="e"></span>',
-                                '    </div>',
-                                '</div>'
-                                ].join("");
-
-                    var annotEl = $(html);
-                    
-                    var textarea = $('<textarea style="width: 99%; height: 99%; resize: none;"></textarea>');
-
-                    textarea.val("text text text text");
-
-                    annotEl.append(textarea);
-
-
-                    annotEl.data(span);
-
-                    span.setData(annotEl);
-
-
-                    //reaguje na zmeny polohy
-                    var updatePosition = function(){
-
-                        //this == span
-
-                        annotEl.find(".s").text(Utils.formatTime(this.getStart()));
-
-                        annotEl.find(".e").text(Utils.formatTime(this.getEnd()));                    
-
-                        annotEl.css("top",this.getStartX()).height(this.getEndX()-this.getStartX());
-                    };
-
-                    updatePosition.call(span); // inicializia, call => this = span
-
-                    span.onPositionChanged(updatePosition);
-
-                    span.onMerged(function(prev,created){
-                        //console.log("merged with ",prev," into ",created);
-                    });
-
-                    span.onSplit(function(left,right){
-                        //console.log("split into",left,right);
-                    });
-
-                    span.onRemoved(function(){
-                        annotEl.remove();
-                    });
-
-                    container.append(annotEl);
-
-
+                span.onSplit(function(left,right){
+                    //console.log("split into",left,right);
                 });
 
-                //vytvorenie nahodnych anotacii
+                span.onRemoved(function(){
+                    annotEl.remove();
+                });
 
-                var end = 15;
+                container.append(annotEl);
 
-                spanCollection.addTimeSpan(end); // pridanie anotacie
 
+            });
+
+            //vytvorenie nahodnych anotacii
+
+            var end = 15;
+
+            spanCollection.addTimeSpan(end); // pridanie anotacie
+           
 
         });
 

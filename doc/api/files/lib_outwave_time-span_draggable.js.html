@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/Draggable.html">Draggable</a></li>
             
-                <li><a href="../classes/Outwave.html">Outwave</a></li>
-            
                 <li><a href="../classes/Segment.html">Segment</a></li>
             
                 <li><a href="../classes/SegmentCollection.html">SegmentCollection</a></li>
@@ -68,6 +66,8 @@
                 <li><a href="../classes/TimeSpanError.html">TimeSpanError</a></li>
             
                 <li><a href="../classes/Utils.html">Utils</a></li>
+            
+                <li><a href="../classes/Viewer.html">Viewer</a></li>
             
             </ul>
 
@@ -124,8 +124,7 @@ See LICENSE.txt for licensing information.
 
 
 define([
-&#x27;jquery&#x27;
-],function($){
+],function(){
 
     getOffset = function( elem ) {
 
@@ -143,11 +142,13 @@ define([
      * @extensionfor TimeSpan
      * @constructor
      * @param {TimeSpan} span            Time span
-     * @param {jQuery element} viewportElement Viewport element
+     * @param {Viewer} viewer Viewer instance
      * @param {Style} style           Style object
      */
-    var Draggable = function(span,viewportElement,style){
+    var Draggable = function(span,viewer,style){
 
+
+        var viewportElement = viewer.getViewportElement();
 
         var ext = function(){
 
@@ -393,6 +394,20 @@ define([
 
             this.getStartElement().mousedown(function(e){dragHandler.call(this,e,true);});
             this.getEndElement().mousedown(function(e){dragHandler.call(this,e,false);});
+
+            var hideHover = function(){
+                viewer.setHoverDisplayed(false);
+            };
+
+            var showHover = function(){
+                viewer.setHoverDisplayed(true);
+            };
+
+            $(this.getStartElement()).on(&#x27;mouseenter&#x27;,hideHover);
+            $(this.getEndElement()).on(&#x27;mouseenter&#x27;,hideHover);
+
+            $(this.getStartElement()).on(&#x27;mouseleave&#x27;,showHover);
+            $(this.getEndElement()).on(&#x27;mouseleave&#x27;,showHover);
 
 
         };

@@ -5,7 +5,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "ContinuousTimeSpanCollection",
         "DataFile",
         "Draggable",
-        "Outwave",
         "Segment",
         "SegmentCollection",
         "SparseTimeSpan",
@@ -14,7 +13,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "TimeSpan",
         "TimeSpanCollection",
         "TimeSpanError",
-        "Utils"
+        "Utils",
+        "Viewer"
     ],
     "modules": [
         "Outwave",

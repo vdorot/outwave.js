@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/Draggable.html">Draggable</a></li>
             
-                <li><a href="../classes/Outwave.html">Outwave</a></li>
-            
                 <li><a href="../classes/Segment.html">Segment</a></li>
             
                 <li><a href="../classes/SegmentCollection.html">SegmentCollection</a></li>
@@ -68,6 +66,8 @@
                 <li><a href="../classes/TimeSpanError.html">TimeSpanError</a></li>
             
                 <li><a href="../classes/Utils.html">Utils</a></li>
+            
+                <li><a href="../classes/Viewer.html">Viewer</a></li>
             
             </ul>
 
@@ -139,11 +139,11 @@ define([
      * @class ContinuousTimeSpanCollection
      * @extends {TimeSpanCollection}
      * @constructor
-     * @param {Outwave} outwave Outwave object
+     * @param {Viewer} viewer Viewer object
      * @param {Array} options Options: {minSpanLength: Number}
      */
-    var ContinuousTimeSpanCollection = function(outwave, options){
-        var collection = new TimeSpanCollection(outwave, options);
+    var ContinuousTimeSpanCollection = function(viewer, options){
+        var collection = new TimeSpanCollection(viewer, options);
 
 
         /**

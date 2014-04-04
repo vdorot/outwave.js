@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/outwave/outwave.js - Outwave.js</title>
+    <title>lib/outwave/viewer.js - Outwave.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/Draggable.html">Draggable</a></li>
             
-                <li><a href="../classes/Outwave.html">Outwave</a></li>
-            
                 <li><a href="../classes/Segment.html">Segment</a></li>
             
                 <li><a href="../classes/SegmentCollection.html">SegmentCollection</a></li>
@@ -68,6 +66,8 @@
                 <li><a href="../classes/TimeSpanError.html">TimeSpanError</a></li>
             
                 <li><a href="../classes/Utils.html">Utils</a></li>
+            
+                <li><a href="../classes/Viewer.html">Viewer</a></li>
             
             </ul>
 
@@ -112,7 +112,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/outwave/outwave.js</h1>
+                        <h1 class="file-heading">File: lib/outwave/viewer.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -133,13 +133,12 @@ See LICENSE.txt for licensing information.
 
 
 define([
-    &#x27;jquery&#x27;,
-    &#x27;jquery-mousewheel&#x27;,
+    &#x27;./vendor/jquery-mousewheel&#x27;,
     &#x27;./utils&#x27;,
     &#x27;./style&#x27;,
     &#x27;./segment&#x27;,
     &#x27;./segment-collection&#x27;
-],function($,_mouseWheel,Utils,Style,Segment,SegmentCollection){
+],function(_mouseWheel,Utils,Style,Segment,SegmentCollection){
 
     var defaultOptions = {
         height: 400,
@@ -165,7 +164,7 @@ define([
             }
             return grad;
         },
-        hover: false,
+        hover: true,
         mono: false,
         autoScrollType: &#x27;jerky&#x27;, // smooth or jerky
         autoScrollTimeout: 800, // milliseconds
@@ -180,13 +179,13 @@ define([
      * Width and height(x,y) dimensions are used as if for horizontal orientation.
      * If you are using Outwave vertically, exchange the dimensions. Eg. the height option means width on screen.
      * 
-     * @class Outwave
+     * @class Viewer
      * @constructor
      * @param {HTMLElement|jQuery element} container The element which the viewer will reside in
      * @param {DataFile} file    Object containing preprocessed waveform data
      * @param {Object} options   Options
      */
-    var Outwave = function(container,file,options){
+    var Viewer = function(container,file,options){
         var self = this; // keep this in scope
         this.zoom = 40;
 
@@ -254,11 +253,25 @@ define([
 
         this.updateDimensions();
 
+
+        //test for pointer events
+        var element = document.createElement(&#x27;x&#x27;);
+        element.style.cssText = &#x27;pointer-events:auto&#x27;;
+        var eventsWorking = element.style.pointerEvents === &#x27;auto&#x27;;
+
+        if(!eventsWorking){
+            //no pointer-events support, disable hover
+            this.options.hover = false;
+        }
+
+
         this.hoverEl = this.options.style.hover();
         this.hoverDim = Utils.getElementDimensions(this.hoverEl);
-        this.hoverEl.css({position: &quot;absolute&quot;, display: &quot;block&quot;,&#x27;z-index&#x27;: &#x27;100&#x27;, &#x27;pointer-events&#x27;: &#x27;none&#x27;});
+        this.hoverEl.css({position: &quot;absolute&quot;, display: &quot;block&quot;,&#x27;z-index&#x27;: &#x27;100&#x27;,&#x27;pointer-events&#x27;: &#x27;none&#x27;});
 
         this.foregroundEl.append(this.hoverEl);
+
+        this.setHoverDisplayed(this.options.hover);
 
 
 
@@ -272,23 +285,24 @@ define([
                         self.scrollbarEl.triggerHandler(&quot;mouseleave&quot;);
                         return;
                     }
-                    self.hoverEl.css(&quot;left&quot;,Math.floor(pos-(self.hoverDim.w/2))).show();
+                    self.hoverEl.css(&quot;left&quot;,Math.floor(pos-(self.hoverDim.w/2)));
                 }else{
                     pos = event.pageY - self.backgroundEl.offset().top;
                     if(pos &gt;= self.internalWidth()){
                         self.scrollbarEl.triggerHandler(&quot;mouseleave&quot;);
                         return;
                     }
-                    self.hoverEl.css(&quot;top&quot;,Math.floor(pos-(self.hoverDim.h/2))).show();
+                    self.hoverEl.css(&quot;top&quot;,Math.floor(pos-(self.hoverDim.h/2)));
                 }
 
 
 
 
             }).on(&quot;mouseleave&quot;,function(){
-                self.hoverEl.hide();
+                self.setHoverDisplayed(false);
+            }).on(&quot;mouseenter&quot;,function(){
+                self.setHoverDisplayed(true);
             });
-
             if(this.options.style.horizontal()){
                 this.foregroundEl.css(&quot;cursor&quot;,&#x27;text&#x27;);
             }else{
@@ -419,7 +433,7 @@ define([
     };
 
 
-    Outwave.prototype = {  
+    Viewer.prototype = {  
         /**
          * Get default options
          * @method getDefaultOoptions
@@ -969,14 +983,25 @@ define([
          */
         getStyle: function(){
             return this.options.style;
+        },
+        /**
+         * Display position line under mouse cursor?
+         * @method setHoverDisplayed
+         * @param {Boolean} isDisplayed Whether to display hover or not
+         */
+        setHoverDisplayed: function(isDisplayed){
+            if(!this.options.hover){
+                //hover is disabled completely
+                isDisplayed = false;
+            }
+            this.hoverEl.css({&quot;display&quot;: isDisplayed ? &#x27;block&#x27; : &#x27;none&#x27;});
         }
 
     };
 
-    return Outwave;
+    return Viewer;
 
 });
-
     </pre>
 </div>
 
