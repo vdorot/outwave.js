@@ -14,11 +14,21 @@
     background-color: black;
     width: 1px;
     height: 100%;
+    cursor: text;
 }
 
 .outwave.vertical .hover{
     height: 1px;
     width: 100%;
+    cursor: vertical-text;
+}
+
+.outwave .foreground{
+    cursor: text;
+}
+
+.outwave.vertical .foreground{
+    cursor: vertical-text;
 }
 
 .outwave.horizontal .timespan-start{
