@@ -45,9 +45,13 @@
             
                 <li><a href="../classes/ContinuousTimeSpanCollection.html">ContinuousTimeSpanCollection</a></li>
             
+                <li><a href="../classes/Controls.html">Controls</a></li>
+            
                 <li><a href="../classes/DataFile.html">DataFile</a></li>
             
                 <li><a href="../classes/Draggable.html">Draggable</a></li>
+            
+                <li><a href="../classes/Outwave.html">Outwave</a></li>
             
                 <li><a href="../classes/Segment.html">Segment</a></li>
             
@@ -183,7 +187,7 @@ define([&#x27;./utils&#x27;],function(Utils){
             //played: this part has been played, cursor is further
             var grad = ctx.createLinearGradient(p1.x,p1.y,p2.x,p2.y);
                 if(played){
-                    if(channel == 0){
+                    if(channel === 0){
                         grad.addColorStop(0, &#x27;#fff&#x27;);
                         grad.addColorStop(1, &#x27;#ff0000&#x27;);
                     }else{
@@ -191,7 +195,7 @@ define([&#x27;./utils&#x27;],function(Utils){
                         grad.addColorStop(1, &#x27;#0000ff&#x27;);
                     }
                 }else{
-                    if(channel == 0){
+                    if(channel === 0){
                         grad.addColorStop(0, &#x27;#fff&#x27;);
                         grad.addColorStop(1, &#x27;#00ABEB&#x27;);
                     }else{
@@ -200,6 +204,26 @@ define([&#x27;./utils&#x27;],function(Utils){
                     }               
                 }
                 return grad;
+        };
+
+        this.error = function(message){
+            return ($(&#x27;&lt;div class=&quot;center&quot;&gt;&lt;/div&gt;&#x27;).append($(&#x27;&lt;div class=&quot;centerm&quot;&gt;&#x27;).append($(&#x27;&lt;div class=&quot;error&quot;&gt;&lt;/div&gt;&#x27;).text(message))));
+        };
+
+        this.loading = function(){
+            return ($(&#x27;&lt;div class=&quot;center&quot;&gt;&lt;/div&gt;&#x27;).append($(&#x27;&lt;div class=&quot;centerm&quot;&gt;&#x27;).append($(&#x27;&lt;div class=&quot;loading&quot;&gt;&lt;/div&gt;&#x27;))));            
+        };
+
+        this.zoomInControl = function(){
+            return $(&#x27;&lt;div class=&quot;control zoom-in&quot;&gt;&lt;a href=&quot;#&quot;&gt;+&lt;/a&gt;&#x27;);
+        };
+
+        this.zoomOutControl = function(){
+            return $(&#x27;&lt;div class=&quot;control zoom-out&quot;&gt;&lt;a href=&quot;#&quot;&gt;-&lt;/a&gt;&#x27;);
+        };
+
+        this.lockPositionControl = function(){
+            return $(&#x27;&lt;div class=&quot;control lock-position&quot;&gt;&lt;a href=&quot;#&quot;&gt;a&lt;/a&gt;&#x27;);
         };
 
         return this;

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Style - Outwave.js</title>
+    <title>Outwave - Outwave.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -116,7 +116,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Style Class</h1>
+                        <h1>Outwave Class</h1>
 <div class="box meta">
     
 
@@ -124,7 +124,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/lib_outwave_style.js.html#l14"><code>lib&#x2F;outwave&#x2F;style.js:14</code></a>
+            Defined in: <a href="../files/lib_outwave_outwave.js.html#l94"><code>lib&#x2F;outwave&#x2F;outwave.js:94</code></a>
         </div>
     
 
@@ -140,18 +140,49 @@
 
 
 <div class="box intro">
-    <p>Default styling options</p>
+    <p>Waveform viewer loader
+Loads datafile and creates a waveform viewer instance. Adds control buttons if enabled in options.
+If no errors occur onLoad is called with the viewer instance as an argument</p>
+<p>Use without new keyword</p>
 
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_Style" class="method item">
-    <h3 class="name"><code>Style</code></h3>
+        <div id="method_Outwave" class="method item">
+    <h3 class="name"><code>Outwave</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>dataFileUrl</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>container</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>onLoad</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -179,7 +210,7 @@
             
         
         
-        <a href="../files/lib_outwave_style.js.html#l14"><code>lib&#x2F;outwave&#x2F;style.js:14</code></a>
+        <a href="../files/lib_outwave_outwave.js.html#l94"><code>lib&#x2F;outwave&#x2F;outwave.js:94</code></a>
         
         </p>
 
@@ -193,6 +224,78 @@
         
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">dataFileUrl</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>URL of waveform file</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">container</code>
+                        <span class="type">HTMLElement | JQuery element</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Container element</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Various options</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">onLoad</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Function(Viewer viewer) - viewer has been successfully loaded</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -209,6 +312,8 @@
 
         
         
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
         
         
     </ul>
@@ -220,6 +325,21 @@
             
 
             
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_api">api</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
 
             
 
@@ -228,6 +348,57 @@
 
         
 
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_api" class="property item">
+    <h3 class="name"><code>api</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_outwave_outwave.js.html#l37"><code>lib&#x2F;outwave&#x2F;outwave.js:37</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Provides Outwave.js API for monkey patching, quick fixes, etc.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         

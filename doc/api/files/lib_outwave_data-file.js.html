@@ -45,9 +45,13 @@
             
                 <li><a href="../classes/ContinuousTimeSpanCollection.html">ContinuousTimeSpanCollection</a></li>
             
+                <li><a href="../classes/Controls.html">Controls</a></li>
+            
                 <li><a href="../classes/DataFile.html">DataFile</a></li>
             
                 <li><a href="../classes/Draggable.html">Draggable</a></li>
+            
+                <li><a href="../classes/Outwave.html">Outwave</a></li>
             
                 <li><a href="../classes/Segment.html">Segment</a></li>
             
@@ -414,7 +418,7 @@ define([&#x27;./vendor/jdataview&#x27;],function(_jDataView){
      * @param  {String}   url  URL of file containing preprocessed waveform data
      * @param  {Function} done Callback done(Boolean success,String errorMessage,DataFile dataFile)
      */
-    DataFile.loadUrl = function(url, done){
+    DataFile.loadUrl = function(url, done, progress){
 
         var xhr = new XMLHttpRequest();
         xhr.open(&#x27;GET&#x27;, url, true);
@@ -434,9 +438,25 @@ define([&#x27;./vendor/jdataview&#x27;],function(_jDataView){
             xhr.setRequestHeader(&#x27;Accept-Charset&#x27;, &#x27;x-user-defined&#x27;);
         }
 
+        xhr.onprogress = function(event){
+            if(event.total &amp;&amp; event.loaded){
+                progress(Math.floor(event.loaded / event.total * 100));
+            }
+        };
+
 
         xhr.onload = function(event){
             //this = xhr
+
+            
+
+            if(! (this.status &gt;= 200 &amp;&amp; this.status &lt; 300 || this.status === 304)){
+                done(false,this.status + &#x27; &#x27;+this.statusText);
+                return;
+            }
+
+
+
             if (!(&#x27;response&#x27; in this)) { //IE9 compatibility
                 var bytes = new VBArray(this.responseBody).toArray();
                 this.response = &#x27;&#x27;;

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/outwave/utils.js - Outwave.js</title>
+    <title>lib/outwave/controls.js - Outwave.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -116,7 +116,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/outwave/utils.js</h1>
+                        <h1 class="file-heading">File: lib/outwave/controls.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -126,122 +126,107 @@ All rights reserved.
 See LICENSE.txt for licensing information.
 */
 
+/**
+ * @module Outwave
+ * @main  Outwave
+ */
+
+define(
+    [], //TODO: add timespans if necessary
+    function(){
 
 
-define([],function(){
+        /**
+         * Adds control buttons to waveform viewer
+         *
+         * Use without new keyword
+         * 
+         * @class Controls
+         * @constructor
+         * @param {HTMLElement|jQuery element} container Container element
+         * @param {Viewer} viewer    Waveform viewer instance
+         * @param {Style} style     Style options
+         */
+        var Controls = function(container,viewer,style){
 
-    /**
-     * @module Outwave
-     */
+            var controls = $(&#x27;&lt;div class=&quot;controls&quot;&gt;&lt;/div&gt;&#x27;);
 
-    /**
-     * Various utilities
-     *
-     * @class Utils
-     * @static
-     */
-    var Utils = new function(){
+            var zoomIn = style.zoomInControl();
 
-        this.scrollbarDim = null;
+            var zoomOut = style.zoomOutControl();
 
-        this.dimBase = null;
-
-        this.setDimBase = function(element){ //set parent element for dimension measurement
-            this.dimBase = $(element);
-        }
-
-        this.getElementDimensions = function(element){
-            var e = $(element).clone();
-            e.css({position: &quot;absolute&quot;/*,visibility: &quot;hidden&quot;*/});
-
-            var base = $(document.body);
-            if(this.dimBase){
-                base = this.dimBase;
-            }
-            base.prepend(e);
-
-            var dim = [];
-
-            dim.h = e.outerHeight();
-            dim.w = e.outerWidth();
-
-            dim.push(dim.w);
-            dim.push(dim.h);
-
-            e.remove();
-            return dim;
-        };
-
-        /*Calculate native scrollbar dimensions using the fact, taht you cannot scroll further than the element allows*/
-        this.getScrollbarDim = function(){
-            if(!this.scrollbarDim){
-                var elem=$(&#x27;&lt;div style=&quot;position: absolute; width: 100px; height: 100px; overflow: auto; visibility: hidden;&quot;&gt;&lt;div style=&quot;width: 200px; height: 200px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&#x27;);
-                $(document.body).prepend(elem);
-                elem.scrollTop(500);
-                var vScroll = elem.scrollTop();
-                elem.scrollLeft(500);
-                var hScroll = elem.scrollLeft();
-                elem.remove();
-                //100 = parent.height - child.height
-                this.scrollbarDim = {height: vScroll - 100, width: hScroll - 100};
-            }
-            return this.scrollbarDim;
-        };
-        this.formatTime = function(time){
-
-            var zeroPad = function(num, places) {
-              var zero = places - num.toString().length + 1;
-              return Array(+(zero &gt; 0 &amp;&amp; zero)).join(&quot;0&quot;) + num;
-            }
-
-            //time = 59*60*60+59*60+59+0.999;
+            var lockPosition = style.lockPositionControl();
 
 
-            var hrs = Math.floor(time / (60*60));
-
-            var mins = Math.floor((time - hrs*60*60) / 60);
-
-            var secs = Math.floor(time - hrs*60*60 - mins*60);
-
-            var millis  = Math.round((time - Math.floor(time))*1000)/1000;
 
 
-            var ret = &#x27;&#x27;;
+            controls.append(zoomIn,zoomOut,lockPosition);
 
-            if(hrs != 0){
-                ret+=hrs+&#x27;:&#x27;;
-            }
+            container.prepend(controls);
 
-            if(mins!=0){
-                var pad = 2;
-                if(hrs == 0){
-                    pad = 1;
-                }
-                ret+=zeroPad(mins,pad)+&#x27;:&#x27;;
-            }
-
-            var pad = 2;
-            if(hrs == 0 &amp;&amp; mins == 0){
-                pad = 1;
-            }
-            ret+=zeroPad(secs,pad);
-
-            millis = millis.toString().slice(2);
-
-            if(millis != &#x27;&#x27;){
-                ret+=&#x27;.&#x27;+millis;
+            if(style.vertical()){
+                var margin = viewer.timelineHeight();
+                controls.css(&#x27;left&#x27;,margin);
             }
 
 
-            return ret;
+
+
+            if(zoomIn.find(&#x27;a&#x27;).length){
+                zoomIn = zoomIn.find(&#x27;a&#x27;);
+            }
+
+            if(zoomOut.find(&#x27;a&#x27;).length){
+                zoomOut = zoomOut.find(&#x27;a&#x27;);
+            }
+
+            if(lockPosition.find(&#x27;a&#x27;).length){
+                lockPosition = lockPosition.find(&#x27;a&#x27;);
+            }
+
+            console.log(lockPosition);
+
+            zoomIn.click(function(event){
+                event.preventDefault();
+                viewer.zoomIn();
+            });
+
+            zoomOut.click(function(event){
+                event.preventDefault();
+                viewer.zoomOut();
+            });
+
+            lockPosition.click(function(event){
+                event.preventDefault();
+               if($(this).hasClass(&#x27;locked&#x27;)){
+                $(this).attr(&#x27;title&#x27;,&#x27;Lock view&#x27;);
+                viewer.setScrollLocked(false);
+               }else{
+                $(this).attr(&#x27;title&#x27;,&#x27;Unlock view&#x27;);
+                viewer.setScrollLocked(true);
+               }
+               $(this).toggleClass(&#x27;locked&#x27;);
+            });
+
+            lockPosition.attr(&#x27;title&#x27;,&#x27;Lock view&#x27;);
+
+            controls.children().on(&#x27;mouseenter&#x27;,function(){
+                viewer.handleMouseEnter();
+            });
+
+            controls.children().on(&#x27;mouseleave&#x27;, function(){
+                viewer.handleMouseLeave();
+            });
+
 
         };
 
+        return Controls;
 
-    }();
 
-    return Utils;
-});
+
+    }
+);
     </pre>
 </div>
 

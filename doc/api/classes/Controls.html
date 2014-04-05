@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/outwave/utils.js - Outwave.js</title>
+    <title>Controls - Outwave.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -116,133 +116,203 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/outwave/utils.js</h1>
+                        <h1>Controls Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-/*
-Copyright (c) 2014, Viktor Dorotovic
-All rights reserved.
-See LICENSE.txt for licensing information.
-*/
+    
 
+    
+        <div class="foundat">
+            Defined in: <a href="../files/lib_outwave_controls.js.html#l17"><code>lib&#x2F;outwave&#x2F;controls.js:17</code></a>
+        </div>
+    
 
+    
+        
+            Module: <a href="../modules/Outwave.html">Outwave</a>
+        
+    
 
-define([],function(){
-
-    /**
-     * @module Outwave
-     */
-
-    /**
-     * Various utilities
-     *
-     * @class Utils
-     * @static
-     */
-    var Utils = new function(){
-
-        this.scrollbarDim = null;
-
-        this.dimBase = null;
-
-        this.setDimBase = function(element){ //set parent element for dimension measurement
-            this.dimBase = $(element);
-        }
-
-        this.getElementDimensions = function(element){
-            var e = $(element).clone();
-            e.css({position: &quot;absolute&quot;/*,visibility: &quot;hidden&quot;*/});
-
-            var base = $(document.body);
-            if(this.dimBase){
-                base = this.dimBase;
-            }
-            base.prepend(e);
-
-            var dim = [];
-
-            dim.h = e.outerHeight();
-            dim.w = e.outerWidth();
-
-            dim.push(dim.w);
-            dim.push(dim.h);
-
-            e.remove();
-            return dim;
-        };
-
-        /*Calculate native scrollbar dimensions using the fact, taht you cannot scroll further than the element allows*/
-        this.getScrollbarDim = function(){
-            if(!this.scrollbarDim){
-                var elem=$(&#x27;&lt;div style=&quot;position: absolute; width: 100px; height: 100px; overflow: auto; visibility: hidden;&quot;&gt;&lt;div style=&quot;width: 200px; height: 200px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&#x27;);
-                $(document.body).prepend(elem);
-                elem.scrollTop(500);
-                var vScroll = elem.scrollTop();
-                elem.scrollLeft(500);
-                var hScroll = elem.scrollLeft();
-                elem.remove();
-                //100 = parent.height - child.height
-                this.scrollbarDim = {height: vScroll - 100, width: hScroll - 100};
-            }
-            return this.scrollbarDim;
-        };
-        this.formatTime = function(time){
-
-            var zeroPad = function(num, places) {
-              var zero = places - num.toString().length + 1;
-              return Array(+(zero &gt; 0 &amp;&amp; zero)).join(&quot;0&quot;) + num;
-            }
-
-            //time = 59*60*60+59*60+59+0.999;
+    
+</div>
 
 
-            var hrs = Math.floor(time / (60*60));
 
-            var mins = Math.floor((time - hrs*60*60) / 60);
+<div class="box intro">
+    <p>Adds control buttons to waveform viewer</p>
+<p>Use without new keyword</p>
 
-            var secs = Math.floor(time - hrs*60*60 - mins*60);
-
-            var millis  = Math.round((time - Math.floor(time))*1000)/1000;
-
-
-            var ret = &#x27;&#x27;;
-
-            if(hrs != 0){
-                ret+=hrs+&#x27;:&#x27;;
-            }
-
-            if(mins!=0){
-                var pad = 2;
-                if(hrs == 0){
-                    pad = 1;
-                }
-                ret+=zeroPad(mins,pad)+&#x27;:&#x27;;
-            }
-
-            var pad = 2;
-            if(hrs == 0 &amp;&amp; mins == 0){
-                pad = 1;
-            }
-            ret+=zeroPad(secs,pad);
-
-            millis = millis.toString().slice(2);
-
-            if(millis != &#x27;&#x27;){
-                ret+=&#x27;.&#x27;+millis;
-            }
+</div>
 
 
-            return ret;
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_Controls" class="method item">
+    <h3 class="name"><code>Controls</code></h3>
 
-        };
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>container</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>viewer</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>style</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_outwave_controls.js.html#l17"><code>lib&#x2F;outwave&#x2F;controls.js:17</code></a>
+        
+        </p>
 
 
-    }();
+        
 
-    return Utils;
-});
-    </pre>
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">container</code>
+                        <span class="type">HTMLElement | JQuery element</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Container element</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">viewer</code>
+                        <span class="type"><a href="../classes/Viewer.html" class="crosslink">Viewer</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Waveform viewer instance</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">style</code>
+                        <span class="type"><a href="../classes/Style.html" class="crosslink">Style</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Style options</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+    </div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>

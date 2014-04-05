@@ -3,8 +3,10 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "ContinousTimeSpan",
         "ContinuousTimeSpanCollection",
+        "Controls",
         "DataFile",
         "Draggable",
+        "Outwave",
         "Segment",
         "SegmentCollection",
         "SparseTimeSpan",
@@ -23,8 +25,7 @@ YUI.add("yuidoc-meta", function(Y) {
     "allModules": [
         {
             "displayName": "Outwave",
-            "name": "Outwave",
-            "description": "Web based waveform viewer"
+            "name": "Outwave"
         },
         {
             "displayName": "TimeSpan",

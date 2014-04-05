@@ -45,9 +45,13 @@
             
                 <li><a href="../classes/ContinuousTimeSpanCollection.html">ContinuousTimeSpanCollection</a></li>
             
+                <li><a href="../classes/Controls.html">Controls</a></li>
+            
                 <li><a href="../classes/DataFile.html">DataFile</a></li>
             
                 <li><a href="../classes/Draggable.html">Draggable</a></li>
+            
+                <li><a href="../classes/Outwave.html">Outwave</a></li>
             
                 <li><a href="../classes/Segment.html">Segment</a></li>
             
@@ -125,8 +129,6 @@ See LICENSE.txt for licensing information.
 
 
 /**
- * Web based waveform viewer 
- * 
  * @module Outwave
  * @main  Outwave
  */
@@ -139,38 +141,6 @@ define([
     &#x27;./segment&#x27;,
     &#x27;./segment-collection&#x27;
 ],function(_mouseWheel,Utils,Style,Segment,SegmentCollection){
-
-    var defaultOptions = {
-        height: 400,
-        segmentWidth: 500,
-        waveformFill: function (ctx, y1, y2, channel, played) {
-            var grad = ctx.createLinearGradient(0, y1, 0, y2);
-            if (played) {
-                if (channel === 0) {
-                    grad.addColorStop(0, &#x27;#fff&#x27;);
-                    grad.addColorStop(1, &#x27;#ff0000&#x27;);
-                } else {
-                    grad.addColorStop(0, &#x27;#fff&#x27;);
-                    grad.addColorStop(1, &#x27;#0000ff&#x27;);
-                }
-            } else {
-                if (channel === 0) {
-                    grad.addColorStop(0, &#x27;#fff&#x27;);
-                    grad.addColorStop(1, &#x27;#00ABEB&#x27;);
-                } else {
-                    grad.addColorStop(0, &#x27;#fff&#x27;);
-                    grad.addColorStop(1, &#x27;#66CC00&#x27;);
-                }
-            }
-            return grad;
-        },
-        hover: true,
-        mono: false,
-        autoScrollType: &#x27;jerky&#x27;, // smooth or jerky
-        autoScrollTimeout: 800, // milliseconds
-        zoomChangeFactor: 2, // number by which the zoom value gets divided/multiplied when zooming in/out
-    };
-
 
 
     /**
@@ -197,12 +167,7 @@ define([
 
         this.dataFile = file;
 
-        this.options = $.extend(this.getDefaultOptions(),options);
-        this.options.style = new Style();
-
-        if(options.style){
-            $.extend(this.options.style,options.style);  
-        }
+        this.options = options;
 
         this.dataFile.setMono(this.options.mono);
 
@@ -212,11 +177,9 @@ define([
         this.zoomFactorChangedHnd = [];
 
         //element with scrollbars
-        this.scrollbarEl = $(&#x27;&lt;div class=&quot;outwave&quot;&gt;&lt;/div&gt;&#x27;).css(this.style.horizontal()?&quot;height&quot;:&quot;width&quot;,this.options.height);
+        this.scrollbarEl = $(&#x27;&lt;div class=&quot;viewport&quot;&gt;&lt;/div&gt;&#x27;).css(this.style.horizontal()?&quot;height&quot;:&quot;width&quot;,this.options.height);
         
         Utils.setDimBase(this.scrollbarEl);
-
-        this.scrollbarEl.addClass(this.style.vertical()?&quot;vertical&quot;:&quot;horizontal&quot;);
 
         if(this.style.vertical()){
             this.scrollbarEl.css(&quot;height&quot;,&quot;100%&quot;);
@@ -299,17 +262,12 @@ define([
 
 
             }).on(&quot;mouseleave&quot;,function(){
-                this.hoverEl.hide();
+                self.hoverEl.hide();
             }).on(&quot;mouseenter&quot;,function(){
-                if(this.hoverDisplayed){
-                    this.hoverEl.show();
+                if(self.hoverDisplayed){
+                    self.hoverEl.show();
                 }
             });
-            if(this.options.style.horizontal()){
-                this.foregroundEl.css(&quot;cursor&quot;,&#x27;text&#x27;);
-            }else{
-                this.foregroundEl.css(&quot;cursor&quot;,&#x27;vertical-text&#x27;);
-            }
 
         }
 
@@ -387,13 +345,15 @@ define([
 
 
         this.handleMouseEnter = function(){
+            console.log(&#x27;mouse entered&#x27;);
             if(self.mouseTimeout){
                 clearTimeout(self.mouseTimeout);
             }
            self.isMouseOver = true;
         };
 
-        this.handleMouseLeave = function(event){
+        this.handleMouseLeave = function(){
+            console.log(&#x27;mouse left&#x27;);
 
             if(this.mouseTimeout){
                 clearTimeout(this.mouseTimeout);            
@@ -431,19 +391,13 @@ define([
 
         this.scrollHnd = [];
 
+        this.isScrollLocekd = false;
+
 
     };
 
 
     Viewer.prototype = {  
-        /**
-         * Get default options
-         * @method getDefaultOoptions
-         */
-        getDefaultOptions: function(){
-            return defaultOptions;
-
-        },
         /**
          * Translate time to pixels
          *
@@ -998,6 +952,16 @@ define([
                 isDisplayed = false;
             }
             this.hoverEl.css({&quot;display&quot;: isDisplayed ? &#x27;block&#x27; : &#x27;none&#x27;});
+        },
+
+        /**
+         * Disable autoscroll
+         *
+         * @method setScrollLocked
+         * @param {Boolean} locked Disable autoscroll?
+         */
+        setScrollLocked: function(locked){
+            this.isScrollLocked = locked;
         }
 
     };
