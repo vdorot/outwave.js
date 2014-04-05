@@ -542,7 +542,7 @@
             "module": "Outwave",
             "namespace": "",
             "file": "lib/outwave/outwave.js",
-            "line": 94,
+            "line": 98,
             "description": "Waveform viewer loader\nLoads datafile and creates a waveform viewer instance. Adds control buttons if enabled in options.\nIf no errors occur onLoad is called with the viewer instance as an argument\n\nUse without new keyword",
             "is_constructor": 1,
             "params": [
@@ -1581,18 +1581,13 @@
         {
             "file": "lib/outwave/time-span/time-span.js",
             "line": 588,
-            "description": "Adds active class to elements",
+            "description": "Get jquery colletion of all elements used to mark time span",
             "itemtype": "method",
-            "name": "activate",
-            "class": "TimeSpan",
-            "module": "TimeSpan"
-        },
-        {
-            "file": "lib/outwave/time-span/time-span.js",
-            "line": 597,
-            "description": "Removes active class from elements",
-            "itemtype": "method",
-            "name": "deactivate",
+            "name": "getElements",
+            "return": {
+                "description": "elements",
+                "type": "JQuery element collection"
+            },
             "class": "TimeSpan",
             "module": "TimeSpan"
         },

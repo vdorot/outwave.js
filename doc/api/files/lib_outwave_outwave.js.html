@@ -207,7 +207,11 @@ define(
             },
             hover: true,
             mono: false,
-            autoScrollType: &#x27;jerky&#x27;, // smooth or jerky
+            autoScrollType: &#x27;smooth&#x27;, // smooth or jerky
+
+            autoScrollLeftThreshold: 0.2, //[percentage of width] position to which the viewer scrolls the cursor to
+            autoscrollRightThreshold: 0.8, //[percentage of width] positon at which scrolling starts
+
             autoScrollTimeout: 800, // milliseconds
             zoomChangeFactor: 2, // number by which the zoom value gets divided/multiplied when zooming in/out
         };
