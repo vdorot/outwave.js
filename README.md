@@ -40,7 +40,7 @@ The resulting files containg waveform data can be created with configurable samp
 ###Browser part
 
 Copy `build/outwave` into your webhost and include the following resources(your paths may vary): 
-```
+```HTML
 <link rel="stylesheet" type="text/css" href="outwave/css/layout.css">
 <link rel="stylesheet" type="text/css" href="outwave/css/style.css">
 
