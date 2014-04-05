@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     browserify: {
       build: {
         files: {
-          'build/outwave.js': ['lib/outwave/outwave.js'],
+          'build/outwave/outwave.js': ['lib/outwave/outwave.js'],
         },
         options: {
           transform: ['deamdify'],
@@ -31,14 +31,13 @@ module.exports = function(grunt) {
     },
     uglify: {
       build: {
-        files: {'build/outwave.min.js': ['build/outwave.js']}
+        files: {'build/outwave/outwave.min.js': ['build/outwave/outwave.js']}
       }
     },
     copy: {
       build: {
         files: [
-          {expand: true, cwd: 'lib/outwave/css/', src: ["**"], dest:"build/css/"},
-          {expand: true, cwd: 'lib/outwave/img/', src: ["**"], dest:"build/img/"}
+          {expand: true, cwd: 'lib/outwave/css/', src: ["**"], dest:"build/outwave/css/"}
         ]
       }
 
@@ -56,11 +55,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-browserify');
 
-/*
-  grunt.registerTask('test', ['jshint', 'qunit']);
 
-  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
-*/
   grunt.registerTask('doc',['yuidoc:build']);
 
   grunt.registerTask('build',['clean','browserify:build','uglify:build','copy:build','doc']);

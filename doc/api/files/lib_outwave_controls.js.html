@@ -196,10 +196,12 @@ define(
                 viewer.zoomOut();
             });
 
+            var lockTitle = &quot;Lock view - disable autoscroll while playing&quot;;
+
             lockPosition.click(function(event){
                 event.preventDefault();
                if($(this).hasClass(&#x27;locked&#x27;)){
-                $(this).attr(&#x27;title&#x27;,&#x27;Lock view&#x27;);
+                $(this).attr(&#x27;title&#x27;,lockTitle);
                 viewer.setScrollLocked(false);
                }else{
                 $(this).attr(&#x27;title&#x27;,&#x27;Unlock view&#x27;);
@@ -208,7 +210,7 @@ define(
                $(this).toggleClass(&#x27;locked&#x27;);
             });
 
-            lockPosition.attr(&#x27;title&#x27;,&#x27;Lock view&#x27;);
+            lockPosition.attr(&#x27;title&#x27;,lockTitle);
 
             controls.children().on(&#x27;mouseenter&#x27;,function(){
                 viewer.handleMouseEnter();

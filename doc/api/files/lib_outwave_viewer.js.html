@@ -345,7 +345,6 @@ define([
 
 
         this.handleMouseEnter = function(){
-            console.log(&#x27;mouse entered&#x27;);
             if(self.mouseTimeout){
                 clearTimeout(self.mouseTimeout);
             }
@@ -353,7 +352,6 @@ define([
         };
 
         this.handleMouseLeave = function(){
-            console.log(&#x27;mouse left&#x27;);
 
             if(this.mouseTimeout){
                 clearTimeout(this.mouseTimeout);            
