@@ -177,7 +177,7 @@ define([
         this.zoomFactorChangedHnd = [];
 
         //element with scrollbars
-        this.scrollbarEl = $(&#x27;&lt;div class=&quot;viewport&quot;&gt;&lt;/div&gt;&#x27;).css(this.style.horizontal()?&quot;height&quot;:&quot;width&quot;,this.options.height);
+        this.scrollbarEl = $(&#x27;&lt;div class=&quot;viewport&quot;&gt;&lt;/div&gt;&#x27;);
         
         Utils.setDimBase(this.scrollbarEl);
 
@@ -433,7 +433,7 @@ define([
         }, 
         internalHeight: function(){//height of element minus scrollbars
             var scrollbar = (this.style.horizontal()?Utils.getScrollbarDim().height:Utils.getScrollbarDim().width) + 4;
-            return this.options.height - scrollbar;
+            return (this.style.horizontal() ? this.scrollbarEl.height() : this.scrollbarEl.width()) - scrollbar;
         },
         /**
          * Internal, helper function forwarding scroll events to segment collection
@@ -476,10 +476,9 @@ define([
          * Autmatically scroll viewport so that the waveform at time is visible
          *
          * @method autoScroll
-         * @param  {Number} time Time in seconds
+         * @param  {Number} time Time(seconds) of the next cursor position
          */
         autoScroll: function(time){
-
 
             //if previous and current position are inside the viewport(visible area of waveform),
             //and cursor is left from center, nudge the scroll position twice the difference between the previous and current position
@@ -499,25 +498,38 @@ define([
             var scrollX;
             if(this.style.horizontal()){   
                 scrollX = self.scrollbarEl.scrollLeft();
+            }else{
+                scrollX = self.scrollbarEl.scrollTop();
+            }
+
+
+
+            if(this.style.horizontal()){   
                 scrollFn = function(val){
                     return self.scrollbarEl.scrollLeft(val);
                 };
             }else{
-                scrollX = self.scrollbarEl.scrollTop();
                 scrollFn = function(val){
                     return self.scrollbarEl.scrollTop(val);
                 };
             }
 
 
-           var cursorX = this.timeToInternalX(this.cursor);
 
-           var timeX = this.timeToInternalX(time);
+
+            var cursorX = this.timeToInternalX(this.cursor);
+
+
+            var timeX = this.timeToInternalX(time);
+
+            if(this.cursor === null){
+                this.cursorX = timeX;
+            }
 
 
             if(this.options.autoScrollType == &#x27;smooth&#x27;){
 
-                var targetScroll = Math.floor(x - width / 2);
+                var targetScroll = Math.floor(x - (width * this.options.autoScrollTarget));
 
                 if(((cursorX &gt;= scrollX &amp;&amp; cursorX &lt; scrollX + width)) &amp;&amp; // cursor is outside of visible area
                     (timeX &gt;= scrollX &amp;&amp; timeX &lt; scrollX + width)){
@@ -547,19 +559,51 @@ define([
                 }
             }
 
-            if(this.options.autoScrollType == &#x27;jerky&#x27;){
-                if(((cursorX &gt;= scrollX &amp;&amp; cursorX &lt; scrollX + width)) &amp;&amp; // cursor is inside of visible area
-                    (timeX &gt;= scrollX &amp;&amp; timeX &lt; scrollX + width)){
-                    
-                    
-                    //waiting for cursor to get invisible
 
 
+            if(this.options.autoScrollType == &#x27;jumpy&#x27; || this.options.autoScrollType == &#x27;jumpy-animated&#x27;){
+
+
+                var scrollTo = timeX - width * this.options.autoScrollTarget;
+
+
+                var tooQuick = (timeX - cursorX &gt; (width*0.1));
+
+
+
+                if(cursorX &gt;= scrollX &amp;&amp; cursorX &lt; scrollX + width &amp;&amp; !tooQuick){ // cursor is inside of visible area
+
+                    if((timeX &gt;= scrollX &amp;&amp; timeX &lt; scrollX + (width * this.options.autoScrollThreshold))){
+                    
+                        //waiting for cursor to get invisible
+
+                    }else{
+
+                        //animate or jump
+                        //
+                        //
+                        
+                        
+                        if(this.options.autoScrollType == &#x27;jumpy&#x27;){
+                            scrollFn(scrollTo);
+                        }else{
+                            self.scrollbarEl.stop(); 
+                            var animVal; 
+                            if(this.style.horizontal()){
+                                animVal = {scrolLeft: scrollTo};
+                            }else{
+                                animVal = {scrollTop: scrollTo};
+                            }   
+                            self.scrollbarEl.animate(animVal,this.options.autoScrollAnimationDuration);
+                        }
+
+                    }
 
 
                 }else{
+                    //jump
 
-                    scrollFn(timeX);
+                    scrollFn(scrollTo);
                 }            
             }
 

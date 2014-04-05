@@ -182,37 +182,16 @@ define(
 
 
         var defaultOptions = {
-            height: 400,
             segmentWidth: 500,
-            waveformFill: function (ctx, y1, y2, channel, played) {
-                var grad = ctx.createLinearGradient(0, y1, 0, y2);
-                if (played) {
-                    if (channel === 0) {
-                        grad.addColorStop(0, &#x27;#fff&#x27;);
-                        grad.addColorStop(1, &#x27;#ff0000&#x27;);
-                    } else {
-                        grad.addColorStop(0, &#x27;#fff&#x27;);
-                        grad.addColorStop(1, &#x27;#0000ff&#x27;);
-                    }
-                } else {
-                    if (channel === 0) {
-                        grad.addColorStop(0, &#x27;#fff&#x27;);
-                        grad.addColorStop(1, &#x27;#00ABEB&#x27;);
-                    } else {
-                        grad.addColorStop(0, &#x27;#fff&#x27;);
-                        grad.addColorStop(1, &#x27;#66CC00&#x27;);
-                    }
-                }
-                return grad;
-            },
             hover: true,
             mono: false,
-            autoScrollType: &#x27;smooth&#x27;, // smooth or jerky
+            autoScrollType: &#x27;jumpy-animated&#x27;, // smooth, jumpy or jumpy-animated
+                                                // jumpy-animated can cause problems with high zoom values
 
-            autoScrollLeftThreshold: 0.2, //[percentage of width] position to which the viewer scrolls the cursor to
-            autoscrollRightThreshold: 0.8, //[percentage of width] positon at which scrolling starts
-
-            autoScrollTimeout: 800, // milliseconds
+            autoScrollTarget: 0.2, //[percentage of width] position to which the viewer scrolls the cursor to, only applies to jumpy autoscroll
+            autoScrollThreshold: 0.9, //[percentage of width] positon at which scrolling starts, only applies to jumpy autoscroll
+            autoScrollAnimationDuration: 400, // [ms]
+            autoScrollTimeout: 800, // [milliseconds]
             zoomChangeFactor: 2, // number by which the zoom value gets divided/multiplied when zooming in/out
         };
 
