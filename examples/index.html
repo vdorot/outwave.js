@@ -262,6 +262,16 @@ require([
                 
                 var textarea = $('<textarea style="width: 99%; height: 99%; resize: none;"></textarea>');
 
+
+                // highlighting of current time span
+                textarea.on('focus',function(){
+                    span.activate();
+                });
+
+                textarea.on('blur',function(){
+                    span.deactivate();
+                });
+
                 textarea.val("text text text text");
 
                 annotEl.append(textarea);
@@ -307,9 +317,13 @@ require([
 
             //vytvorenie nahodnych anotacii
 
-            var end = 15;
 
-            spanCollection.addTimeSpan(end); // pridanie anotacie
+
+            spanCollection.addTimeSpan(10); // pridanie anotacie
+
+            spanCollection.addTimeSpan(20); 
+            spanCollection.addTimeSpan(30);
+            spanCollection.addTimeSpan(40);          
            
 
         });

@@ -104,6 +104,7 @@
     background-clip: padding-box;
 }
 
+
 .outwave .timespan-end.continuous{
     border-radius: 0;
 }
@@ -137,6 +138,19 @@
 .outwave .timespan-back.end-missing div{
     margin-bottom: 0;
 }
+
+.outwave .timespan-start.active{
+    background-color: rgba(0,255,0,0.4);
+}
+
+.outwave .timespan-end.active{
+    background-color: rgba(0,255,0,0.4);
+}
+
+.outwave .timespan-back.active div{
+    background-color: #C9FFC9;
+}
+
 
 .outwave.horizontal .timeline-marker{
     background-repeat: no-repeat;
