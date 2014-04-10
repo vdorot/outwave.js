@@ -526,10 +526,10 @@ define([&#x27;./utils&#x27;],function(Utils){
 			    	if(this.cursor !== null &amp;&amp; this.cursor &gt;= this.xPos &amp;&amp; this.cursor &lt; this.xPos+this.width){
 
 
-						this.ctx.fillStyle = styleFn(this.ctx,p1,p2,styleChannel,true);
+						this.ctx.fillStyle = styleFn(this.ctx,p1,p2,styleChannel,this.dataFile.getChannelCnt(),true);
 						this.ctx.fillRect(0,yRange[0],this.cursor-this.xPos,yRange[1]);
 
-						this.ctx.fillStyle = styleFn(this.ctx,p1,p2,styleChannel,false);
+						this.ctx.fillStyle = styleFn(this.ctx,p1,p2,styleChannel,this.dataFile.getChannelCnt(),false);
 
 						this.ctx.fillRect(this.cursor-this.xPos,yRange[0],this.width,yRange[1]);
 
@@ -539,7 +539,7 @@ define([&#x27;./utils&#x27;],function(Utils){
 
 			    		var played = this.cursor &amp;&amp; (this.cursor &gt; this.xPos);
 
-					    this.ctx.fillStyle = styleFn(this.ctx,p1,p2,styleChannel,played);
+					    this.ctx.fillStyle = styleFn(this.ctx,p1,p2,styleChannel,this.dataFile.getChannelCnt(),played);
 
 					    this.ctx.fillRect(0,yRange[0],this.width,yRange[1]);
 					}

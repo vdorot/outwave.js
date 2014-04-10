@@ -181,26 +181,26 @@ define([&#x27;./utils&#x27;],function(Utils){
             return $(&#x27;&lt;div class=&quot;timespan-back&quot;&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;&#x27;);
         };
 
-        this.waveformFill = function(ctx,p1,p2,channel,played){
+        this.waveformFill = function(ctx,p1,p2,channel,channelCnt,played){
 
             //channel: channel id (0..n-1)
             //played: this part has been played, cursor is further
             var grad = ctx.createLinearGradient(p1.x,p1.y,p2.x,p2.y);
                 if(played){
                     if(channel === 0){
-                        grad.addColorStop(0, &#x27;#fff&#x27;);
-                        grad.addColorStop(1, &#x27;#ff0000&#x27;);
+                        grad.addColorStop(0, &#x27;#6ED7FF&#x27;);
+                        grad.addColorStop(1, &#x27;#00A0DB&#x27;);
                     }else{
-                        grad.addColorStop(0, &#x27;#fff&#x27;);
-                        grad.addColorStop(1, &#x27;#0000ff&#x27;);
+                        grad.addColorStop(0, &#x27;#B0FF61&#x27;);
+                        grad.addColorStop(1, &#x27;#69D100&#x27;);
                     }
                 }else{
                     if(channel === 0){
-                        grad.addColorStop(0, &#x27;#fff&#x27;);
-                        grad.addColorStop(1, &#x27;#00ABEB&#x27;);
+                        grad.addColorStop(0, &#x27;#6ED7FF&#x27;);
+                        grad.addColorStop(1, &#x27;#0084B5&#x27;);
                     }else{
-                        grad.addColorStop(0, &#x27;#fff&#x27;);
-                        grad.addColorStop(1, &#x27;#66CC00&#x27;);
+                        grad.addColorStop(0, &#x27;#B0FF61&#x27;);
+                        grad.addColorStop(1, &#x27;#57AD00&#x27;);
                     }               
                 }
                 return grad;
@@ -223,7 +223,11 @@ define([&#x27;./utils&#x27;],function(Utils){
         };
 
         this.lockPositionControl = function(){
-            return $(&#x27;&lt;div class=&quot;control lock-position&quot;&gt;&lt;a href=&quot;#&quot;&gt;a&lt;/a&gt;&#x27;);
+            return $(&#x27;&lt;div class=&quot;control lock-position&quot;&gt;&lt;a href=&quot;#&quot;&gt;Lock position&lt;/a&gt;&#x27;);
+        };
+
+        this.channelsControl = function(){
+            return $(&#x27;&lt;div class=&quot;control channels&quot;&gt;&lt;a href=&quot;#&quot;&gt;Channels&lt;/a&gt;&#x27;);
         };
 
         return this;

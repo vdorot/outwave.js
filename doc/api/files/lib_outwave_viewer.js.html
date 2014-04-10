@@ -186,12 +186,11 @@ define([
         }
 
         this.containerEl.append(this.scrollbarEl);
-        var self = this;
 
         this.width = this.scrollbarEl.width();
 
 
-        this.segmentsEl = $(&#x27;&lt;div style=&quot;position: relative&quot;;&gt;&lt;/div&gt;&#x27;);
+        this.segmentsEl = $(&#x27;&lt;div style=&quot;position: relative;&quot; class=&quot;segments&quot;&gt;&lt;/div&gt;&#x27;);
         this.segmentsEl.height(this.internalHeight());
 
         this.scrollbarEl.append(this.segmentsEl);
@@ -621,7 +620,7 @@ define([
                 this.removeCursor();
                 return;
             }  
-            if(!this.isMouseOver &amp;&amp; !this.isScrollLocked){
+            if(this.options.autoScroll &amp;&amp; !this.isMouseOver &amp;&amp; !this.isScrollLocked){
                 try{
                     this.autoScroll(time);
                 }catch(e){
@@ -911,6 +910,7 @@ define([
         handleZoomed: function(){
 
             this.segments.setZoom(this.zoom); // changes container length
+            this.updateCursor();
             var i;
             if(this.zoomChangedHnd){
                 for(i in this.zoomChangedHnd){
@@ -942,7 +942,11 @@ define([
          */
         setMono: function(on){
             if(on === undefined) on = true;
+            if(this.options.mono === on){
+                return;
+            }
             this.options.mono = on;
+
             this.dataFile.setMono(on);
             this.segments.rebuild();
         }, 

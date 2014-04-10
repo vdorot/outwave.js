@@ -157,10 +157,21 @@ define(
 
             var lockPosition = style.lockPositionControl();
 
+            var channels = style.channelsControl();
 
 
+            controls.append(zoomIn,zoomOut);
 
-            controls.append(zoomIn,zoomOut,lockPosition);
+
+            if(viewer.options.autoScroll){
+                controls.append(lockPosition);
+            }
+
+            if(viewer.getDataFile().getChannelCnt() &gt; 1){
+                controls.append(channels);
+                channels.addClass(&#x27;left-3&#x27;);
+                lockPosition.addClass(&#x27;left-4&#x27;);
+            }
 
             container.prepend(controls);
 
@@ -184,7 +195,10 @@ define(
                 lockPosition = lockPosition.find(&#x27;a&#x27;);
             }
 
-            console.log(lockPosition);
+            if(channels.find(&#x27;a&#x27;).length){
+                channels = channels.find(&#x27;a&#x27;);
+            }
+
 
             zoomIn.click(function(event){
                 event.preventDefault();
@@ -196,7 +210,30 @@ define(
                 viewer.zoomOut();
             });
 
-            var lockTitle = &quot;Lock view - disable autoscroll while playing&quot;;
+            var channelsAll = &quot;All channels visible&quot;;
+            var channelsMono = &quot;Mixed channels to mono&quot;;
+
+            if(viewer.options.mono){
+                channels.attr(&#x27;title&#x27;,channelsMono).addClass(&#x27;mono&#x27;);
+            }else{
+                channels.attr(&#x27;title&#x27;,channelsAll);
+            }
+
+
+
+            channels.click(function(event){
+                event.preventDefault();
+                if($(this).hasClass(&#x27;mono&#x27;)){
+                    $(this).removeClass(&#x27;mono&#x27;).attr(&#x27;title&#x27;,channelsAll);
+                    viewer.setMono(false);
+                }else{
+                    $(this).addClass(&#x27;mono&#x27;).attr(&#x27;title&#x27;,channelsMono);
+                    viewer.setMono(true);
+                }
+            });
+
+
+            var lockTitle = &quot;Autoscroll enabled&quot;;
 
             lockPosition.click(function(event){
                 event.preventDefault();
@@ -204,7 +241,7 @@ define(
                 $(this).attr(&#x27;title&#x27;,lockTitle);
                 viewer.setScrollLocked(false);
                }else{
-                $(this).attr(&#x27;title&#x27;,&#x27;Unlock view&#x27;);
+                $(this).attr(&#x27;title&#x27;,&#x27;Position locked&#x27;);
                 viewer.setScrollLocked(true);
                }
                $(this).toggleClass(&#x27;locked&#x27;);
