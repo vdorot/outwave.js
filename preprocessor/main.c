@@ -223,7 +223,7 @@ void write_sample(short int s, int sample_size, FILE * out){
 }
 
 void write_frame(short int min[], short int max[], int channels, FILE *out, int mix, int sample_size){
-	//printf("%d\n",max[0]);
+
 	if(mix){
 		short int smax = 0;
 		short int smin = 0;
@@ -274,7 +274,7 @@ unsigned int downsample(SNDFILE *snd,FILE * out, double fpf ,int channels,int mi
 	reset_bounds(sum2max,sum2min,channels);
 
 
-	printf("FPS: %f\n",fpf);
+	printf("Downsampling factor: %f\n",fpf);
 
 
 	int next_output = ceil(fpf);
@@ -457,7 +457,6 @@ int main(int argc, char **argv)
            int         seekable ;
        } SF_INFO ;*/
 
-		//do magic
         printf("Frames: %ld\n",sfinfo.frames);
         printf("Sample rate: %d\n",sfinfo.samplerate);
 
@@ -504,11 +503,6 @@ int main(int argc, char **argv)
 	if(snd){
 		sf_close(snd);
 	}
-
-
-
-	printf("Hurray\n");
-
  
 	if(args.input != NULL){
 		fclose(input_f);
