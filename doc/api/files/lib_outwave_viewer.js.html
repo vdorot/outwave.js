@@ -157,7 +157,7 @@ define([
      */
     var Viewer = function(container,file,options){
         var self = this; // keep this in scope
-        this.zoom = 40;
+        this.zoom = options.zoom;
 
         container = $(container);
 
@@ -229,7 +229,7 @@ define([
 
         this.hoverEl = this.options.style.hover();
         this.hoverDim = Utils.getElementDimensions(this.hoverEl);
-        this.hoverEl.css({position: &quot;absolute&quot;, display: &quot;block&quot;,&#x27;z-index&#x27;: &#x27;100&#x27;,&#x27;pointer-events&#x27;: &#x27;none&#x27;});
+        this.hoverEl.css({position: &quot;absolute&quot;, display: &quot;none&quot;,&#x27;z-index&#x27;: &#x27;100&#x27;,&#x27;pointer-events&#x27;: &#x27;none&#x27;});
 
         this.foregroundEl.append(this.hoverEl);
 
@@ -458,18 +458,21 @@ define([
             var time = this.cursor;
             this.segments.setCursor(time);
 
+            if(time !== null){
+                var css = {display: &quot;block&quot;};
 
-            var css = {display: &quot;block&quot;};
+                var px = this.timeToInternalX(time);
 
-            var px = this.timeToInternalX(time);
+                if(this.options.style.horizontal()){
+                    css.left = px - this.cursorDim.w / 2;
+                }else{
+                    css.top = px - this.cursorDim.h / 2;
+                }
 
-            if(this.options.style.horizontal()){
-                css.left = px - this.cursorDim.w / 2;
+                this.cursorEl.css(css);
             }else{
-                css.top = px - this.cursorDim.h / 2;
+                this.cursorEl.hide()
             }
-
-            this.cursorEl.css(css);
         },
         /**
          * Autmatically scroll viewport so that the waveform at time is visible
@@ -733,11 +736,13 @@ define([
          */
         zoomIn: function(mult){
             var time = this.getTimeInMiddle();
+            var cur = this.zoom;
             this._zoomIn(mult);
+            if(cur !== this.zoom){
+                this.setTimeInMiddle(time);
             
-            this.setTimeInMiddle(time);
-
-            this.handleZoomed();
+                this.handleZoomed();
+            }
         },
         /**
          * Zoom out
@@ -748,10 +753,12 @@ define([
         zoomOut: function(div){
 
             var time = this.getTimeInMiddle();
+            var cur = this.zoom;
             this._zoomOut(div);
-            this.setTimeInMiddle(time);
-
-            this.handleZoomed();
+            if(cur !== this.zoom){
+                this.setTimeInMiddle(time);
+                this.handleZoomed();
+            }
         },
         /**
          * Get zoom
@@ -762,9 +769,19 @@ define([
         getZoom: function(){
             return this.dataFile.getSampleRate()/this.getZoomFactor();
         },
+        normalizeZoom: function(zoom){
+            if(this.options.maxZoom !== null){
+                zoom = Math.min(zoom,this.options.maxZoom);
+            }
 
+            if(this.options.minZoom !== null){
+                zoom = Math.max(zoom,this.options.minZoom);
+            }
+            return zoom;
+        },
         //internal use, doesn&#x27;t fire event handlers
         _setZoom: function(zoom){
+            zoom = this.normalizeZoom(zoom);
             var zoomFactor = this.dataFile.getSampleRate() / zoom; 
             this._setZoomFactor(zoomFactor);
         },
@@ -776,6 +793,7 @@ define([
          * @param {Boolean} disableScroll Don&#x27;t automatically update scroll position
          */
         setZoom: function(zoom){
+            zoom = this.normalizeZoom(zoom);
             var zoomFactor = this.dataFile.getSampleRate() / zoom; 
             this.setZoomFactor(zoomFactor);
         },
@@ -795,6 +813,7 @@ define([
         },
         /**
          * Return position at mouse coodinates
+         *
          * @param  {Number} pageX X coordinate relative to page
          * @param  {Number} pageY Y coordinate relative to page
          * @return {Number}       Time in seconds
@@ -859,20 +878,25 @@ define([
 
             //get time under cursor            
             var time = this.getTimeFromMouseCoords(this.lastMouseEvent.pageX, this.lastMouseEvent.pageY);  
-
+            var cur = this.zoom;
             zoomFn.call(this);
 
-            //set viewport scroll so that time is under cursor
-            this.setTimeAtMouseCoords(time,this.lastMouseEvent.pageX, this.lastMouseEvent.pageY);
+            if(cur !== this.zoom){ // zoom value actually changed
+                //set viewport scroll so that time is under cursor
+                this.setTimeAtMouseCoords(time,this.lastMouseEvent.pageX, this.lastMouseEvent.pageY);
 
-            this.handleZoomed();   
+                this.handleZoomed();   
 
-            this.handleScrolled();        
+                this.handleScrolled();    
+            }    
             
         },
 
         //internal use, doesn&#x27;t fire event handlers
         _setZoomFactor: function(zoom){
+            if(zoom === this.zoom){
+                return;
+            }
             this.zoom = zoom;
             this.updateDimensions();
         },
@@ -884,11 +908,14 @@ define([
          *
          * The resulting zoom levels are therefore dependent on the sample rate of the data file.
          *
+         * Min and max values are not considered
          * @method  setZoomFactor
          * @param {Number} zoom Zoom factor
          */
         setZoomFactor: function(zoom){
-
+            if(zoom === this.zoom){
+                return;
+            }
             this._setZoomFactor(zoom);
 
             this.handleZoomed();

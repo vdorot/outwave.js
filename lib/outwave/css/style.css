@@ -205,6 +205,7 @@
     font-size: 28px; /* size of buttons is relative to font size*/
 
     position: absolute;
+    top: 0.05em;
     z-index: 15;
 
     opacity: 0.8;

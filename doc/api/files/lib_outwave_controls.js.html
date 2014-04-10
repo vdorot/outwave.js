@@ -182,11 +182,12 @@ define(
 
 
 
-
+            var zoomInCont = zoomIn;
             if(zoomIn.find(&#x27;a&#x27;).length){
                 zoomIn = zoomIn.find(&#x27;a&#x27;);
             }
 
+            var zoomOutCont = zoomOut;
             if(zoomOut.find(&#x27;a&#x27;).length){
                 zoomOut = zoomOut.find(&#x27;a&#x27;);
             }
@@ -208,6 +209,18 @@ define(
             zoomOut.click(function(event){
                 event.preventDefault();
                 viewer.zoomOut();
+            });
+
+
+            viewer.onZoomed(function(zoomVal){
+
+                zoomInCont.add(zoomOutCont).removeClass(&#x27;disabled&#x27;);
+                if(viewer.options.maxZoom === zoomVal){
+                    zoomInCont.addClass(&#x27;disabled&#x27;);
+                }
+                if(viewer.options.minZoom === zoomVal){
+                    zoomOutCont.addClass(&#x27;disabled&#x27;);
+                }
             });
 
             var channelsAll = &quot;All channels visible&quot;;
