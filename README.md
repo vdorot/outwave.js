@@ -39,8 +39,47 @@ The resulting files containg waveform data can be created with configurable samp
 
 ###Browser part
 
+Copy `build/outwave` into your webhost and include the following resources(your paths may vary): 
+```HTML
+<link rel="stylesheet" type="text/css" href="outwave/css/layout.css">
+<link rel="stylesheet" type="text/css" href="outwave/css/style.css">
 
-The UI component is expected to change, for up-to-date information on usage, see files in the examples folder.
+<script type="text/javascript" src="outwave/outwave.min.js"></script>
+```
+jQuery is a requirement, using the global $ variable.
+
+It is also possible to load Outwave through require.js, in this case you don't need to explicitly link any js files.
+
+#####Basic waveform viewer
+
+```HTML
+<div style="width: 100%; height: 100px;" id="waveform"></div>
+<script>
+$(function(){
+
+  var file = "path-to-waveform-file.wf"
+
+  var options = {}
+
+  Outwave(file,$("#waveform"),options,function(viewer){
+    //waveform has loaded
+    
+    //viewer is an object representing the waveform viewer
+    //use it to manipulate it and listen to events
+    
+    viewer.setZoom(200); // 200 pixels per second
+    
+    viewer.onClick(function(time){
+      console.log('Clicked on waveform at position:, time, 's');
+    });
+    
+  });
+  
+});
+</script>
+```
+
+For advanced use cases, explore the examples folder.
 
 An API reference generated from source is available in the doc/api directory. 
 
