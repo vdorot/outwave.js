@@ -130,10 +130,6 @@ See LICENSE.txt for licensing information.
 define([
 ],function(){
 
-    getOffset = function( elem ) {
-
-        return $(elem).offset();
-    };
 
     /**
      * @module TimeSpan
@@ -178,7 +174,7 @@ define([
              */
             this.tickScroll = function(){
 
-                var offset = getOffset(viewportElement);
+                var offset = viewer.viewportOffset();
                 var width = viewportElement.width();
                 var height = viewportElement.height();
 
@@ -238,7 +234,9 @@ define([
 
                 var parent = $(this).parent();
 
-                var ofs = getOffset(parent[0]);
+                console.log(parent);
+
+                var ofs = viewer.internalOffset();
 
                 var startPos;
                 if(self.style.horizontal()){
@@ -281,6 +279,7 @@ define([
                     self.scrollCursorX = e.pageX;
                     self.scrollCursorY = e.pageY;
 
+                    var ofs = viewer.internalOffset();
 
                     var element = document.elementFromPoint(e.pageX - window.pageXOffset, e.pageY - window.pageYOffset);
 
@@ -291,9 +290,6 @@ define([
                         self.startAutoScroll();
                     }
 
-
-
-                    var ofs = getOffset(parent[0]);
 
                     var endPos;
                     if(typeof e.pageX == &#x27;undefined&#x27;){

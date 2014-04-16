@@ -145,8 +145,8 @@ define([&#x27;./utils&#x27;],function(Utils){
         this.ORIENTATION_HORIZONTAL = 1;
         this.ORIENTATION_VERTICAL = 2;
 
-        //this.orientation = this.ORIENTATION_VERTICAL;
-        this.orientation = this.ORIENTATION_HORIZONTAL;
+        this.orientation = this.ORIENTATION_VERTICAL;
+        //this.orientation = this.ORIENTATION_HORIZONTAL;
 
         this.horizontal = function(){return this.orientation == this.ORIENTATION_HORIZONTAL;};
         this.vertical = function(){return this.orientation == this.ORIENTATION_VERTICAL;};
@@ -158,7 +158,7 @@ define([&#x27;./utils&#x27;],function(Utils){
         };
 
         this.cursor = function(time){
-                return $(&#x27;&lt;div class=&quot;cursor&quot;&gt;&lt;/div&gt;&#x27;).click(function(){alert(&#x27;cursor click&#x27;);});
+                return $(&#x27;&lt;div class=&quot;cursor&quot;&gt;&lt;/div&gt;&#x27;);
         };
 
         this.hover = function(time){
