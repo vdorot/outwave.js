@@ -542,7 +542,7 @@
             "module": "Outwave",
             "namespace": "",
             "file": "lib/outwave/outwave.js",
-            "line": 85,
+            "line": 87,
             "description": "Waveform viewer loader\nLoads datafile and creates a waveform viewer instance. Adds control buttons if enabled in options.\nIf no errors occur onLoad is called with the viewer instance as an argument\n\nUse without new keyword",
             "is_constructor": 1,
             "params": [
@@ -982,7 +982,7 @@
             "line": 124,
             "description": "Merge mergingSpan with span before",
             "itemtype": "method",
-            "name": "mergePrev",
+            "name": "mergeWithPrev",
             "params": [
                 {
                     "name": "mergingSpan",
@@ -995,7 +995,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 175,
+            "line": 176,
             "description": "Split spans at a given time position",
             "itemtype": "method",
             "name": "split",
@@ -1011,7 +1011,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 246,
+            "line": 247,
             "description": "Remove time span\n\nAbstract method",
             "itemtype": "method",
             "name": "removeTimeSpan",
@@ -1027,7 +1027,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 259,
+            "line": 260,
             "description": "Update zoom",
             "itemtype": "method",
             "name": "setZoom",
@@ -1043,7 +1043,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 272,
+            "line": 273,
             "description": "Set event handler for new spans created",
             "itemtype": "method",
             "name": "onTimeSpanCreated",
@@ -1059,7 +1059,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 75,
+            "line": 77,
             "description": "Get back reference to collection",
             "itemtype": "method",
             "name": "getCollection",
@@ -1072,7 +1072,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 84,
+            "line": 86,
             "description": "adds arbitrary data to span",
             "itemtype": "method",
             "name": "setData",
@@ -1088,7 +1088,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 93,
+            "line": 95,
             "description": "Get data associated with this time span",
             "itemtype": "method",
             "name": "getData",
@@ -1101,7 +1101,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 102,
+            "line": 104,
             "description": "Set event handler for splitting time spans\n\nprevSpan - Time span created to the left of splitting position\nnextSpan - Time span created to the right of splitting position",
             "itemtype": "method",
             "name": "onSplit",
@@ -1117,7 +1117,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 114,
+            "line": 116,
             "description": "Fire event handler",
             "itemtype": "method",
             "name": "handleSplit",
@@ -1138,7 +1138,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 126,
+            "line": 128,
             "description": "Set event handler for merging\n\nprevSpan - Time span that was merged with this object\ncreatedSpan - New time span created as a result of merging",
             "itemtype": "method",
             "name": "onMerged",
@@ -1154,7 +1154,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 138,
+            "line": 140,
             "description": "Fire event handler",
             "itemtype": "method",
             "name": "handleMerged",
@@ -1175,7 +1175,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 150,
+            "line": 152,
             "description": "Get minimum length of span",
             "itemtype": "method",
             "name": "getMinLength",
@@ -1188,7 +1188,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 159,
+            "line": 161,
             "description": "Set minimum length of span",
             "itemtype": "method",
             "name": "setMinLength",
@@ -1204,7 +1204,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 167,
+            "line": 169,
             "description": "Sets previous span in linked list\n\nThis function should not be used directly, use collection methods instead",
             "itemtype": "method",
             "name": "setPrev",
@@ -1220,7 +1220,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 178,
+            "line": 183,
             "description": "Sets next span in linked list\n\nThis function should not be used directly, use collection methods instead",
             "itemtype": "method",
             "name": "setNext",
@@ -1236,7 +1236,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 188,
+            "line": 196,
             "description": "Returns previous span in linked list",
             "itemtype": "method",
             "name": "getPrev",
@@ -1249,7 +1249,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 197,
+            "line": 205,
             "description": "Returns next span in linked list",
             "itemtype": "method",
             "name": "getNext",
@@ -1262,7 +1262,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 208,
+            "line": 216,
             "description": "Compute the interseciton of 2 intervals\n\nInterval are represented as an object:\n\n {s: Number, e: Number}\n\n s - start\n\n e - end",
             "itemtype": "method",
             "name": "intersectIntervals",
@@ -1287,7 +1287,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 232,
+            "line": 240,
             "description": "Limits value to range defined by interval",
             "itemtype": "method",
             "name": "applyInterval",
@@ -1312,7 +1312,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 246,
+            "line": 254,
             "description": "Check if value is inside interval\n\nIf interval is not set, the value is not considered to be inside",
             "itemtype": "method",
             "name": "inInterval",
@@ -1337,7 +1337,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 259,
+            "line": 267,
             "description": "Get range of times this span can start at",
             "itemtype": "method",
             "name": "getStartLimits",
@@ -1350,7 +1350,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 271,
+            "line": 279,
             "description": "Get range of times this span can end at",
             "itemtype": "method",
             "name": "getEndLimits",
@@ -1363,7 +1363,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 283,
+            "line": 291,
             "description": "Can this span start at a given time?",
             "itemtype": "method",
             "name": "canStart",
@@ -1383,7 +1383,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 294,
+            "line": 302,
             "description": "Can this span end at a given time?",
             "itemtype": "method",
             "name": "canEnd",
@@ -1403,7 +1403,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 305,
+            "line": 313,
             "description": "Sets start time of span",
             "itemtype": "method",
             "name": "setStart",
@@ -1419,7 +1419,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 321,
+            "line": 329,
             "description": "Sets end time of span",
             "itemtype": "method",
             "name": "setEnd",
@@ -1435,7 +1435,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 336,
+            "line": 344,
             "description": "Get start time",
             "itemtype": "method",
             "name": "getStart",
@@ -1448,7 +1448,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 345,
+            "line": 353,
             "description": "Get starting position in pixels",
             "itemtype": "method",
             "name": "getStartX",
@@ -1461,7 +1461,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 354,
+            "line": 362,
             "description": "Get ending position in pixels",
             "itemtype": "method",
             "name": "getEndX",
@@ -1474,7 +1474,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 363,
+            "line": 371,
             "description": "Get end time",
             "itemtype": "method",
             "name": "getEnd",
@@ -1487,7 +1487,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 372,
+            "line": 380,
             "description": "Update element position on screen",
             "itemtype": "method",
             "name": "updatePositon",
@@ -1496,7 +1496,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 461,
+            "line": 469,
             "description": "Render elements",
             "itemtype": "method",
             "name": "render",
@@ -1505,7 +1505,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 514,
+            "line": 522,
             "description": "Set zoom",
             "itemtype": "method",
             "name": "setZoom",
@@ -1521,7 +1521,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 525,
+            "line": 533,
             "description": "Remove elements",
             "itemtype": "method",
             "name": "unRender",
@@ -1530,7 +1530,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 553,
+            "line": 561,
             "description": "Set event handler for position changes",
             "itemtype": "method",
             "name": "onPositionChanged",
@@ -1546,8 +1546,40 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 562,
-            "description": "Set event handler that is called after the span gets removed",
+            "line": 571,
+            "description": "Set event handler for changes of neighboring time spans",
+            "itemtype": "method",
+            "name": "onNeighborChanged",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Function()",
+                    "type": "Function"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 579,
+            "description": "Set event handler for destruction(after splitting, merging or removing)",
+            "itemtype": "method",
+            "name": "onDestroyed",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "Function()",
+                    "type": "Function"
+                }
+            ],
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 588,
+            "description": "Set event handler that is called after the span gets removed by calling remove()\n\nThis event is triggered before the destroyed event",
             "itemtype": "method",
             "name": "onRemoved",
             "params": [
@@ -1562,7 +1594,16 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 571,
+            "line": 599,
+            "description": "Fire onDestroyed handler",
+            "itemtype": "method",
+            "name": "handleDestroyed",
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 608,
             "description": "Fire onRemoved handler",
             "itemtype": "method",
             "name": "handleRemoved",
@@ -1571,7 +1612,16 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 580,
+            "line": 616,
+            "description": "Merge this and left neighbor",
+            "itemtype": "method",
+            "name": "mergeWithPrev",
+            "class": "TimeSpan",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span.js",
+            "line": 625,
             "description": "Remove timespan from collection",
             "itemtype": "method",
             "name": "remove",
@@ -1580,7 +1630,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span.js",
-            "line": 588,
+            "line": 633,
             "description": "Get jquery colletion of all elements used to mark time span",
             "itemtype": "method",
             "name": "getElements",
@@ -1593,7 +1643,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 66,
+            "line": 65,
             "description": "Enable or disable mono mode\n\nIn mono mode, the DataFile acts as if there was only one channel, summarising channels together",
             "itemtype": "method",
             "name": "setMono",
@@ -1609,7 +1659,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 83,
+            "line": 82,
             "description": "Get version of loaded waveform file",
             "itemtype": "method",
             "name": "getVersion",
@@ -1622,7 +1672,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 92,
+            "line": 91,
             "description": "Get number of channels in file",
             "itemtype": "method",
             "name": "getChannelCnt",
@@ -1635,7 +1685,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 109,
+            "line": 108,
             "description": "Get sample size",
             "itemtype": "method",
             "name": "getSampleSize",
@@ -1648,7 +1698,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 117,
+            "line": 116,
             "description": "Get sample rate",
             "itemtype": "method",
             "name": "getSampleRate",
@@ -1661,7 +1711,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 126,
+            "line": 125,
             "description": "Get number of frames in file\n\nFrame - samples(min,max) for all channels",
             "itemtype": "method",
             "name": "getFrameCnt",
@@ -1674,7 +1724,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 137,
+            "line": 136,
             "description": "Get length of waveform",
             "itemtype": "method",
             "name": "getLength",
@@ -1687,7 +1737,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 146,
+            "line": 145,
             "description": "Translate pixel position to time",
             "itemtype": "method",
             "name": "px2time",
@@ -1712,7 +1762,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 160,
+            "line": 159,
             "description": "Translate time into pixel position",
             "itemtype": "method",
             "name": "time2px",
@@ -1737,7 +1787,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 175,
+            "line": 174,
             "description": "Get start of region being summarized\n\nUsed for getting samples with different zoom levels",
             "itemtype": "method",
             "name": "sampleStart",
@@ -1762,7 +1812,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 188,
+            "line": 187,
             "description": "Get end of region being summarized\n\nUsed for getting samples with different zoom levels",
             "itemtype": "method",
             "name": "sampleEnd",
@@ -1787,7 +1837,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 201,
+            "line": 200,
             "description": "Get raw sample without taking zoom into account",
             "itemtype": "method",
             "name": "getRawSample",
@@ -1812,7 +1862,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 232,
+            "line": 231,
             "description": "Get raw sample in mono mode\n\nMultiple channels are summarized by computing minimum and maximum across all of them",
             "itemtype": "method",
             "name": "getRawSampleMono",
@@ -1832,7 +1882,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 252,
+            "line": 251,
             "description": "Get sample in zoomed waveform",
             "itemtype": "method",
             "name": "getSample",
@@ -1862,7 +1912,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 286,
+            "line": 285,
             "description": "Loads waveform file from URL and returns a DataFile instance\n\nUses jQuery AJAX\n\nIf DataView is not available in the browser, it tries to look for jDataView, which can be used as a compatibility layer.\njDataView is much slower though.",
             "itemtype": "method",
             "name": "loadUrl",
@@ -2406,7 +2456,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 306,
+            "line": 302,
             "description": "Translate time to pixels",
             "itemtype": "method",
             "name": "timeToInternalX",
@@ -2426,7 +2476,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 319,
+            "line": 315,
             "description": "Translate pixels to time",
             "itemtype": "method",
             "name": "internalXToTime",
@@ -2446,7 +2496,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 350,
+            "line": 345,
             "description": "Internal, helper function forwarding scroll events to segment collection",
             "itemtype": "method",
             "name": "updateSegments",
@@ -2455,7 +2505,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 365,
+            "line": 360,
             "description": "Update elements to reflect cursor position",
             "itemtype": "method",
             "name": "updateCursor",
@@ -2464,7 +2514,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 390,
+            "line": 385,
             "description": "Autmatically scroll viewport so that the waveform at time is visible",
             "itemtype": "method",
             "name": "autoScroll",
@@ -2480,7 +2530,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 527,
+            "line": 522,
             "description": "Set cursor position",
             "itemtype": "method",
             "name": "setCursor",
@@ -2496,7 +2546,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 550,
+            "line": 545,
             "description": "Removes cursor, use when playback is stopped",
             "itemtype": "method",
             "name": "removeCursor",
@@ -2505,7 +2555,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 561,
+            "line": 556,
             "description": "Sets (replaces) click handler",
             "itemtype": "method",
             "name": "onClick",
@@ -2521,7 +2571,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 571,
+            "line": 566,
             "description": "Fires configurable click handler",
             "itemtype": "method",
             "name": "clicked",
@@ -2530,6 +2580,11 @@
                     "name": "time",
                     "description": "Position in seconds computed from mouse coordinates",
                     "type": "Number"
+                },
+                {
+                    "name": "mouseEvent",
+                    "description": "Mouse event",
+                    "type": "MouseEvent"
                 }
             ],
             "class": "Viewer",
@@ -2537,7 +2592,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 582,
+            "line": 578,
             "description": "Updates dimensions of HTML elements",
             "itemtype": "method",
             "name": "updateDimensions",
@@ -2546,7 +2601,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 596,
+            "line": 592,
             "description": "Set scroll position",
             "params": [
                 {
@@ -2560,7 +2615,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 607,
+            "line": 603,
             "description": "Add handler for scroll change",
             "itemtype": "method",
             "name": "onScroll",
@@ -2576,7 +2631,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 615,
+            "line": 611,
             "description": "Call scroll event handlers",
             "itemtype": "method",
             "name": "handleScrolled",
@@ -2585,7 +2640,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 644,
+            "line": 640,
             "description": "Zoom in",
             "itemtype": "method",
             "name": "zoomIn",
@@ -2601,7 +2656,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 660,
+            "line": 656,
             "description": "Zoom out",
             "itemtype": "method",
             "name": "zoomOut",
@@ -2617,7 +2672,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 676,
+            "line": 672,
             "description": "Get zoom",
             "itemtype": "method",
             "name": "getZoom",
@@ -2630,7 +2685,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 701,
+            "line": 697,
             "description": "Set zoom",
             "itemtype": "method",
             "name": "setZoom",
@@ -2651,7 +2706,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 713,
+            "line": 709,
             "description": "Get current zoom value\n\nThe zoom factor determines how many samples in the preprocessed file\nare collapsed into one sample(pixel column) on the screen.\n\nThe resulting zoom levels are therefore dependent on the sample rate of the data file.",
             "itemtype": "method",
             "name": "getZoomFactor",
@@ -2664,7 +2719,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 727,
+            "line": 723,
             "description": "Return position at mouse coodinates",
             "params": [
                 {
@@ -2687,7 +2742,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 761,
+            "line": 757,
             "description": "Return position in the middle of viewport",
             "return": {
                 "description": "Time in seconds",
@@ -2698,7 +2753,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 775,
+            "line": 771,
             "description": "Scroll viewport so that the middle is on time",
             "params": [
                 {
@@ -2712,7 +2767,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 816,
+            "line": 812,
             "description": "Set zoom factor\n\nThe zoom factor determines how many samples in the preprocessed file\nare collapsed into one sample(pixel column) on the screen.\n\nThe resulting zoom levels are therefore dependent on the sample rate of the data file.\n\nMin and max values are not considered",
             "itemtype": "method",
             "name": "setZoomFactor",
@@ -2728,7 +2783,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 836,
+            "line": 832,
             "description": "Set event handler for zoom changes",
             "itemtype": "method",
             "name": "onZoomed",
@@ -2744,7 +2799,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 845,
+            "line": 841,
             "description": "Fire zoom change events",
             "itemtype": "method",
             "name": "handleZoomed",
@@ -2753,7 +2808,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 866,
+            "line": 862,
             "description": "Set event handler for zoom factor changes",
             "itemtype": "method",
             "name": "onZoomFactorChanged",
@@ -2769,7 +2824,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 875,
+            "line": 871,
             "description": "Enable or disable mono mode\n\nIn mono mode, all channels are summarised into one",
             "itemtype": "method",
             "name": "setMono",
@@ -2785,7 +2840,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 893,
+            "line": 889,
             "description": "Returns jQuery element which is used for native scrollbars",
             "itemtype": "method",
             "name": "getViewportElement",
@@ -2798,7 +2853,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 902,
+            "line": 898,
             "description": "Returns container elements for time span markers",
             "itemtype": "method",
             "name": "getTimeSpanContainers",
@@ -2811,7 +2866,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 911,
+            "line": 907,
             "description": "Returns waveform data",
             "itemtype": "method",
             "name": "getDataFile",
@@ -2824,7 +2879,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 920,
+            "line": 916,
             "description": "Returns style options",
             "itemtype": "method",
             "name": "getStyle",
@@ -2837,7 +2892,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 929,
+            "line": 925,
             "description": "Display position line under mouse cursor?",
             "itemtype": "method",
             "name": "setHoverDisplayed",
@@ -2853,7 +2908,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 943,
+            "line": 939,
             "description": "Disable autoscroll",
             "itemtype": "method",
             "name": "setScrollLocked",
@@ -2871,19 +2926,19 @@
     "warnings": [
         {
             "message": "Missing item type\nSet scroll position",
-            "line": " lib/outwave/viewer.js:596"
+            "line": " lib/outwave/viewer.js:592"
         },
         {
             "message": "Missing item type\nReturn position at mouse coodinates",
-            "line": " lib/outwave/viewer.js:727"
+            "line": " lib/outwave/viewer.js:723"
         },
         {
             "message": "Missing item type\nReturn position in the middle of viewport",
-            "line": " lib/outwave/viewer.js:761"
+            "line": " lib/outwave/viewer.js:757"
         },
         {
             "message": "Missing item type\nScroll viewport so that the middle is on time",
-            "line": " lib/outwave/viewer.js:775"
+            "line": " lib/outwave/viewer.js:771"
         }
     ]
 }

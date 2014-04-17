@@ -193,7 +193,6 @@
     background-image: -o-linear-gradient(bottom, #d2d2d2 0%, #fff 100%); /* gradient overlay */
     background-image: -webkit-linear-gradient(bottom, #d2d2d2 0%, #fff 100%); /* gradient overlay */
     background-image: linear-gradient(bottom, #d2d2d2 0%, #fff 100%); /* gradient overlay */
-    border: 1px solid #aaa;
     display: block;
     font-size: 20px;
     height: 1em;

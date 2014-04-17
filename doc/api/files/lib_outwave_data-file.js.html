@@ -176,7 +176,6 @@ define([&#x27;./vendor/jdataview&#x27;],function(_jDataView){
 
         this.byteLen = byteLen;
 
-        console.log(this);
 
         this.mono;
         this.sampleSource;
@@ -425,7 +424,6 @@ define([&#x27;./vendor/jdataview&#x27;],function(_jDataView){
 
        // new browsers (XMLHttpRequest2-compliant)
         if (&#x27;responseType&#x27; in xhr) {
-            console.log(&quot;AJAX response: arraybuffer&quot;);
             xhr.responseType = &#x27;arraybuffer&#x27;;
         }
         // old browsers (XMLHttpRequest-compliant)

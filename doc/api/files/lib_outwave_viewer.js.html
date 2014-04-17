@@ -173,8 +173,6 @@ define([
 
         this.style = this.options.style;
 
-        console.log(&quot;contructor height&quot;,this.options.height);
-
         this.zoomChangedHnd = [];
         this.zoomFactorChangedHnd = [];
 
@@ -285,7 +283,7 @@ define([
             if(internX &gt;= self.internalWidth()){
                 return;
             }
-            self.clicked(self.internalXToTime(internX));     
+            self.clicked(self.internalXToTime(internX),event);     
         });
 
 
@@ -395,10 +393,8 @@ define([
 
 
         this.viewportOffset = function(){
-            console.log(&#x27;getting offset&#x27;);
             return this.getViewportElement().offset();
         };
-
         if(this.options.cacheOffset){
             var cachedOffset = this.viewportOffset();
 
@@ -463,7 +459,6 @@ define([
         internalHeight: function(){//height of element minus scrollbars
 
             if(this.options.height !== null){
-                console.log(&quot;height&quot;, this.options.height);
                 return this.options.height;
             }
             var scrollbar = (this.style.horizontal()?Utils.getScrollbarDim().height:Utils.getScrollbarDim().width) + 4;
@@ -695,10 +690,11 @@ define([
          *
          * @method  clicked
          * @param  {Number} time Position in seconds computed from mouse coordinates
+         * @param {MouseEvent} mouseEvent Mouse event
          */
-        clicked: function(time){
+        clicked: function(time,mouseEvent){
             if(this.clickHnd){
-                this.clickHnd(time);
+                this.clickHnd(time,mouseEvent);
             }
         },
         /**
@@ -864,7 +860,7 @@ define([
             return this.internalXToTime(pos);       
         },
         setTimeAtMouseCoords: function(time,pageX,pageY){
-            var ofs = this.viwportOffset();
+            var ofs = this.viewportOffset();
             var x = this.timeToInternalX(time);
             var sc;
             if(this.style.horizontal()){

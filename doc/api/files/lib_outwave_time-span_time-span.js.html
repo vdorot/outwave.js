@@ -182,9 +182,11 @@ define([
         this.utils = Utils; //TODO: refactor
 
 
-        this.splitFn;
+        this.splitFn = null;
 
-        this.mergedFn;
+        this.mergedFn = null;
+
+        this.neighborChangedFn = null;
 
         this.minLength = 0;
 
@@ -296,6 +298,9 @@ define([
          */
         setPrev: function(prev){
             this.prev = prev;
+            if(this.neighborChangedFn){
+                this.neighborChangedFn();
+            }
         },
         /**
          * Sets next span in linked list
@@ -306,6 +311,9 @@ define([
          */        
         setNext: function(next){
             this.next = next;
+            if(this.neighborChangedFn){
+                this.neighborChangedFn();
+            }
         },
         /**
          * Returns previous span in linked list
@@ -681,8 +689,28 @@ define([
         onPositionChanged: function(fn){
             this.positionChangedFn = fn;
         },
+
         /**
-         * Set event handler that is called after the span gets removed
+         * Set event handler for changes of neighboring time spans
+         * @method  onNeighborChanged
+         * @param  {Function} fn Function()
+         */
+        onNeighborChanged: function(fn){
+            this.neighborChangedFn = fn;
+        },
+        /**
+         * Set event handler for destruction(after splitting, merging or removing)
+         *
+         * @method  onDestroyed
+         * @param  {Function} fn Function()
+         */
+        onDestroyed: function(fn){
+            this.destroyedFn = fn;
+        },
+        /**
+         * Set event handler that is called after the span gets removed by calling remove()
+         *
+         * This event is triggered before the destroyed event
          *
          * @method  onRemoved
          * @param  {Function} fn Function()
@@ -691,13 +719,30 @@ define([
             this.removedFn = fn;
         },
         /**
+         * Fire onDestroyed handler
+         * @method  handleDestroyed
+         */
+        handleDestroyed: function(){
+            this.unRender();
+            if(this.destroyedFn) this.destroyedFn();
+        },
+
+        /**
          * Fire onRemoved handler
          *
          * @method  handleRemoved
          */
         handleRemoved: function(){
-            this.unRender();
             if(this.removedFn) this.removedFn();
+        },
+        /**
+         * Merge this and left neighbor
+         * @method mergeWithPrev
+         */
+        mergeWithPrev: function(){
+            if(this.getPrev() !== null){
+                this.collection.mergeWithPrev(this);
+            }
         },
         /**
          * Remove timespan from collection

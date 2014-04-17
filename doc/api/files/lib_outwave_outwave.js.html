@@ -201,6 +201,8 @@ define(
             zoomChangeFactor: 2, // number by which the zoom value gets divided/multiplied when zooming in/out
 
             cacheOffset: false, //cache viewer position on page, the top or left corner(depending on orientation) of the viewer must not move, this makes mouse movmemnts much smoother in Firefox 
+        
+            init: null, // callback Function(done) to be used after the viewer has been initialized, before it is shown, possible use is to load, thi == viewer, done must be called after everything is ready
         };
 
 
@@ -276,11 +278,22 @@ define(
                     showError(errorMessage);
                     return;
                 }
+                // loading indicator should stay visible
                 var viewer = new Viewer(container,dataFile,options);
 
                 Controls(container,viewer,options.style);
 
-                onLoad(viewer);
+                var loaded = function(){
+                    //TODO: should display viewer
+                    onLoad(viewer);
+                };
+
+                if(options.init){
+                    options.init.call(viewer,loaded);
+                }else{
+
+                    loaded();
+                }
 
             },onProgress);
 
