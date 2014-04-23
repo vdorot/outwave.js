@@ -228,7 +228,7 @@ define([
             };
 
 
-            var dragHandler = function(e,isStart){
+            this.dragHandler = function(e,isStart){
 
                 e.preventDefault();
 
@@ -329,41 +329,66 @@ define([
                         limits = self.getStartLimits();
 
 
+                        if(self.getPrev() &amp;&amp; self.getPrev().getStart() + elemSize &gt; limits.s){
+                            var lim = self.getPrev().getStart() + elemSize;
+                            if(lim &lt;= limits.e){
+                                limits.s = lim;
+                            }
+                        }
 
                         if(self.getEnd() - limits.e &lt; elemSize){
-                            limits.e = self.getEnd() - elemSize;
+                            var lim = self.getEnd() - elemSize;
+                            if(lim &gt;= limits.s){
+                                limits.e = lim;
+                            }
                         }
 
-
-                        if(limits.e &lt; limits.s){
-                            limits.e = limits.s;
-                        }
-
-                        time = self.applyInterval(limits,time);
-                        if(time !==null){
-                            self.setStart(time);
-                        }
                     }else{
                         limits = self.getEndLimits();
 
-                        if(limits.s - self.getStart() &lt; elemSize){
-                            limits.s = self.getStart() + elemSize;
+                        if(self.getNext() &amp;&amp; self.getNext().getEnd() - elemSize &lt; limits.e){
+                            var lim = self.getNext().getEnd() - elemSize;
+                            if(lim &gt;= limits.s){
+                                limits.e = lim;
+                            }
                         }
+
+
+                        if(limits.s - self.getStart() &lt; elemSize){
+                            var lim = self.getStart() + elemSize;
+                            if(lim &lt;= limits.e){
+                                limits.s = lim;
+                            }
+                        }
+
+
+
 
                         if(limits.s &gt; limits.e){
                             limits.s = limits.e;
                         }
 
 
-                        time = self.applyInterval(limits,time);
-                        if(time !==null){
+
+                    }
+
+                    time = self.applyInterval(limits,time);
+                    if(time !==null){
+
+                        if(isStart){
+                            self.setStart(time);
+                        }else{
                             self.setEnd(time);
                         }
+
                     }
+
+
 
                     return false;
 
                 };
+
 
                 viewportElement.on(&quot;scroll.spandragging&quot;,function(){
                     moveHandler(lastMouseEvent);
@@ -393,7 +418,7 @@ define([
 
                 $(document)[0].addEventListener(&#x27;mouseup&#x27;,upHandler,true); // event capturing &gt;=IE9
             };
-
+            var dragHandler = this.dragHandler;
 
             this.getStartElement().on(&#x27;mousedown&#x27;,function(e){dragHandler.call(this,e,true);});
             this.getEndElement().on(&#x27;mousedown&#x27;,function(e){dragHandler.call(this,e,false);});

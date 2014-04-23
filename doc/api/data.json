@@ -771,7 +771,7 @@
         },
         {
             "file": "lib/outwave/time-span/continuous-time-span.js",
-            "line": 54,
+            "line": 59,
             "description": "Get range of times this span can end at\n\nExtends method from parent class",
             "itemtype": "method",
             "name": "getEndLimits",
@@ -784,7 +784,7 @@
         },
         {
             "file": "lib/outwave/time-span/continuous-time-span.js",
-            "line": 75,
+            "line": 84,
             "description": "Sets start time of span\n\nExtends method from parent class",
             "itemtype": "method",
             "name": "setStart",
@@ -800,7 +800,7 @@
         },
         {
             "file": "lib/outwave/time-span/continuous-time-span.js",
-            "line": 94,
+            "line": 103,
             "description": "Sets end time of span\n\nExtends method from parent class",
             "itemtype": "method",
             "name": "setEnd",
@@ -816,7 +816,7 @@
         },
         {
             "file": "lib/outwave/time-span/continuous-time-span.js",
-            "line": 113,
+            "line": 122,
             "description": "Sets previous span in linked list\n\nThis function should not be used directly, use collection methods instead\n\nExtends method from parent class",
             "itemtype": "method",
             "name": "setPrev",
@@ -832,7 +832,7 @@
         },
         {
             "file": "lib/outwave/time-span/continuous-time-span.js",
-            "line": 134,
+            "line": 144,
             "description": "Sets next span in linked list\n\nThis function should not be used directly, use collection methods instead\n\nExtends method from parent class",
             "itemtype": "method",
             "name": "setNext",
@@ -1005,6 +1005,26 @@
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
             "line": 186,
+            "description": "Find time span by position",
+            "itemtype": "method",
+            "name": "getTimeSpanAtPosition",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "Time inside span",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "TimeSpan|null"
+            },
+            "class": "TimeSpanCollection",
+            "module": "TimeSpan"
+        },
+        {
+            "file": "lib/outwave/time-span/time-span-collection.js",
+            "line": 202,
             "description": "Split spans at a given time position",
             "itemtype": "method",
             "name": "split",
@@ -1020,7 +1040,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 257,
+            "line": 273,
             "description": "Remove time span\n\nAbstract method",
             "itemtype": "method",
             "name": "removeTimeSpan",
@@ -1036,7 +1056,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 270,
+            "line": 286,
             "description": "Update zoom",
             "itemtype": "method",
             "name": "setZoom",
@@ -1052,7 +1072,7 @@
         },
         {
             "file": "lib/outwave/time-span/time-span-collection.js",
-            "line": 283,
+            "line": 299,
             "description": "Set event handler for new spans created",
             "itemtype": "method",
             "name": "onTimeSpanCreated",

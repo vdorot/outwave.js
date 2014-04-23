@@ -165,7 +165,12 @@ define([
             
             if(this.getPrev()){
                 limits = this.intersectIntervals(limits,{s:this.getPrev().getStart()+this.getPrev().getMinLength(),e:this.getEnd()});
+            }else{
+                if(this.getStart() !== null){
+                    limits.s = limits.e = this.getStart(); // don&#x27;t allow moving first span
+                }
             }
+
 
             return limits;
         };
@@ -186,6 +191,10 @@ define([
             
             if(this.getNext()){
                 limits = this.intersectIntervals(limits,{s:this.getStart(),e:this.getNext().getEnd()-this.getNext().getMinLength()});
+            }else{
+                if(this.getEnd() !== null){
+                    limits.s = limits.e = this.getEnd(); // don&#x27;t allow moving last span
+                }
             }
 
 
@@ -244,10 +253,11 @@ define([
          */
         span.setPrev = function(prev){
             setPrev.call(this,prev);
+            this.getStartElement().addClass(&#x27;continuous&#x27;);
             if(prev){
-                this.getStartElement().addClass(&#x27;continuous&#x27;);
+                this.getStartElement().removeClass(&#x27;first&#x27;);
             }else{
-                this.getStartElement().removeClass(&#x27;continuous&#x27;);
+                this.getStartElement().addClass(&#x27;first&#x27;);
             }
         };
 
@@ -265,10 +275,11 @@ define([
          */ 
         span.setNext = function(next){
             setNext.call(this,next);
+            this.getEndElement().addClass(&#x27;continuous&#x27;);
             if(next){
-                this.getEndElement().addClass(&#x27;continuous&#x27;);
+                this.getEndElement().removeClass(&#x27;last&#x27;);
             }else{
-                this.getEndElement().removeClass(&#x27;continuous&#x27;);
+                this.getEndElement().addClass(&#x27;last&#x27;);
             }
         };
 

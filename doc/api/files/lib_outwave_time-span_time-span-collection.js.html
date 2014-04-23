@@ -306,6 +306,22 @@ define([
 
         },
         /**
+         * Find time span by position
+         *
+         * @method  getTimeSpanAtPosition
+         * @param  {Number} time Time inside span
+         * @return {TimeSpan|null} 
+         */
+        getTimeSpanAtPosition: function(time){
+            for(var i=this.timespans.length-1; i&gt;=0; i--){
+                var span = this.timespans[i];
+                if(span.getStart()&lt;=time &amp;&amp; span.getEnd()&gt;=time){
+                    return this.timespans[i];
+                }
+            }            
+            return null;
+        },
+        /**
          * Split spans at a given time position
          *
          * @method  split
