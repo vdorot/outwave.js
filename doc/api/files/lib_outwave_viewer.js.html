@@ -358,7 +358,13 @@ define([
             self.options.autoScrollTimeout);
         };
 
-       this.scrollbarEl.on(&quot;mouseenter&quot;,this.handleMouseEnter).on(&#x27;mouseleave&#x27;,this.handleMouseLeave);
+
+
+        if(this.options.autoScrollMouseLock){
+            console.log(this.options);
+            this.scrollbarEl.on(&quot;mouseenter&quot;,this.handleMouseEnter).on(&#x27;mouseleave&#x27;,this.handleMouseLeave);
+        }
+
 
 
 
@@ -885,7 +891,7 @@ define([
             if(this.style.horizontal()){
                 pos = this.scrollbarEl.scrollLeft() + this.scrollbarEl.width() / 2;
             }else{
-                pos = this.scrollbarEl.scrollTop() + this.scrollbarEl.width() / 2;
+                pos = this.scrollbarEl.scrollTop() + this.scrollbarEl.height() / 2;
             }
 
             return this.internalXToTime(pos);
