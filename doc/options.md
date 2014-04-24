@@ -11,7 +11,7 @@ Options can be supplied when initialising Outwave:
   });
 ```
 
-#Available options
+##Available options
 
 #####`height:  Number[pixels] | null`
 
