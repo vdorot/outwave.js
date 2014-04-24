@@ -79,6 +79,8 @@ $(function(){
 </script>
 ```
 
+[List of all options](doc/options.md)
+
 For advanced use cases, explore the examples folder.
 
 An API reference generated from source is available in the doc/api directory. 
