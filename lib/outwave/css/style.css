@@ -44,6 +44,7 @@
     width: 1px;
     height: 100%;
     cursor: text;
+    z-index: 10;
 }
 
 .outwave.vertical .hover{
@@ -68,7 +69,8 @@
     cursor: ew-resize;
     border-top-left-radius: 6px 6px;
     border-bottom-left-radius: 6px 6px;  
-    background-clip: padding-box;     
+    background-clip: padding-box;  
+    z-index: 20;   
 }
 
 .outwave.vertical .timespan-start{
@@ -79,7 +81,8 @@
     cursor: ns-resize;
     border-top-left-radius: 6px 6px;
     border-top-right-radius: 6px 6px;
-    background-clip: padding-box;   
+    background-clip: padding-box;  
+    z-index: 20;   
 }
 
 .outwave.horizontal .timespan-end{
@@ -91,6 +94,7 @@
     border-top-right-radius: 6px 6px;
     border-bottom-right-radius: 6px 6px;
     background-clip: padding-box;
+    z-index: 20;  
 }
 
 .outwave.vertical .timespan-end{
@@ -102,6 +106,7 @@
     border-bottom-left-radius: 6px 6px;
     border-bottom-right-radius: 6px 6px;
     background-clip: padding-box;
+    z-index: 20;  
 }
 
 

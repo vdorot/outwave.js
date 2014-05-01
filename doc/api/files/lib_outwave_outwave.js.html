@@ -226,10 +226,10 @@ define(
             container = $(container);
 
             options = $.extend({},defaultOptions,options);
-            options.style = new Style();
+            var style = new Style();
 
             if(options.style){
-                $.extend({},options.style,options.style);  
+                options.style = $.extend({},style,options.style);  
             }
 
             var wrapper = $(&#x27;&lt;div class=&quot;outwave&quot;&gt;&lt;/div&gt;&#x27;);

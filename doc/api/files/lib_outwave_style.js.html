@@ -142,14 +142,11 @@ define([&#x27;./utils&#x27;],function(Utils){
      */
     var Style = function(){
 
-        this.ORIENTATION_HORIZONTAL = 1;
-        this.ORIENTATION_VERTICAL = 2;
 
-        this.orientation = this.ORIENTATION_VERTICAL;
-        //this.orientation = this.ORIENTATION_HORIZONTAL;
+        this.orientation = &#x27;horizontal&#x27;; // or vertical
 
-        this.horizontal = function(){return this.orientation == this.ORIENTATION_HORIZONTAL;};
-        this.vertical = function(){return this.orientation == this.ORIENTATION_VERTICAL;};
+        this.horizontal = function(){return this.orientation == &quot;horizontal&quot;;};
+        this.vertical = function(){return this.orientation !== &quot;horizontal&quot;;};
 
 
         this.timelineMarker = function(time){

@@ -228,12 +228,11 @@ define([
 
         this.hoverEl = this.options.style.hover();
         this.hoverDim = Utils.getElementDimensions(this.hoverEl);
-        this.hoverEl.css({position: &quot;absolute&quot;, display: &quot;none&quot;,&#x27;z-index&#x27;: &#x27;100&#x27;,&#x27;pointer-events&#x27;: &#x27;none&#x27;});
 
         this.foregroundEl.append(this.hoverEl);
 
         this.setHoverDisplayed(this.options.hover);
-
+        this.hoverEl.css({position: &quot;absolute&quot;, display: &quot;none&quot;/*,&#x27;z-index&#x27;: &#x27;100&#x27;,&#x27;pointer-events&#x27;: &#x27;none&#x27;*/});
 
 
         if(this.options.hover){
@@ -269,8 +268,19 @@ define([
 
         }
 
+        var mouseIsDown = false;
+
+        this.foregroundEl.on(&quot;mousedown&quot;,function(event){
+            mouseIsDown = true;
+        });
+
         this.foregroundEl.on(&quot;mouseup&quot;,function(event){
             event.preventDefault();
+
+            if(!mouseIsDown){
+                return;
+            }
+            mouseIsDown = false;
 
             var internX;
 
@@ -361,7 +371,6 @@ define([
 
 
         if(this.options.autoScrollMouseLock){
-            console.log(this.options);
             this.scrollbarEl.on(&quot;mouseenter&quot;,this.handleMouseEnter).on(&#x27;mouseleave&#x27;,this.handleMouseLeave);
         }
 
