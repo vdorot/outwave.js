@@ -7,7 +7,7 @@ The UI widget is written purely in JavaScript, using HTML 5 Canvas for rendering
 
 ##Getting started
 
-Media files have to be processed before they can be viewed effectively, so using Outwave.js requires to steps. Using the preprocessor to generate a downsampled file and loading the generated file in the browser. The datafiles can be hosted by any ordinary HTTP server like Apache or nginx.
+Media files have to be processed before they can be viewed effectively, so using Outwave.js requires two steps - using the preprocessor to generate a downsampled file and loading the generated file in the browser. The datafiles can be hosted by any ordinary HTTP server like Apache or nginx.
 
 ###Preprocessor
 
@@ -78,6 +78,8 @@ $(function(){
 });
 </script>
 ```
+
+[List of all options](doc/options.md)
 
 For advanced use cases, explore the examples folder.
 
