@@ -100,7 +100,7 @@ It's suitable for creating time spans.
 
 ##Styling options
 
-Most of the styling options are defines as a element generator function. These generators should return a jQuery element object.
+Most of the styling options are defined as an element generator function. These generators should return a jQuery element object.
 
 The default generators should be sufficient for most uses. Changing the looks of the viewer can be achieved by overriding CSS styles. Only redefine the generators if you need different class names or a more complicated element structure.
 
@@ -154,7 +154,7 @@ This function is used for styling of the waveform itself. The waveform is render
 
 If multiple audio channels are present, the function is called separately for each channel. 
 
-Arguments:
+######Arguments:
 
 `ctx` - convas drawing context
 `p1` - starting point of the gradient, if necessary `{x: Number, y: Number}`
