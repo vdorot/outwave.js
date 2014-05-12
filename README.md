@@ -37,7 +37,7 @@ The result is an executable called `outwave` in the same directory.
 
 The resulting files containg waveform data can be created with configurable sample rate and size. For a full list of options and other information about the preprocessor, see [Preprocessor Usage](doc/preprocessor.md).
 
-###Browser part
+###The viewer
 
 Copy `build/outwave` into your webhost and include the following resources(your paths may vary): 
 ```HTML
