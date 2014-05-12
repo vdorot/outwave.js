@@ -156,12 +156,12 @@ If multiple audio channels are present, the function is called separately for ea
 
 ######Arguments:
 
-`ctx` - convas drawing context
-`p1` - starting point of the gradient, if necessary `{x: Number, y: Number}`
-`p2` - ending point of the gradient
-`channel` - Channel id, starting from 0
-`channelCnt` - Number of channels
-`played` - whether this part of the waveform has been already played. True, if the cursor is further.
+ - `ctx` - convas drawing context
+ - `p1` - starting point of the gradient, if necessary `{x: Number, y: Number}`
+ - `p2` - ending point of the gradient
+ - `channel` - Channel id, starting from 0
+ - `channelCnt` - Number of channels
+ - `played` - whether this part of the waveform has been already played. True, if the cursor is further.
 
 ######Return value:
 
