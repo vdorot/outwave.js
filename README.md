@@ -5,6 +5,8 @@ Outwave.js is a web based waveform viewer buildt to handle very long recordings.
 
 The UI widget is written purely in JavaScript, using HTML 5 Canvas for rendering of the waveform. Navigation across the recording is done using a native scrollbar, with the help of `overflow: auto;`. The audio is divided into segments, and only segments that are visible are kept rendered. This way, the rendering can be done fast, without interrupting responsiveness of the page and with memory usage independent of the length of the recording or zoom level.
 
+The library was developed for use in an annotation editor. A simple [demo](http://outwave.dorotovic.name/demo/) is available.
+
 ##Getting started
 
 Media files have to be processed before they can be viewed effectively, so using Outwave.js requires two steps - using the preprocessor to generate a downsampled file and loading the generated file in the browser. The datafiles can be hosted by any ordinary HTTP server like Apache or nginx.
