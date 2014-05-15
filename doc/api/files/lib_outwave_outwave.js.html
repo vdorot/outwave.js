@@ -230,6 +230,8 @@ define(
 
             if(options.style){
                 options.style = $.extend({},style,options.style);  
+            }else{
+                options.style = style;
             }
 
             var wrapper = $(&#x27;&lt;div class=&quot;outwave&quot;&gt;&lt;/div&gt;&#x27;);

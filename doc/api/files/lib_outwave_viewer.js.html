@@ -618,6 +618,7 @@ define([
 
 
 
+
                 if(cursorX &gt;= scrollX &amp;&amp; cursorX &lt; scrollX + width &amp;&amp; !tooQuick){ // cursor is inside of visible area
 
                     if((timeX &gt;= scrollX &amp;&amp; timeX &lt; scrollX + (width * this.options.autoScrollThreshold))){
@@ -637,7 +638,7 @@ define([
                             self.scrollbarEl.stop(); 
                             var animVal; 
                             if(this.style.horizontal()){
-                                animVal = {scrolLeft: scrollTo};
+                                animVal = {scrollLeft: scrollTo};
                             }else{
                                 animVal = {scrollTop: scrollTo};
                             }   

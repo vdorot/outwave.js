@@ -2580,7 +2580,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 537,
+            "line": 538,
             "description": "Set cursor position",
             "itemtype": "method",
             "name": "setCursor",
@@ -2596,7 +2596,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 560,
+            "line": 561,
             "description": "Removes cursor, use when playback is stopped",
             "itemtype": "method",
             "name": "removeCursor",
@@ -2605,7 +2605,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 571,
+            "line": 572,
             "description": "Sets (replaces) click handler",
             "itemtype": "method",
             "name": "onClick",
@@ -2621,7 +2621,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 581,
+            "line": 582,
             "description": "Fires configurable click handler",
             "itemtype": "method",
             "name": "clicked",
@@ -2642,7 +2642,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 593,
+            "line": 594,
             "description": "Updates dimensions of HTML elements",
             "itemtype": "method",
             "name": "updateDimensions",
@@ -2651,7 +2651,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 607,
+            "line": 608,
             "description": "Set scroll position",
             "params": [
                 {
@@ -2665,7 +2665,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 618,
+            "line": 619,
             "description": "Add handler for scroll change",
             "itemtype": "method",
             "name": "onScroll",
@@ -2681,7 +2681,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 626,
+            "line": 627,
             "description": "Call scroll event handlers",
             "itemtype": "method",
             "name": "handleScrolled",
@@ -2690,7 +2690,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 655,
+            "line": 656,
             "description": "Zoom in",
             "itemtype": "method",
             "name": "zoomIn",
@@ -2706,7 +2706,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 671,
+            "line": 672,
             "description": "Zoom out",
             "itemtype": "method",
             "name": "zoomOut",
@@ -2722,7 +2722,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 687,
+            "line": 688,
             "description": "Get zoom",
             "itemtype": "method",
             "name": "getZoom",
@@ -2735,7 +2735,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 712,
+            "line": 713,
             "description": "Set zoom",
             "itemtype": "method",
             "name": "setZoom",
@@ -2756,7 +2756,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 724,
+            "line": 725,
             "description": "Get current zoom value\n\nThe zoom factor determines how many samples in the preprocessed file\nare collapsed into one sample(pixel column) on the screen.\n\nThe resulting zoom levels are therefore dependent on the sample rate of the data file.",
             "itemtype": "method",
             "name": "getZoomFactor",
@@ -2769,7 +2769,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 738,
+            "line": 739,
             "description": "Return position at mouse coodinates",
             "params": [
                 {
@@ -2792,7 +2792,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 772,
+            "line": 773,
             "description": "Return position in the middle of viewport",
             "return": {
                 "description": "Time in seconds",
@@ -2803,7 +2803,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 786,
+            "line": 787,
             "description": "Scroll viewport so that the middle is on time",
             "params": [
                 {
@@ -2817,7 +2817,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 827,
+            "line": 828,
             "description": "Set zoom factor\n\nThe zoom factor determines how many samples in the preprocessed file\nare collapsed into one sample(pixel column) on the screen.\n\nThe resulting zoom levels are therefore dependent on the sample rate of the data file.\n\nMin and max values are not considered",
             "itemtype": "method",
             "name": "setZoomFactor",
@@ -2833,7 +2833,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 847,
+            "line": 848,
             "description": "Set event handler for zoom changes",
             "itemtype": "method",
             "name": "onZoomed",
@@ -2849,7 +2849,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 856,
+            "line": 857,
             "description": "Fire zoom change events",
             "itemtype": "method",
             "name": "handleZoomed",
@@ -2858,7 +2858,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 877,
+            "line": 878,
             "description": "Set event handler for zoom factor changes",
             "itemtype": "method",
             "name": "onZoomFactorChanged",
@@ -2874,7 +2874,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 886,
+            "line": 887,
             "description": "Enable or disable mono mode\n\nIn mono mode, all channels are summarised into one",
             "itemtype": "method",
             "name": "setMono",
@@ -2890,7 +2890,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 904,
+            "line": 905,
             "description": "Returns jQuery element which is used for native scrollbars",
             "itemtype": "method",
             "name": "getViewportElement",
@@ -2903,7 +2903,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 913,
+            "line": 914,
             "description": "Returns container elements for time span markers",
             "itemtype": "method",
             "name": "getTimeSpanContainers",
@@ -2916,7 +2916,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 922,
+            "line": 923,
             "description": "Returns waveform data",
             "itemtype": "method",
             "name": "getDataFile",
@@ -2929,7 +2929,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 931,
+            "line": 932,
             "description": "Returns style options",
             "itemtype": "method",
             "name": "getStyle",
@@ -2942,7 +2942,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 940,
+            "line": 941,
             "description": "Display position line under mouse cursor?",
             "itemtype": "method",
             "name": "setHoverDisplayed",
@@ -2958,7 +2958,7 @@
         },
         {
             "file": "lib/outwave/viewer.js",
-            "line": 954,
+            "line": 955,
             "description": "Disable autoscroll",
             "itemtype": "method",
             "name": "setScrollLocked",
@@ -2976,19 +2976,19 @@
     "warnings": [
         {
             "message": "Missing item type\nSet scroll position",
-            "line": " lib/outwave/viewer.js:607"
+            "line": " lib/outwave/viewer.js:608"
         },
         {
             "message": "Missing item type\nReturn position at mouse coodinates",
-            "line": " lib/outwave/viewer.js:738"
+            "line": " lib/outwave/viewer.js:739"
         },
         {
             "message": "Missing item type\nReturn position in the middle of viewport",
-            "line": " lib/outwave/viewer.js:772"
+            "line": " lib/outwave/viewer.js:773"
         },
         {
             "message": "Missing item type\nScroll viewport so that the middle is on time",
-            "line": " lib/outwave/viewer.js:786"
+            "line": " lib/outwave/viewer.js:787"
         }
     ]
 }

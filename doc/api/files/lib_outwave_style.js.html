@@ -154,11 +154,11 @@ define([&#x27;./utils&#x27;],function(Utils){
                 return $(&#x27;&lt;div class=&quot;timeline-marker&quot;&gt;&lt;/div&gt;&#x27;).append(text);
         };
 
-        this.cursor = function(time){
+        this.cursor = function(){
                 return $(&#x27;&lt;div class=&quot;cursor&quot;&gt;&lt;/div&gt;&#x27;);
         };
 
-        this.hover = function(time){
+        this.hover = function(){
                 return $(&#x27;&lt;div class=&quot;hover&quot;&gt;&lt;/div&gt;&#x27;);
         };
 
@@ -169,10 +169,6 @@ define([&#x27;./utils&#x27;],function(Utils){
         this.timeSpanEnd = function(){
             return $(&#x27;&lt;div class=&quot;timespan-end&quot;&gt;&lt;/div&gt;&#x27;);
         };
-
-        this.timeSpanDividerElement = function(){
-            return $(&#x27;&lt;div class=&quot;timespan-end&quot;&gt;&lt;/div&gt;&#x27;);
-        };    
 
         this.timeSpanBackground = function(){
             return $(&#x27;&lt;div class=&quot;timespan-back&quot;&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;&#x27;);
@@ -185,11 +181,11 @@ define([&#x27;./utils&#x27;],function(Utils){
             var grad = ctx.createLinearGradient(p1.x,p1.y,p2.x,p2.y);
                 if(played){
                     if(channel === 0){
-                        grad.addColorStop(0, &#x27;#6ED7FF&#x27;);
-                        grad.addColorStop(1, &#x27;#00A0DB&#x27;);
+                        grad.addColorStop(0, &#x27;#8CDFFF&#x27;);
+                        grad.addColorStop(1, &#x27;#17C0FF&#x27;);
                     }else{
-                        grad.addColorStop(0, &#x27;#B0FF61&#x27;);
-                        grad.addColorStop(1, &#x27;#69D100&#x27;);
+                        grad.addColorStop(0, &#x27;#C3FF87&#x27;);
+                        grad.addColorStop(1, &#x27;#77ED00&#x27;);
                     }
                 }else{
                     if(channel === 0){
