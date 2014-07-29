@@ -43,8 +43,8 @@ const char *USAGE_MSG=
 	"Defaults:\n"
 	"Sample rate: 441 Hz\n"
 	"Sample size: 8 bits\n"
-	"Summary 1: 256\n"
-	"Summary 2: 65536\n"
+	"Summary 1: 128\n"
+	"Summary 2: 16384\n"
 	"\n"
 	"Exit codes:\n"
 	"0 - ok\n"
@@ -66,8 +66,8 @@ struct args{
 	.output = NULL,
 	.samplerate = 441,
 	.samplesize = 8,
-	.summary1 = 256,
-	.summary2 = 65536,
+	.summary1 = 128,
+	.summary2 = 16384,
 	.mono = 0,
 	.nosum = 0
 };

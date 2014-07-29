@@ -1693,7 +1693,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 65,
+            "line": 68,
             "description": "Enable or disable mono mode\n\nIn mono mode, the DataFile acts as if there was only one channel, summarising channels together",
             "itemtype": "method",
             "name": "setMono",
@@ -1709,7 +1709,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 82,
+            "line": 85,
             "description": "Get version of loaded waveform file",
             "itemtype": "method",
             "name": "getVersion",
@@ -1722,7 +1722,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 91,
+            "line": 94,
             "description": "Get number of channels in file",
             "itemtype": "method",
             "name": "getChannelCnt",
@@ -1735,7 +1735,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 108,
+            "line": 111,
             "description": "Get sample size",
             "itemtype": "method",
             "name": "getSampleSize",
@@ -1748,7 +1748,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 116,
+            "line": 119,
             "description": "Get sample rate",
             "itemtype": "method",
             "name": "getSampleRate",
@@ -1761,7 +1761,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 125,
+            "line": 128,
             "description": "Get number of frames in file\n\nFrame - samples(min,max) for all channels",
             "itemtype": "method",
             "name": "getFrameCnt",
@@ -1774,7 +1774,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 136,
+            "line": 139,
             "description": "Get length of waveform",
             "itemtype": "method",
             "name": "getLength",
@@ -1787,7 +1787,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 145,
+            "line": 148,
             "description": "Translate pixel position to time",
             "itemtype": "method",
             "name": "px2time",
@@ -1812,7 +1812,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 159,
+            "line": 162,
             "description": "Translate time into pixel position",
             "itemtype": "method",
             "name": "time2px",
@@ -1837,7 +1837,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 174,
+            "line": 177,
             "description": "Get start of region being summarized\n\nUsed for getting samples with different zoom levels",
             "itemtype": "method",
             "name": "sampleStart",
@@ -1862,7 +1862,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 187,
+            "line": 190,
             "description": "Get end of region being summarized\n\nUsed for getting samples with different zoom levels",
             "itemtype": "method",
             "name": "sampleEnd",
@@ -1887,7 +1887,82 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 200,
+            "line": 206,
+            "description": "Get n-th summarized sample from level 1 summarization",
+            "itemtype": "method",
+            "name": "getRawSample",
+            "params": [
+                {
+                    "name": "sample",
+                    "description": "Index of level 1 summarization sample",
+                    "type": "Number"
+                },
+                {
+                    "name": "channel",
+                    "description": "Channel index",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "[min,max]",
+                "type": "Array"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 222,
+            "description": "Get n-th summarized sample from level 2 summarization",
+            "itemtype": "method",
+            "name": "getRawSample",
+            "params": [
+                {
+                    "name": "sample",
+                    "description": "Index of level 2 summarization sample",
+                    "type": "Number"
+                },
+                {
+                    "name": "channel",
+                    "description": "Channel index",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "[min,max]",
+                "type": "Array"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 235,
+            "description": "Get sample directly, skipping over summarization samples",
+            "itemtype": "method",
+            "name": "getRawSample",
+            "params": [
+                {
+                    "name": "sample",
+                    "description": "Sample index",
+                    "type": "Number"
+                },
+                {
+                    "name": "channel",
+                    "description": "Channel index",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "[min,max]",
+                "type": "Array"
+            },
+            "class": "DataFile",
+            "module": "Outwave"
+        },
+        {
+            "file": "lib/outwave/data-file.js",
+            "line": 250,
             "description": "Get raw sample without taking zoom into account",
             "itemtype": "method",
             "name": "getRawSample",
@@ -1912,7 +1987,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 231,
+            "line": 288,
             "description": "Get raw sample in mono mode\n\nMultiple channels are summarized by computing minimum and maximum across all of them",
             "itemtype": "method",
             "name": "getRawSampleMono",
@@ -1932,7 +2007,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 251,
+            "line": 308,
             "description": "Get sample in zoomed waveform",
             "itemtype": "method",
             "name": "getSample",
@@ -1962,7 +2037,7 @@
         },
         {
             "file": "lib/outwave/data-file.js",
-            "line": 285,
+            "line": 413,
             "description": "Loads waveform file from URL and returns a DataFile instance\n\nUses jQuery AJAX\n\nIf DataView is not available in the browser, it tries to look for jDataView, which can be used as a compatibility layer.\njDataView is much slower though.",
             "itemtype": "method",
             "name": "loadUrl",

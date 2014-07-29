@@ -152,18 +152,21 @@ define([&#x27;./vendor/jdataview&#x27;],function(_jDataView){
 
         this.version = dataView.getUint8(ofs); ofs++;
 
-        this.channels = dataView.getUint8(ofs); ofs++
+        this.channels = dataView.getUint8(ofs); ofs++;
 
         this.sampleSize = dataView.getUint8(ofs); ofs+=1;
 
         this.sampleRate = dataView.getUint32(ofs,false); ofs+=4; //false =&gt; big endian
 
-        this.summery1;
+        this.summary1;
         this.summary2;
 
         if(this.version == 2){
             this.summary1 = dataView.getUint8(ofs,false); ofs += 1;
             this.summary2 = dataView.getUint8(ofs,false); ofs += 1;
+
+            this.sum1p = Math.pow(2,this.summary1);
+            this.sum2p = Math.pow(2,this.summary2);
         }
 
         this.headerLen = ofs;
@@ -319,6 +322,53 @@ define([&#x27;./vendor/jdataview&#x27;],function(_jDataView){
         sampleEnd: function(x,zoom){
             return Math.min(Math.ceil((x+1)*zoom -1 ),this.getFrameCnt()-1);
         },
+
+
+
+        /**
+         * Get n-th summarized sample from level 1 summarization
+         *
+         * @method  getRawSample
+         * @param  {Number} sample  Index of level 1 summarization sample
+         * @param  {Number} channel Channel index
+         * @return {Array}  [min,max]
+         * */
+        getSum1Sample: function(sample,channel){
+
+            var target = (sample + 1) * (this.sum1p + 1) - 1 + Math.floor(((sample+1) * this.sum1p - 1) / this.sum2p);
+
+            return this.sampleSource(target,channel);
+
+        },
+
+        /**
+         * Get n-th summarized sample from level 2 summarization
+         *
+         * @method  getRawSample
+         * @param  {Number} sample  Index of level 2 summarization sample
+         * @param  {Number} channel Channel index
+         * @return {Array}  [min,max]
+         * */
+        getSum2Sample: function(sample,channel){
+            var target  = (sample + 1) * (this.sum2p + 1) - 1 + Math.floor((sample + 1) * this.sum2p / this.sum1p);
+            return this.sampleSource(target,channel);
+        },
+
+        /**
+         * Get sample directly, skipping over summarization samples
+         *
+         *
+         * @method  getRawSample
+         * @param  {Number} sample  Sample index
+         * @param  {Number} channel Channel index
+         * @return {Array}  [min,max]
+         * */
+        getNoSumSample: function(sample,channel){
+            return this.sampleSource(sample + (sample &gt;&gt; this.summary1) + (sample &gt;&gt; this.summary2), channel);
+        },
+
+
+
         /**
          * Get raw sample without taking zoom into account
          *
@@ -329,21 +379,28 @@ define([&#x27;./vendor/jdataview&#x27;],function(_jDataView){
          */
         getRawSample: function(sample,channel){
 
-            //TODO: implement optimalisation for high zoom-values
+            var seekTo = this.headerLen+(sample*this._getChannelCnt()*this.getSampleSize()*2)+channel*this.getSampleSize()*2;
 
-            var seekTo;
-            if(this.version == 2){
-                seekTo = this.headerLen+(sample*this._getChannelCnt()*this.getSampleSize()*2)+channel*this.getSampleSize()*2 + (sample &gt;&gt; this.summary1)*this._getChannelCnt()*this.getSampleSize()*2 + (sample &gt;&gt; this.summary2)*this._getChannelCnt()*this.getSampleSize()*2;
-            }else{
-                seekTo = this.headerLen+(sample*this._getChannelCnt()*this.getSampleSize()*2)+channel*this.getSampleSize()*2;
-            }
 
             var min;
             var max;
             if(this.getSampleSize() == 2 ){
+
+                if(seekTo &gt; this.byteLen || seekTo+2 &gt; this.byteLen){
+                    return [0,0];
+                }
+
                 min = this.data.getInt16(seekTo) / 65535;
                 max = this.data.getInt16(seekTo+2) / 65535;
+
+
+
             }else{
+
+                if(seekTo &gt; this.byteLen || seekTo+1 &gt; this.byteLen){
+                    return [0,0];
+                }
+
                 min = this.data.getInt8(seekTo) / 128;
                 max = this.data.getInt8(seekTo+1) / 128;               
             }
@@ -382,20 +439,91 @@ define([&#x27;./vendor/jdataview&#x27;],function(_jDataView){
         getSample: function(x,channel,zoom){
 
 
-            var min = Number.POSITIVE_INFINITY;
-            var max = Number.NEGATIVE_INFINITY;
+                var min, max,start, end,samples,s;
 
-            var start = this.sampleStart(x,zoom);
-            var end = this.sampleEnd(x,zoom);
+            if(this.version != 2){
 
-            for(var sample = start; sample&lt;=end;sample++){
+                min = Number.POSITIVE_INFINITY;
+                max = Number.NEGATIVE_INFINITY;
 
-                var s = this.sampleSource(sample,channel);
+                start = this.sampleStart(x,zoom);
+                end = this.sampleEnd(x,zoom);
+
+                for(sample = start; sample&lt;=end;sample++){
+
+                    s = this.sampleSource(sample,channel);
+
+                    min = Math.min(min,s[0]);
+                    max = Math.max(max,s[1]);
+                }
 
 
-                min = Math.min(min,s[0]);
-                max = Math.max(max,s[1]);
+            }else{
+
+                    if(zoom &gt; (this.sum2p * 2)){
+
+
+                        min = Number.POSITIVE_INFINITY;
+                        max = Number.NEGATIVE_INFINITY;
+
+                        start = Math.floor(this.sampleStart(x,zoom)/this.sum2p);
+
+                        end = Math.ceil(this.sampleEnd(x,zoom)/this.sum2p);
+                        end = Math.min(end,Math.floor(this.frames/this.sum2p));
+
+                        for(sample = start; sample&lt;=end;sample++){
+
+                            s = this.getSum2Sample(sample,channel);
+
+                            min = Math.min(min,s[0]);
+                            max = Math.max(max,s[1]);
+                        }
+
+                    }else if( zoom &gt; (this.sum1p * 2)){
+
+
+                        min = Number.POSITIVE_INFINITY;
+                        max = Number.NEGATIVE_INFINITY;
+
+                        start = Math.floor(this.sampleStart(x,zoom)/this.sum1p);
+
+                        end = Math.ceil(this.sampleEnd(x,zoom)/this.sum1p);
+                        end = Math.min(end,Math.floor(this.frames/this.sum1p));
+
+                        for(sample = start; sample&lt;=end;sample++){
+
+                            s = this.getSum1Sample(sample,channel);
+
+                            min = Math.min(min,s[0]);
+                            max = Math.max(max,s[1]);
+                        }
+
+
+                    }else{
+                        min = Number.POSITIVE_INFINITY;
+                        max = Number.NEGATIVE_INFINITY;
+
+                        start = this.sampleStart(x,zoom);
+                        end = this.sampleEnd(x,zoom);
+
+                        for(sample = start; sample&lt;=end;sample++){
+
+                            s = this.getNoSumSample(sample,channel);
+
+                            min = Math.min(min,s[0]);
+                            max = Math.max(max,s[1]);
+                        }
+
+                    }
+
+
             }
+
+
+
+
+
+
             return [min,max];
 
         }
@@ -432,7 +560,6 @@ define([&#x27;./vendor/jdataview&#x27;],function(_jDataView){
         }
         // IE9 (Microsoft.XMLHTTP-compliant)
         else {
-            console.log(&quot;AJAX response: IE9&quot;);
             xhr.setRequestHeader(&#x27;Accept-Charset&#x27;, &#x27;x-user-defined&#x27;);
         }
 
