@@ -148,7 +148,7 @@ define([],function(){
 
         this.setDimBase = function(element){ //set parent element for dimension measurement
             this.dimBase = $(element);
-        }
+        };
 
         this.getElementDimensions = function(element){
             var e = $(element).clone();
@@ -158,6 +158,7 @@ define([],function(){
             if(this.dimBase){
                 base = this.dimBase;
             }
+
             base.prepend(e);
 
             var dim = [];

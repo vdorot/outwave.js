@@ -168,9 +168,21 @@ define([
 
         var containers = viewer.getTimeSpanContainers();
 
-        this.backgroundContainer = containers.back;
+
+        this.backgroundContainer = $(&#x27;&lt;div class=&quot;optimising-connector&quot;&gt;&lt;/div&gt;&#x27;);
+
+        containers.back.append(this.backgroundContainer);
+
+        this.backgroundConnector = containers.back;
 
         this.foregroundContainer = containers.front;
+
+
+        this.foregroundContainer = $(&#x27;&lt;div class=&quot;optimising-connector&quot;&gt;&lt;/div&gt;&#x27;);
+
+        containers.front.append(this.foregroundContainer);
+
+        this.foregroundConnector = containers.front;
 
         this.style = viewer.getStyle();
 
@@ -191,6 +203,10 @@ define([
         });
 
         this.activeTimeSpan = null;
+
+        this.BeforeBatchPositionChangeHnd = [];
+
+        this.BatchPositionChangedHnd = [];
     };
 
 
@@ -414,9 +430,13 @@ define([
         setZoom: function(zoom){
             this.zoom = zoom;
             var i;
+            this.disconnectContainers();
+            this.handleBeforeBatchPositionChange();
             for(i in this.timespans){
                 this.timespans[i].setZoom(this.zoom);
             }
+            this.handleBatchPositionChanged();
+            this.reconnectContainers();
         },
         /**
          * Set event handler for new spans created
@@ -426,7 +446,110 @@ define([
          */
         onTimeSpanCreated: function(fn){
             this.timeSpanCreatedFn = fn;
-        }
+        },
+        startBatch: function(){
+            this.disconnectContainers();
+        }, 
+        cancelBatch: function(){
+            this.reconnectContainers();
+        },
+        finishBatch: function(){
+
+            this.reconnectContainers();
+
+            /*var foreFragment = $(document.createDocumentFragment());
+            var backFragment = $(document.createDocumentFragment());
+
+
+            this.batchLoading = false;
+            for(var i=0; i&lt; this.timespans.length; i++){
+                this.timespans[i].render(foreFragment, backFragment);
+            }
+
+            if(this.timespans.length){
+                this.timespans[0].backgroundContainer.append(backFragment);
+                this.timespans[0].foregroundContainer.append(foreFragment);
+            }
+*/
+
+        },
+
+        /**
+         * Disconnect annotation element containers from DOM
+         *
+         * Useful for speeding up batch updates like zooming or creating lots of time spans
+         *
+         * @method disconnectContainers
+         */
+        disconnectContainers: function(){
+            this.foregroundContainer.detach();
+            this.backgroundContainer.detach();
+        },
+        /**
+         * Reconnect annotation element containers disconnected by disconnectContainers
+         *
+         * @method reconnectContainers
+         */
+        reconnectContainers: function(){
+            
+            if(this.areContainersConnected()){
+                return;
+            }
+
+            this.foregroundConnector.append(this.foregroundContainer);
+            this.backgroundConnector.append(this.backgroundContainer);
+        },
+        areContainersConnected: function(){
+            return this.foregroundContainer.parent().length &gt; 0;
+        },
+
+        /**
+         * Set event handler for batch position changes (zooming)
+         *
+         * @method  onBeforeBatchPositionChange
+         * @param  {Function} fn Event handler accepting zoom(pixels per second) and waveform length(pixels) as arguments
+         */
+        onBeforeBatchPositionChange: function(fn){
+            this.BeforeBatchPositionChangeHnd.push(fn);
+        },
+        /**
+         * Fire position change event handlers
+         *
+         * @method  handleBeforeBatchPositionChange
+         */
+        handleBeforeBatchPositionChange: function(){
+
+            if(this.BeforeBatchPositionChangeHnd){
+                for(var i in this.BeforeBatchPositionChangeHnd){
+                    this.BeforeBatchPositionChangeHnd[i]();
+                }
+            }
+
+        },
+
+        /**
+         * Set event handler for batch position changes (zooming)
+         *
+         * @method  onBatchPositionChanged
+         * @param  {Function} fn Event handler accepting zoom(pixels per second) and waveform length(pixels) as arguments
+         */
+        onBatchPositionChanged: function(fn){
+            this.BatchPositionChangedHnd.push(fn);
+        },
+        /**
+         * Fire position change event handlers
+         *
+         * @method  handleBatchPositionChanged
+         */
+        handleBatchPositionChanged: function(){
+
+            if(this.BatchPositionChangedHnd){
+                for(var i in this.BatchPositionChangedHnd){
+                    this.BatchPositionChangedHnd[i]();
+                }
+            }
+
+        },
 
 
     };

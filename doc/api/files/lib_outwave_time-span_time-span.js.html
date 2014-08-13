@@ -439,8 +439,7 @@ define([
          * @param {Number} start Time in seconds
          */
         setStart: function(start){
-            if(!this.canStart(start)){
-                //console.log(this.getStartLimits(),end);               
+            if(!this.canStart(start)){          
 
                 throw new TimeSpanError(&#x27;set-start&#x27;,&quot;Cannot set starting position of time span, time span would overlap another or be shorter than the minimum length&quot;);
             }
@@ -577,23 +576,31 @@ define([
             return this.backEl;       
         },
         getStartDimensions: function(){ // return dimensions of HTML element representing start of time span
-            if(!this.startDim){
-                this.startDim = this.utils.getElementDimensions(this.getStartElement());
+            if(!this.collection.startDim){
+
+
+                this.collection.startDim = this.utils.getElementDimensions(this.getStartElement());
+
             }
-            return this.startDim;
+            
+            return this.collection.startDim;
         },
         getEndDimensions: function(){
-            if(!this.endDim){
-                this.endDim = this.utils.getElementDimensions(this.getEndElement());
+            if(!this.collection.endDim){
+                var rec = !this.collection.areContainersConnected();
+
+
+                this.collection.endDim = this.utils.getElementDimensions(this.getEndElement());
+
             }
-            return this.endDim;
+            return this.collection.endDim;
         },
         /**
          * Render elements
          *
          * @method  render
          */
-        render: function(){
+        render: function(foreContainer, backContainer){
 
             //generate element
             if(this.rendered){
@@ -605,30 +612,27 @@ define([
                 return;
             }
 
-            //check if start, end and zoom are available
-
             var startEl = this.getStartElement();
-
-            //startEl.mousemove(function(e){$(e.target).parent().trigger(&#x27;mouseleave&#x27;); e.stopPropagation();});
-
-            var startDim = this.getStartDimensions();
 
 
             var endEl = this.getEndElement();
 
-            /*endEl.mousemove(function(e){
 
-                $(e.target).parent().trigger(&#x27;mouseleave&#x27;); e.stopPropagation();
+            if(!foreContainer){
+                foreContainer = this.foregroundContainer;
+            }
 
-            });*/
+            if(!backContainer){
+                backContainer = this.backgroundContainer;
+            }
 
-            var endDim = this.getEndDimensions();
+            var startDim = this.getStartDimensions();
 
-            this.foregroundContainer.append(startEl, endEl);
+            foreContainer.append(startEl, endEl);
 
             var backEl = this.getBackElement();
 
-            this.backgroundContainer.append(backEl);
+            backContainer.append(backEl);
 
             this.rendered = true;
 

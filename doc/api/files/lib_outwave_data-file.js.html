@@ -335,7 +335,7 @@ define([&#x27;./vendor/jdataview&#x27;],function(_jDataView){
          * */
         getSum1Sample: function(sample,channel){
 
-            var target = (sample + 1) * (this.sum1p + 1) - 1 + Math.floor(((sample+1) * this.sum1p - 1) / this.sum2p);
+            var target = (sample + 1) * (this.sum1p + 1) - 1 + (((sample+1) * this.sum1p - 1) &gt;&gt; this.summary2);
 
             return this.sampleSource(target,channel);
 
@@ -350,7 +350,7 @@ define([&#x27;./vendor/jdataview&#x27;],function(_jDataView){
          * @return {Array}  [min,max]
          * */
         getSum2Sample: function(sample,channel){
-            var target  = (sample + 1) * (this.sum2p + 1) - 1 + Math.floor((sample + 1) * this.sum2p / this.sum1p);
+            var target  = (sample + 1) * (this.sum2p + 1) - 1 + ((sample + 1) * this.sum2p &gt;&gt; this.summary1);
             return this.sampleSource(target,channel);
         },
 

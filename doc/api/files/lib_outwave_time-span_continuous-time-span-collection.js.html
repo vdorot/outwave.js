@@ -212,7 +212,9 @@ define([
             this.timespans.splice(this.timespans.length,0,span);
 
             span.setZoom(this.zoom);
-            span.render();
+            if(!this.batchLoading){
+                span.render();
+            }
 
             if(this.timeSpanCreatedFn) this.timeSpanCreatedFn(span);
             

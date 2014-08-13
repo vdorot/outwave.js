@@ -11,6 +11,7 @@
     "grunt-contrib-copy": "^0.5.0",
     "grunt-contrib-requirejs": "~0.4.3",
     "grunt-contrib-uglify": "^0.5.1",
-    "grunt-contrib-yuidoc": "~0.5.2"
+    "grunt-contrib-yuidoc": "~0.5.2",
+    "deamdify": "~0.1.1"
   }
 }

@@ -304,6 +304,13 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_disconnectContainers">disconnectContainers</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_getAll">getAll</a>
 
                                 
@@ -318,6 +325,20 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_handleBatchPositionChanged">handleBatchPositionChanged</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_handleBeforeBatchPositionChange">handleBeforeBatchPositionChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_mergeWithPrev">mergeWithPrev</a>
 
                                 
@@ -325,7 +346,28 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_onBatchPositionChanged">onBatchPositionChanged</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_onBeforeBatchPositionChange">onBeforeBatchPositionChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_onTimeSpanCreated">onTimeSpanCreated</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_reconnectContainers">reconnectContainers</a>
 
                                 
                                 
@@ -417,7 +459,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l122"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:122</code></a>
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l138"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:138</code></a>
         
         </p>
 
@@ -496,7 +538,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l87"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:87</code></a>
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l103"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:103</code></a>
         
         </p>
 
@@ -555,7 +597,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l110"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:110</code></a>
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l126"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:126</code></a>
         
         </p>
 
@@ -586,6 +628,62 @@
                 
             </div>
         </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_disconnectContainers" class="method item">
+    <h3 class="name"><code>disconnectContainers</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l355"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:355</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Disconnect annotation element containers from DOM</p>
+<p>Useful for speeding up batch updates like zooming or creating lots of time spans</p>
+
+    </div>
+
+    
+
     
 
     
@@ -628,7 +726,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l76"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:76</code></a>
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l92"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:92</code></a>
         
         </p>
 
@@ -712,7 +810,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l186"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:186</code></a>
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l202"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:202</code></a>
         
         </p>
 
@@ -771,6 +869,116 @@
 </div>
 
                 
+                    <div id="method_handleBatchPositionChanged" class="method item">
+    <h3 class="name"><code>handleBatchPositionChanged</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l417"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:417</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fire position change event handlers</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_handleBeforeBatchPositionChange" class="method item">
+    <h3 class="name"><code>handleBeforeBatchPositionChange</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l393"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:393</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fire position change event handlers</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method_mergeWithPrev" class="method item">
     <h3 class="name"><code>mergeWithPrev</code></h3>
 
@@ -813,7 +1021,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l134"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:134</code></a>
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l150"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:150</code></a>
         
         </p>
 
@@ -844,6 +1052,184 @@
 
                     <div class="param-description">
                         <p>Span to merge - at the right side</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_onBatchPositionChanged" class="method item">
+    <h3 class="name"><code>onBatchPositionChanged</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>fn</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l408"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:408</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Set event handler for batch position changes (zooming)</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">fn</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Event handler accepting zoom(pixels per second) and waveform length(pixels) as arguments</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_onBeforeBatchPositionChange" class="method item">
+    <h3 class="name"><code>onBeforeBatchPositionChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>fn</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l384"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:384</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Set event handler for batch position changes (zooming)</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">fn</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Event handler accepting zoom(pixels per second) and waveform length(pixels) as arguments</p>
 
                     </div>
 
@@ -902,7 +1288,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l299"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:299</code></a>
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l319"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:319</code></a>
         
         </p>
 
@@ -941,6 +1327,61 @@
             
             </ul>
         </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_reconnectContainers" class="method item">
+    <h3 class="name"><code>reconnectContainers</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l366"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:366</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Reconnect annotation element containers disconnected by disconnectContainers</p>
+
+    </div>
+
     
 
     
@@ -991,7 +1432,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l273"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:273</code></a>
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l289"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:289</code></a>
         
         </p>
 
@@ -1081,7 +1522,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l286"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:286</code></a>
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l302"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:302</code></a>
         
         </p>
 
@@ -1164,7 +1605,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l97"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:97</code></a>
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l113"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:113</code></a>
         
         </p>
 
@@ -1244,7 +1685,7 @@
             
         
         
-        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l202"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:202</code></a>
+        <a href="../files/lib_outwave_time-span_time-span-collection.js.html#l218"><code>lib&#x2F;outwave&#x2F;time-span&#x2F;time-span-collection.js:218</code></a>
         
         </p>
 
