@@ -274,6 +274,8 @@ define([
             mouseIsDown = true;
         });
 
+        this.clickTimer = null;
+
         this.foregroundEl.on(&quot;mouseup&quot;,function(event){
             event.preventDefault();
 
@@ -293,7 +295,24 @@ define([
             if(internX &gt;= self.internalWidth()){
                 return;
             }
-            self.clicked(self.internalXToTime(internX),event);     
+            
+            if(self.clickTimer){
+                clearTimeout(self.clickTimer);
+                self.dblClicked(self.internalXToTime(internX),event);                    
+                self.clickTimer = null;
+            }else{
+                if(self.dblClickHnd){
+                    self.clickTimer = setTimeout(function(){
+                        self.clickTimer = null;
+                        self.clicked(self.internalXToTime(internX),event);    
+                    },300);
+                }else{
+                    self.clicked(self.internalXToTime(internX),event);     
+                }
+
+            }
+
+
         });
 
 
@@ -446,9 +465,6 @@ define([
         timeToInternalX: function(time){
             return this.dataFile.time2px(time,this.zoom);
         },
-        timeToOuterX: function(time){
-            return this.timeToInternalX(time)-this.scrollbarEl.scrollLeft();
-        },
         /**
          * Translate pixels to time
          *
@@ -459,9 +475,12 @@ define([
         internalXToTime: function(x){
             return this.dataFile.px2time(x,this.zoom);
         },
-        outerXtoTime: function(x){
-            return (this.scrollbarEl.scrollLeft()+x)*this.zoom/this.dataFile.getSampleRate();
-        },
+        /**
+         * Internal width
+         *
+         * @method  internalWidth
+         * @return {Number}   Internal width in pixels
+         */
         internalWidth: function(){
             return Math.floor(this.dataFile.getFrameCnt() / this.zoom);
         },
@@ -471,7 +490,13 @@ define([
         waveformHeight: function(){
             return this.internalHeight() - this.timelineHeight();
         }, 
-        internalHeight: function(){//height of element minus scrollbars
+        /**
+         * height of element minus scrollbar
+         *
+         * @method  internalHeight
+         * @return {Number}   Height in pixels
+         */        
+        internalHeight: function(){
 
             if(this.options.height !== null){
                 return this.options.height;
@@ -658,6 +683,36 @@ define([
 
         },
         /**
+         * Scroll to a certain time
+         *
+         * This method should only be used when setCursor is not called periodically(the media player is stopped) or autoscroll is disabled.
+         *
+         * @method  scrollToTime
+         * @param {Number} time Player position in seconds
+         * @param {Number} [positionFraction=0.5] Fraction of the viewport width, to which the time will be scrolled. 0.3 means scrolling the time to 0.3 of viewport width.
+         * @param {Number} [duration] Animation duration. If not set, options.autoScrollAnimationDuration will be used;
+         */
+        scrollToTime: function(time, positionFraction ,duration){
+            if(typeof duration === &quot;undefined&quot;){
+                duration = this.options.autoScrollAnimationDuration;
+            }
+            if(typeof positionFraction ===&quot;undefined&quot;){
+                positionFraction = 0.5;
+            }
+            
+            var x = this.timeToInternalX(time);
+            var width = ( this.style.horizontal() ? this.scrollbarEl.width() : this.scrollbarEl.height() );
+            var fracWidth = width * positionFraction;
+            var scrollTo = x - fracWidth;
+            var animVal; 
+            if(this.style.horizontal()){
+                animVal = {scrollLeft: scrollTo};
+            }else{
+                animVal = {scrollTop: scrollTo};
+            }   
+            this.scrollbarEl.animate(animVal,duration);           
+        },
+        /**
          * Set cursor position
          *
          * @method  setCursor
@@ -699,7 +754,6 @@ define([
          */        
         onClick: function(fn){
             this.clickHnd = fn;
-            return this;
         },
         /**
          * Fires configurable click handler
@@ -711,6 +765,27 @@ define([
         clicked: function(time,mouseEvent){
             if(this.clickHnd){
                 this.clickHnd(time,mouseEvent);
+            }
+        },
+         /**
+         * Sets (replaces) double click handler
+         *
+         * @method  onDblClick
+         * @param  {Function} handler accepting time in seconds as an argument
+         */       
+        onDblClick: function(fn){
+            this.dblClickHnd = fn;
+        },
+        /**
+         * Fires configurable double click handler
+         *
+         * @method  dblClicked
+         * @param  {Number} time Position in seconds computed from mouse coordinates
+         * @param {MouseEvent} mouseEvent Mouse event
+         */
+        dblClicked: function(time,mouseEvent){
+            if(this.dblClickHnd){
+                this.dblClickHnd(time,mouseEvent);
             }
         },
         /**
@@ -860,7 +935,7 @@ define([
         },
         /**
          * Return position at mouse coodinates
-         *
+         * @method getTimeFromMouseCoords
          * @param  {Number} pageX X coordinate relative to page
          * @param  {Number} pageY Y coordinate relative to page
          * @return {Number}       Time in seconds
@@ -875,6 +950,13 @@ define([
 
             return this.internalXToTime(pos);       
         },
+        /**
+         * Scroll to time at mouse coordinates
+         * @method setTimeAtMouseCoords
+         * @param  {Number} time Time in seconds
+         * @param  {Number} pageX X coordinate relative to page
+         * @param  {Number} pageY Y coordinate relative to page
+         */
         setTimeAtMouseCoords: function(time,pageX,pageY){
             var ofs = this.viewportOffset();
             var x = this.timeToInternalX(time);
@@ -894,6 +976,7 @@ define([
         },
         /**
          * Return position in the middle of viewport
+         * @method getTimeInMiddle
          * @return {Number} Time in seconds
          */
         getTimeInMiddle: function(){
@@ -907,7 +990,8 @@ define([
             return this.internalXToTime(pos);
         },
         /**
-         * Scroll viewport so that the middle is on time
+         * Scroll viewport so that the middle is on time, no animation is used
+         * @method setTimeInMiddle
          * @param {setTimeInMiddle} time Time to set the middle to
          */
         setTimeInMiddle: function(time){

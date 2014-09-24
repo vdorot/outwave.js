@@ -3119,6 +3119,7 @@ var Viewer = function (container, file, options) {
     this.foregroundEl.on('mousedown', function (event) {
         mouseIsDown = true;
     });
+    this.clickTimer = null;
     this.foregroundEl.on('mouseup', function (event) {
         event.preventDefault();
         if (!mouseIsDown) {
@@ -3134,7 +3135,20 @@ var Viewer = function (container, file, options) {
         if (internX >= self.internalWidth()) {
             return;
         }
-        self.clicked(self.internalXToTime(internX), event);
+        if (self.clickTimer) {
+            clearTimeout(self.clickTimer);
+            self.dblClicked(self.internalXToTime(internX), event);
+            self.clickTimer = null;
+        } else {
+            if (self.dblClickHnd) {
+                self.clickTimer = setTimeout(function () {
+                    self.clickTimer = null;
+                    self.clicked(self.internalXToTime(internX), event);
+                }, 300);
+            } else {
+                self.clicked(self.internalXToTime(internX), event);
+            }
+        }
     });
     this.scrollbarEl.prepend(this.foregroundEl);
     this.scrollbarEl.prepend(this.backgroundEl);
@@ -3232,14 +3246,8 @@ Viewer.prototype = {
     timeToInternalX: function (time) {
         return this.dataFile.time2px(time, this.zoom);
     },
-    timeToOuterX: function (time) {
-        return this.timeToInternalX(time) - this.scrollbarEl.scrollLeft();
-    },
     internalXToTime: function (x) {
         return this.dataFile.px2time(x, this.zoom);
-    },
-    outerXtoTime: function (x) {
-        return (this.scrollbarEl.scrollLeft() + x) * this.zoom / this.dataFile.getSampleRate();
     },
     internalWidth: function () {
         return Math.floor(this.dataFile.getFrameCnt() / this.zoom);
@@ -3348,6 +3356,25 @@ Viewer.prototype = {
             }
         }
     },
+    scrollToTime: function (time, positionFraction, duration) {
+        if (typeof duration === 'undefined') {
+            duration = this.options.autoScrollAnimationDuration;
+        }
+        if (typeof positionFraction === 'undefined') {
+            positionFraction = 0.5;
+        }
+        var x = this.timeToInternalX(time);
+        var width = this.style.horizontal() ? this.scrollbarEl.width() : this.scrollbarEl.height();
+        var fracWidth = width * positionFraction;
+        var scrollTo = x - fracWidth;
+        var animVal;
+        if (this.style.horizontal()) {
+            animVal = { scrollLeft: scrollTo };
+        } else {
+            animVal = { scrollTop: scrollTo };
+        }
+        this.scrollbarEl.animate(animVal, duration);
+    },
     setCursor: function (time) {
         var maxTime = this.dataFile.getLength();
         if (time > maxTime) {
@@ -3372,11 +3399,18 @@ Viewer.prototype = {
     },
     onClick: function (fn) {
         this.clickHnd = fn;
-        return this;
     },
     clicked: function (time, mouseEvent) {
         if (this.clickHnd) {
             this.clickHnd(time, mouseEvent);
+        }
+    },
+    onDblClick: function (fn) {
+        this.dblClickHnd = fn;
+    },
+    dblClicked: function (time, mouseEvent) {
+        if (this.dblClickHnd) {
+            this.dblClickHnd(time, mouseEvent);
         }
     },
     updateDimensions: function () {
@@ -3600,11 +3634,13 @@ Viewer.prototype = {
 };
 module.exports = Viewer;
 },{"./segment":5,"./segment-collection":4,"./style":6,"./utils":15,"./vendor/jquery-mousewheel":17}],19:[function(_dereq_,module,exports){
-/*!
+/**
  * The buffer module from node.js, for the browser.
  *
- * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
- * @license  MIT
+ * Author:   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * License:  MIT
+ *
+ * `npm install buffer`
  */
 
 var base64 = _dereq_('base64-js')
@@ -3621,14 +3657,17 @@ Buffer.poolSize = 8192
  *   === false   Use Object implementation (compatible down to IE6)
  */
 Buffer._useTypedArrays = (function () {
-  // Detect if browser supports Typed Arrays. Supported browsers are IE 10+, Firefox 4+,
-  // Chrome 7+, Safari 5.1+, Opera 11.6+, iOS 4.2+. If the browser does not support adding
-  // properties to `Uint8Array` instances, then that's the same as no `Uint8Array` support
-  // because we need to be able to add all the node Buffer API methods. This is an issue
-  // in Firefox 4-29. Now fixed: https://bugzilla.mozilla.org/show_bug.cgi?id=695438
+   // Detect if browser supports Typed Arrays. Supported browsers are IE 10+,
+   // Firefox 4+, Chrome 7+, Safari 5.1+, Opera 11.6+, iOS 4.2+.
+  if (typeof Uint8Array !== 'function' || typeof ArrayBuffer !== 'function')
+    return false
+
+  // Does the browser support adding properties to `Uint8Array` instances? If
+  // not, then that's the same as no `Uint8Array` support. We need to be able to
+  // add all the node Buffer API methods.
+  // Bug in Firefox 4-29, now fixed: https://bugzilla.mozilla.org/show_bug.cgi?id=695438
   try {
-    var buf = new ArrayBuffer(0)
-    var arr = new Uint8Array(buf)
+    var arr = new Uint8Array(0)
     arr.foo = function () { return 42 }
     return 42 === arr.foo() &&
         typeof arr.subarray === 'function' // Chrome 9-10 lack `subarray`
@@ -3671,14 +3710,14 @@ function Buffer (subject, encoding, noZero) {
   else if (type === 'string')
     length = Buffer.byteLength(subject, encoding)
   else if (type === 'object')
-    length = coerce(subject.length) // assume that object is array-like
+    length = coerce(subject.length) // Assume object is an array
   else
     throw new Error('First argument needs to be a number, array or string.')
 
   var buf
   if (Buffer._useTypedArrays) {
     // Preferred: Return an augmented `Uint8Array` instance for best performance
-    buf = Buffer._augment(new Uint8Array(length))
+    buf = augment(new Uint8Array(length))
   } else {
     // Fallback: Return THIS instance of Buffer (created by `new`)
     buf = this
@@ -3687,8 +3726,9 @@ function Buffer (subject, encoding, noZero) {
   }
 
   var i
-  if (Buffer._useTypedArrays && typeof subject.byteLength === 'number') {
-    // Speed optimization -- use set if we're copying from a typed array
+  if (Buffer._useTypedArrays && typeof Uint8Array === 'function' &&
+      subject instanceof Uint8Array) {
+    // Speed optimization -- use set if we're copying from a Uint8Array
     buf._set(subject)
   } else if (isArrayish(subject)) {
     // Treat array-ish objects as a byte array
@@ -3985,14 +4025,9 @@ Buffer.prototype.copy = function (target, target_start, start, end) {
   if (target.length - target_start < end - start)
     end = target.length - target_start + start
 
-  var len = end - start
-
-  if (len < 100 || !Buffer._useTypedArrays) {
-    for (var i = 0; i < len; i++)
-      target[i + target_start] = this[i + start]
-  } else {
-    target._set(this.subarray(start, start + len), target_start)
-  }
+  // copy!
+  for (var i = 0; i < end - start; i++)
+    target[i + target_start] = this[i + start]
 }
 
 function _base64Slice (buf, start, end) {
@@ -4061,7 +4096,7 @@ Buffer.prototype.slice = function (start, end) {
   end = clamp(end, len, len)
 
   if (Buffer._useTypedArrays) {
-    return Buffer._augment(this.subarray(start, end))
+    return augment(this.subarray(start, end))
   } else {
     var sliceLen = end - start
     var newBuf = new Buffer(sliceLen, undefined, true)
@@ -4504,7 +4539,7 @@ Buffer.prototype.inspect = function () {
  * Added in Node 0.12. Only available in browsers that support ArrayBuffer.
  */
 Buffer.prototype.toArrayBuffer = function () {
-  if (typeof Uint8Array !== 'undefined') {
+  if (typeof Uint8Array === 'function') {
     if (Buffer._useTypedArrays) {
       return (new Buffer(this)).buffer
     } else {
@@ -4529,9 +4564,9 @@ function stringtrim (str) {
 var BP = Buffer.prototype
 
 /**
- * Augment a Uint8Array *instance* (not the Uint8Array class!) with Buffer methods
+ * Augment the Uint8Array *instance* (not the class!) with Buffer methods
  */
-Buffer._augment = function (arr) {
+function augment (arr) {
   arr._isBuffer = true
 
   // save reference to original Uint8Array get/set methods before overwriting
@@ -4720,6 +4755,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
     ? Uint8Array
     : Array
 
+	var ZERO   = '0'.charCodeAt(0)
 	var PLUS   = '+'.charCodeAt(0)
 	var SLASH  = '/'.charCodeAt(0)
 	var NUMBER = '0'.charCodeAt(0)
@@ -4828,9 +4864,9 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 		return output
 	}
 
-	exports.toByteArray = b64ToByteArray
-	exports.fromByteArray = uint8ToBase64
-}(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
+	module.exports.toByteArray = b64ToByteArray
+	module.exports.fromByteArray = uint8ToBase64
+}())
 
 },{}],21:[function(_dereq_,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
@@ -4920,4 +4956,4 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
 
 },{}]},{},[3])
 (3)
-});
+});;
