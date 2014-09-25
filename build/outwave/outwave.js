@@ -3373,7 +3373,7 @@ Viewer.prototype = {
         } else {
             animVal = { scrollTop: scrollTo };
         }
-        this.scrollbarEl.animate(animVal, duration);
+        this.scrollbarEl.stop(true, true).animate(animVal, duration);
     },
     setCursor: function (time) {
         var maxTime = this.dataFile.getLength();
